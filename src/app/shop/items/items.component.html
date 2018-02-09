@@ -1,0 +1,57 @@
+<div class="container-fluid">
+  <div class="row" *ngIf="items.length > 0; else noItems">
+    <div class="col-sm-3 leftnavigation"><app-navigation [amounttv]="amounttv" [amountlaptops]="amountlaptops" [amountsoundbars]="amountsoundbars" [amountphones]="amountphones"></app-navigation></div>
+
+    <div class="col-sm-9">
+      <div class="row">
+    <div class="col-sm-12"><app-amount-items [amountItem]="amountItem"></app-amount-items></div>
+    <div class="col-sm-2 lessmargins" *ngFor="let item of items"  [ngClass]="item.condition=='new' ? 'condition' : 'usecondition'">
+      <div class="smalldivs"><p class="parainline">ID: </p><p class="parainline">{{ item.id }}</p></div>
+      <div class="smalldivs"><p class="parainline">Name: </p><p class="parainline">{{ item.name }}</p></div>
+      <div class="smalldivs"><p class="parainline">Category: </p><p class="parainline">{{ item.category }}</p></div>
+      <div class="smalldivs"><p class="parainline">Color: </p><p class="parainline">{{ item.color }}</p></div>
+      <div class="smalldivs"><p class="parainline">Condition: </p><p class="parainline">{{ item.condition }}</p></div>
+      <div class="smalldivs"><p class="parainline">Damaged: </p><p class="parainline">{{ item.damaged }}</p></div>
+      <div class="smalldivs"><p class="parainline">Price: </p><p class="parainline">{{ item.price }}</p></div>
+      <div class="smalldivs"><p class="parainline">Delivery Cost: </p><p class="parainline">{{ item.delivery_cost }}</p></div>
+    </div></div></div>
+
+          <!-- Another Way to use ngClass -->
+    <!-- [ngClass]="{'damaged': item.damaged}"-->
+
+
+
+
+    <!-- <div class="col-md-6">
+       <table class="table table-bordered">
+         <thead>
+         <tr>
+           <th>ID</th>
+           <th>Name</th>
+           <th>Category</th>
+           <th>Color</th>
+           <th>Condition</th>
+           <th>Damaged</th>
+           <th>Price</th>
+           <th>Delivery Cost</th>
+         </tr>
+         </thead>
+         <tbody>
+         <tr *ngFor="let item of items">
+           <td> {{ item.id}}</td>
+           <td> {{ item.name}}</td>
+           <td> {{ item.category}}</td>
+           <td> {{ item.color}}</td>
+           <td> {{ item.condition}}</td>
+           <td> {{ item.damaged}}</td>
+           <td> {{ item.price}}</td>
+           <td> {{ item.delivery_cost}}</td>
+         </tr>
+         </tbody>
+       </table>
+     </div> -->
+
+  </div>
+  <ng-template #noItems> <p>I can't find any shop item</p></ng-template>
+</div>
+
