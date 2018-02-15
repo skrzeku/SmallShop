@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-navigation',
@@ -11,11 +11,16 @@ export class NavigationComponent implements OnInit {
   @Input () amounttv: number;
   @Input () amountsoundbars: number;
   summaryitems: number;
-
+  @Output () summarys: EventEmitter<number> = new EventEmitter<number>();
+  @Input () newitems: number;
+  @Input () usedItem: number;
+  @Input () damageditem: number;
   constructor() { }
   ngOnInit() {
+    this.check_summary();
   }
 check_summary (): void {
     this.summaryitems = this.amountlaptops + this.amountsoundbars + this.amounttv + this.amountphones;
+    this.summarys.emit(this.summaryitems);
 }
 }

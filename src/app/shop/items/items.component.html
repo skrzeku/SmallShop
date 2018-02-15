@@ -1,8 +1,8 @@
 <div class="container-fluid">
   <div class="row" *ngIf="items.length > 0; else noItems">
-    <div class="col-sm-3 leftnavigation"><app-navigation [amounttv]="amounttv" [amountlaptops]="amountlaptops" [amountsoundbars]="amountsoundbars" [amountphones]="amountphones"></app-navigation></div>
+    <div class="col-sm-2 leftnavigation"><app-navigation [amounttv]="amounttv" [amountlaptops]="amountlaptops" [amountsoundbars]="amountsoundbars" [amountphones]="amountphones" [newitems]="newitems" [usedItem]="usedItem" [damageditem]="damageditem" (summarys)="showvalue($event)"></app-navigation></div>
 
-    <div class="col-sm-9">
+    <div class="col-sm-10">
       <div class="row">
     <div class="col-sm-12"><app-amount-items [amountItem]="amountItem"></app-amount-items></div>
     <div class="col-sm-2 lessmargins" *ngFor="let item of items"  [ngClass]="item.condition=='new' ? 'condition' : 'usecondition'">
@@ -21,36 +21,7 @@
 
 
 
-
-    <!-- <div class="col-md-6">
-       <table class="table table-bordered">
-         <thead>
-         <tr>
-           <th>ID</th>
-           <th>Name</th>
-           <th>Category</th>
-           <th>Color</th>
-           <th>Condition</th>
-           <th>Damaged</th>
-           <th>Price</th>
-           <th>Delivery Cost</th>
-         </tr>
-         </thead>
-         <tbody>
-         <tr *ngFor="let item of items">
-           <td> {{ item.id}}</td>
-           <td> {{ item.name}}</td>
-           <td> {{ item.category}}</td>
-           <td> {{ item.color}}</td>
-           <td> {{ item.condition}}</td>
-           <td> {{ item.damaged}}</td>
-           <td> {{ item.price}}</td>
-           <td> {{ item.delivery_cost}}</td>
-         </tr>
-         </tbody>
-       </table>
-     </div> -->
-
+<div class="text-right"><p>All of every available output items: {{sumitems}}</p></div>
   </div>
   <ng-template #noItems> <p>I can't find any shop item</p></ng-template>
 </div>

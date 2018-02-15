@@ -1,40 +1,30 @@
-<!--
-<md-card>
-  <md-card-title>
-    Angular Material Menu Demo
-  </md-card-title>
-  <md-card-content>
-    <button md-raised-button color="primary" [mdMenuTriggerFor]="menu">
-      Open Menu
-    </button>
-    <md-menu #menu="mdMenu">
-      <button md-menu-item>
-        <md-icon></md-icon>
-        <span>Settings</span>
-      </button>
-      <button md-menu-item disabled>
-        <md-icon></md-icon>
-        <span>Check voicemail</span>
-      </button>
-      <button md-menu-item>
-        <md-icon></md-icon>
-        <span>Disable alerts</span>
-      </button>
-    </md-menu>
-  </md-card-content>
-</md-card>
- -->
+
 
 <div class="container">
   <div class="row">
+    <div class="col-sm-12 text-white">
+      <h3>Category:</h3>
+      <div>Smartphones: <span class="r">{{amountphones}}</span></div>
+      <div>Laptops: <span class="r">{{amountlaptops}}</span></div>
+      <div>TV: <span class="r">{{amounttv}}</span> </div>
+      <div>Soundbars: <span class="r">{{amountsoundbars}}</span></div>
+      <div>Summary: <span class="r">{{summaryitems}}</span></div>
+    </div>
     <div class="col-sm-12">
-      <h1>Category</h1>
-      <h4>Smartphones: {{amountphones}}</h4>
-      <h4>Laptops: {{amountlaptops}}</h4>
-      <h4>TV: {{amounttv}}</h4>
-      <h4>Soundbars: {{amountsoundbars}}</h4>
-      <h6>Summary: </h6>
+      <div class="text-white">
+        <h3>Filters:</h3>
+        <h5>* Condition</h5>
+        <div class="form-check"><input type="checkbox" class="form-check-input" id="checkboxWarnin" value="option1">New Items: <span class="r">{{newitems}}</span></div>
+        <div class="form-check"><input type="checkbox" class="form-check-input" id="checkboxWarni" value="option1">Used Items: <span class="r">{{usedItem}}</span></div>
+        <div class="form-check"><input type="checkbox" class="form-check-input" id="checkboxWarn" value="option1">Damaged Items: <span class="r">{{damageditem}}</span></div>
+<h5>Price: </h5>
+        <div class="input-group input-group-sm small">
+          <span class="input-group-addon">From:</span>
+          <input type="text" class="form-control" aria-label="Text input with radio button">
+        </div>
 
+        <button class="btn btn-primary r" type="submit">Submit</button>
+      </div>
     </div>
   </div>
 </div>

@@ -14,7 +14,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     CommonModule,
     MaterialModule
   ],
-  exports: [ItemsComponent, NavigationComponent, NavbarComponent],
+  exports: [ItemsComponent, NavigationComponent, NavbarComponent, SearchComponent],
   declarations: [ItemsComponent, NavigationComponent, AmountItemsComponent, SearchComponent, NavbarComponent]
 })
 export class ShopModule { }

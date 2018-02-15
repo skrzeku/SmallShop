@@ -15,6 +15,10 @@ export class ItemsComponent implements OnInit {
   amountphones: number;
   amounttv: number;
   amountsoundbars: number;
+  sumitems: number;
+  newitems: number;
+  usedItem: number;
+  damageditem: number;
 
   items: Item[] = [
     {
@@ -52,13 +56,54 @@ export class ItemsComponent implements OnInit {
       condition: 'new',
       damaged: true,
       price: 1999,
-      delivery_cost: 35 }
+      delivery_cost: 35 },
+    {
+    id: 5,
+  name: 'iphone',
+  category: 'smartphones',
+  color: 'gold',
+  condition: 'used',
+  damaged: false,
+  price: 1999,
+  delivery_cost: 35 },
+    {
+    id: 6,
+  name: 'iphone',
+  category: 'smartphones',
+  color: 'gold',
+  condition: 'used',
+  damaged: false,
+  price: 1999,
+  delivery_cost: 35 },
+    {
+id: 7,
+  name: 'iphone',
+  category: 'smartphones',
+  color: 'gold',
+  condition: 'used',
+  damaged: false,
+  price: 1999,
+  delivery_cost: 35 },
+    {
+id: 8,
+  name: 'samsung',
+  category: 'smartphones',
+  color: 'silver',
+  condition: 'used',
+  damaged: true,
+  price: 567,
+  delivery_cost: 35 },
   ];
   constructor() { }
 
   ngOnInit() {
     this.countitems();
     this.countCategory();
+    this.showcondition();
+  }
+  showvalue(sumitems: number): void {
+    this.sumitems = sumitems;
+
   }
   countitems(): void {
     this.amountItem = this.items
@@ -75,4 +120,19 @@ export class ItemsComponent implements OnInit {
 
     console.log(this.amountphones);
     console.log(this.amountlaptops);
-}}
+}
+showcondition (): void {
+    this.newitems = this.items.map((item) => item.condition)
+      .filter((sos) => sos === 'new')
+      .length;
+    this.usedItem = this.items.map((item) => item.condition)
+      .filter((item) => item === 'used')
+      .length;
+    this.damageditem = this.items.map((item) => item.damaged)
+      .filter((item) => item === true)
+      .length;
+}
+
+}
+
+
