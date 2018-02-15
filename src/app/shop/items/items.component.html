@@ -5,7 +5,14 @@
     <div class="col-sm-10">
       <div class="row">
     <div class="col-sm-12"><app-amount-items [amountItem]="amountItem"></app-amount-items></div>
-    <div class="col-sm-2 lessmargins" *ngFor="let item of items"  [ngClass]="item.condition=='new' ? 'condition' : 'usecondition'">
+    <div class="col-sm-1 lessmargins" *ngFor="let item of items"  [ngClass]="item.condition=='new' ? 'condition' : 'usecondition'">
+      <div class="smalldivs">{{item.name}}</div>
+      <div class="smalldivs">Color: {{item.color}}</div>
+      <div class="smalldivs">Price: {{item.price}}</div>
+
+     <!--
+
+
       <div class="smalldivs"><p class="parainline">ID: </p><p class="parainline">{{ item.id }}</p></div>
       <div class="smalldivs"><p class="parainline">Name: </p><p class="parainline">{{ item.name }}</p></div>
       <div class="smalldivs"><p class="parainline">Category: </p><p class="parainline">{{ item.category }}</p></div>
@@ -14,6 +21,9 @@
       <div class="smalldivs"><p class="parainline">Damaged: </p><p class="parainline">{{ item.damaged }}</p></div>
       <div class="smalldivs"><p class="parainline">Price: </p><p class="parainline">{{ item.price }}</p></div>
       <div class="smalldivs"><p class="parainline">Delivery Cost: </p><p class="parainline">{{ item.delivery_cost }}</p></div>
+
+
+       -->
     </div></div></div>
 
           <!-- Another Way to use ngClass -->

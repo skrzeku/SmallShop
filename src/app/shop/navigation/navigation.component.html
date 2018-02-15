@@ -8,7 +8,7 @@
       <div>Laptops: <span class="r">{{amountlaptops}}</span></div>
       <div>TV: <span class="r">{{amounttv}}</span> </div>
       <div>Soundbars: <span class="r">{{amountsoundbars}}</span></div>
-      <div>Summary: <span class="r">{{summaryitems}}</span></div>
+      <div class="sum">Summary: <span class="r">{{summaryitems}}</span></div>
     </div>
     <div class="col-sm-12">
       <div class="text-white">
@@ -18,9 +18,13 @@
         <div class="form-check"><input type="checkbox" class="form-check-input" id="checkboxWarni" value="option1">Used Items: <span class="r">{{usedItem}}</span></div>
         <div class="form-check"><input type="checkbox" class="form-check-input" id="checkboxWarn" value="option1">Damaged Items: <span class="r">{{damageditem}}</span></div>
 <h5>Price: </h5>
-        <div class="input-group input-group-sm small">
+        <div class="input-group input-group-sm small d-inline-block">
           <span class="input-group-addon">From:</span>
-          <input type="text" class="form-control" aria-label="Text input with radio button">
+          <input type="text" class="form-control" aria-label="Text input">
+        </div>
+        <div class="input-group input-group-sm small d-inline-block">
+          <span class="input-group-addon">To:</span>
+          <input type="text" class="form-control" aria-label="Text input">
         </div>
 
         <button class="btn btn-primary r" type="submit">Submit</button>
