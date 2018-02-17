@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {Item} from '../models/item';
+import {NavigationComponent} from '../navigation/navigation.component';
 
 
 
@@ -9,7 +10,7 @@ import {Item} from '../models/item';
   templateUrl: './items.component.html',
   styleUrls: ['./items.component.less']
 })
-export class ItemsComponent implements OnInit {
+export class ItemsComponent implements OnInit, AfterViewInit {
   amountItem: number;
   amountlaptops: number;
   amountphones: number;
@@ -19,6 +20,10 @@ export class ItemsComponent implements OnInit {
   newitems: number;
   usedItem: number;
   damageditem: number;
+  mapcost: number[];
+  grossmaxprice: number;
+  grossminprice: number;
+  @ViewChild('showgrosschild') showgrosschild: NavigationComponent;
 
   items: Item[] = [
     {
@@ -163,6 +168,11 @@ id: 8,
     this.countitems();
     this.countCategory();
     this.showcondition();
+    this.mapcostitems();
+
+  }
+  ngAfterViewInit() {
+   this.showgrosschild.showgrossprices();
   }
   showvalue(sumitems: number): void {
     this.sumitems = sumitems;
@@ -194,6 +204,12 @@ showcondition (): void {
     this.damageditem = this.items.map((item) => item.damaged)
       .filter((item) => item === true)
       .length;
+}
+mapcostitems (): void {
+    this.mapcost = this.items.map((item) => item.price);
+}
+showgross (): void {
+
 }
 
 }
