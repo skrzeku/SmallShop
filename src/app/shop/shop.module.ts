@@ -3,18 +3,17 @@ import { CommonModule } from '@angular/common';
 import { ItemsComponent } from './items/items.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { AmountItemsComponent } from './amount-items/amount-items.component';
-import {MaterialModule} from '../material/material.module';
 import { SearchComponent } from './search/search.component';
-import { NavbarComponent } from './navbar/navbar.component';
+import {SharedModule} from '../shared-module/shared-module.module';
 
 
 
 @NgModule({
   imports: [
     CommonModule,
-    MaterialModule
+    SharedModule
   ],
-  exports: [ItemsComponent, NavigationComponent, NavbarComponent, SearchComponent],
-  declarations: [ItemsComponent, NavigationComponent, AmountItemsComponent, SearchComponent, NavbarComponent]
+  exports: [ItemsComponent, NavigationComponent, SearchComponent],
+  declarations: [ItemsComponent, NavigationComponent, AmountItemsComponent, SearchComponent]
 })
 export class ShopModule { }

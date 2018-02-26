@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {Item} from '../models/item';
 import {NavigationComponent} from '../navigation/navigation.component';
+import {ShopService} from '../shop.service';
 
 
 
@@ -25,154 +26,27 @@ export class ItemsComponent implements OnInit, AfterViewInit {
   grossminprice: number;
   @ViewChild('showgrosschild') showgrosschild: NavigationComponent;
 
-  items: Item[] = [
-    {
-      id: 1,
-      name: 'iphone',
-      category: 'smartphones',
-      color: 'gold',
-      condition: 'new',
-      damaged: false,
-      price: 1999,
-      delivery_cost: 35 },
-    {
-      id: 2,
-      name: 'Macbook Air',
-      category: 'laptops',
-      color: 'white',
-      condition: 'new',
-      damaged: false,
-      price: 2500,
-      delivery_cost: 50 },
-    {
-      id: 3,
-      name: 'Iphone 7',
-      category: 'smartphones',
-      color: 'gold',
-      condition: 'used',
-      damaged: false,
-      price: 1999,
-      delivery_cost: 35 },
-    {
-      id: 4,
-      name: 'Iphone 8',
-      category: 'smartphones',
-      color: 'gold',
-      condition: 'new',
-      damaged: true,
-      price: 1999,
-      delivery_cost: 35 },
-    {
-    id: 5,
-  name: 'Iphone 6',
-  category: 'smartphones',
-  color: 'gold',
-  condition: 'used',
-  damaged: false,
-  price: 1999,
-  delivery_cost: 35 },
-    {
-    id: 6,
-  name: 'Iphone X Plus',
-  category: 'smartphones',
-  color: 'gold',
-  condition: 'used',
-  damaged: false,
-  price: 1999,
-  delivery_cost: 35 },
-    {
-id: 7,
-  name: 'Iphone X',
-  category: 'smartphones',
-  color: 'gold',
-  condition: 'used',
-  damaged: false,
-  price: 1999,
-  delivery_cost: 35 },
-    {
-id: 8,
-  name: 'Samsung S8',
-  category: 'smartphones',
-  color: 'silver',
-  condition: 'used',
-  damaged: true,
-  price: 567,
-  delivery_cost: 35 },
-    {
-      id: 9,
-      name: 'Samsung S8',
-      category: 'smartphones',
-      color: 'silver',
-      condition: 'used',
-      damaged: true,
-      price: 567,
-      delivery_cost: 35 },
-    {
-      id: 10,
-      name: 'Samsung S8',
-      category: 'smartphones',
-      color: 'silver',
-      condition: 'used',
-      damaged: true,
-      price: 567,
-      delivery_cost: 35 },
-    {
-      id: 11,
-      name: 'Samsung S8',
-      category: 'smartphones',
-      color: 'silver',
-      condition: 'used',
-      damaged: true,
-      price: 567,
-      delivery_cost: 35 },
-    {
-      id: 12,
-      name: 'Samsung S8',
-      category: 'smartphones',
-      color: 'silver',
-      condition: 'used',
-      damaged: true,
-      price: 567,
-      delivery_cost: 35 },
-    {
-      id: 13,
-      name: 'Samsung S8',
-      category: 'smartphones',
-      color: 'silver',
-      condition: 'used',
-      damaged: true,
-      price: 567,
-      delivery_cost: 35 },
-    {
-      id: 14,
-      name: 'Samsung S8',
-      category: 'smartphones',
-      color: 'silver',
-      condition: 'used',
-      damaged: true,
-      price: 567,
-      delivery_cost: 35 },
-    {
-      id: 15,
-      name: 'Samsung S8',
-      category: 'smartphones',
-      color: 'silver',
-      condition: 'used',
-      damaged: true,
-      price: 567,
-      delivery_cost: 35 },
-  ];
-  constructor() { }
+  items: Item[] = [];
+  constructor(private shopservice: ShopService) { }
 
   ngOnInit() {
-    this.countitems();
-    this.countCategory();
-    this.showcondition();
-    this.mapcostitems();
+    this.LoadItems();
+
 
   }
+  LoadItems(): void {
+this.shopservice.getshopItems().subscribe((items) => {
+  this.items = items;
+  this.countitems();
+  this.countCategory();
+  this.showcondition();
+  this.mapcostitems();
+});
+
+  }
+
   ngAfterViewInit() {
-   this.showgrosschild.showgrossprices();
+
   }
   showvalue(sumitems: number): void {
     this.sumitems = sumitems;
@@ -208,9 +82,7 @@ showcondition (): void {
 mapcostitems (): void {
     this.mapcost = this.items.map((item) => item.price);
 }
-showgross (): void {
 
-}
 
 }
 
