@@ -4,7 +4,7 @@
 </app-header>
  -->
 
-<div class="container-fluid p-2">
+<div class="container-fluid">
   <div class="row" *ngIf="items && items.length > 0; else noItems">
     <div class="col-sm-2 leftnavigation"><app-navigation #showgrosschild [mapcost]="mapcost" [amounttv]="amounttv" [amountlaptops]="amountlaptops" [amountsoundbars]="amountsoundbars" [amountphones]="amountphones" [newitems]="newitems" [usedItem]="usedItem" [damageditem]="damageditem" (summarys)="showvalue($event)"></app-navigation></div>
 
@@ -15,7 +15,6 @@
       <div class="smalldivs">{{item?.name}}</div>
       <div class="smalldivs">Color: {{item?.color}}</div>
       <div class="smalldivs">Price: {{item?.price}}</div>
-
 
     </div></div>
       <button (click)="showgrosschild.showgrossprices()" class="btn btn-primary float-md-right">Show</button>
