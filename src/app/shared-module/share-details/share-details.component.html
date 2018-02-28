@@ -1,0 +1,16 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4"><div class="logo float-left">
+      <ng-content select="[logo]"></ng-content>
+    </div></div>
+    <div class="col-sm-8">
+      <div class="item-detail text-center">
+        <ng-content select="[detail]"></ng-content>
+      </div>
+    </div>
+    <div class="col-sm-12"><div class="card-footer">
+      <ng-content select="[footer]"></ng-content>
+    </div></div>
+  </div>
+</div>

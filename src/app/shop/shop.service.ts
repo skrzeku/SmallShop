@@ -14,4 +14,9 @@ export class ShopService {
     return this.http.get(this.MyApiUrl)
       .map((res) => res.json());
   }
+  getoneitem(id: number): Observable<Item> {
+   // return this.http.get(`/${id}`)
+    return this.http.get(this.MyApiUrl + '/' + id)
+      .map((res) => res.json());
+  }
 }

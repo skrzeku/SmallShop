@@ -2,6 +2,7 @@ import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {Item} from '../models/item';
 import {NavigationComponent} from '../navigation/navigation.component';
 import {ShopService} from '../shop.service';
+import {Route, Router} from '@angular/router';
 
 
 
@@ -27,13 +28,15 @@ export class ItemsComponent implements OnInit, AfterViewInit {
   @ViewChild('showgrosschild') showgrosschild: NavigationComponent;
 
   items: Item[] = [];
-  constructor(private shopservice: ShopService) { }
+
+  // 2 Services in Constructor
+  constructor(private shopservice: ShopService,
+              private routerService: Router) { }
 
   ngOnInit() {
     this.LoadItems();
-
-
   }
+
   LoadItems(): void {
 this.shopservice.getshopItems().subscribe((items) => {
   this.items = items;
@@ -42,9 +45,13 @@ this.shopservice.getshopItems().subscribe((items) => {
   this.showcondition();
   this.mapcostitems();
 });
-
+  }
+  // router.navigate can be replaced by directive [routerLink] in file.html
+  DetailsNavigate (item: Item) {
+this.routerService.navigate(['/shop', item.id]);
   }
 
+  // ngAfterViewInit give u a chance to w8 for load component. Run late than ngOnInit.
   ngAfterViewInit() {
 
   }
@@ -64,7 +71,7 @@ this.shopservice.getshopItems().subscribe((items) => {
     this.amounttv = mapsos.filter((tv) => tv === 'tv').length;
     this.amountsoundbars = mapsos.filter((bars) => bars === 'soundbars').length;
 
-
+// console.log just for validate
     console.log(this.amountphones);
     console.log(this.amountlaptops);
 }
