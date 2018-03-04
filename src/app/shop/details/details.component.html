@@ -1,5 +1,7 @@
+
 <app-share-details>
   <div logo>Logo</div>
+
   <div detail>
     <h3>{{item.name}}</h3>
     <div class="text-right">
@@ -10,6 +12,10 @@
       <p>Color: {{item.color}}</p>
     </div>
 
+  </div>
+  <div buttons>
+    <button type="submit" (click)="ShowPrevItem(item);">Previous Item</button>
+    <button (click)="ShowNextItem(item); ">Next Item</button>
   </div>
 <p footer>{{footerString}}</p>
 </app-share-details>

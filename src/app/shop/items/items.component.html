@@ -14,7 +14,7 @@
 
         <!-- directive [routerLink]="['/shop', item.id]" can be replaced by router.navigate to run routing from level of class component-->
 
-    <div class="col-sm-1 lessmargins" *ngFor="let item of items"  (click)="DetailsNavigate(item)" [ngClass]="item.condition=='new' ? 'condition' : 'usecondition'">
+    <div class="col-sm-1 lessmargins" *ngFor="let item of items" (click)="DetailsNavigate(item)" [ngClass]="item.condition=='new' ? 'condition' : 'usecondition'">
       <div class="smalldivs">{{item?.name}}</div>
       <div class="smalldivs">Color: {{item?.color}}</div>
       <div class="smalldivs">Price: {{item?.price}}</div>
@@ -23,8 +23,37 @@
       <button (click)="showgrosschild.showgrossprices()" class="btn btn-primary float-md-right">Show</button>
     <div class="text-right">Current min gross price: {{showgrosschild.grossminprice}}</div>
       <div class="text-right">Current max gross price: {{showgrosschild.grossmaxprice}}</div>
+      <button type="button" class="btn btn-group float-right" (click)="BuildMyForm()">Add new Item</button>
 
 
+      <div class="offset-sm-8"> <div class="form_addnewitem" *ngIf="myformgroup">
+        <form [formGroup]="myformgroup">
+          <label>Item name:</label>
+          <input formControlName="name" type="text" placeholder="name" class="form-control">
+
+          <label>Category:</label>
+          <input formControlName="category" type="text" placeholder="category" class="form-control">
+
+          <label>Price: </label>
+          <input formControlName="price" type="text" placeholder="price" class="form-control">
+
+          <label>Color:</label>
+          <input formControlName="color" type="text" placeholder="Color" class="form-control">
+
+          <label>Condition:</label>
+          <input formControlName="condition" type="text" placeholder="Condition" class="form-control">
+
+          <label>Is damaged?:</label>
+          <input formControlName="damaged" type="text" placeholder="true or false" class="form-control">
+
+          <label>Delivery cost:</label>
+          <input formControlName="delivery_cost" type="text" placeholder="date" class="form-control">
+        </form>
+        <button type="submit" class="btn btn-primary float-right btnmargin">Submit</button>
+
+
+        <pre class="lessmargins">{{ myformgroup.value | json}}</pre>
+      </div></div>
 
 
 

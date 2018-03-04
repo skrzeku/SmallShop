@@ -3,6 +3,7 @@ import {Item} from '../models/item';
 import {NavigationComponent} from '../navigation/navigation.component';
 import {ShopService} from '../shop.service';
 import {Route, Router} from '@angular/router';
+import {FormBuilder, FormGroup} from '@angular/forms';
 
 
 
@@ -26,15 +27,28 @@ export class ItemsComponent implements OnInit, AfterViewInit {
   grossmaxprice: number;
   grossminprice: number;
   @ViewChild('showgrosschild') showgrosschild: NavigationComponent;
+  myformgroup: FormGroup;
 
   items: Item[] = [];
 
   // 2 Services in Constructor
   constructor(private shopservice: ShopService,
-              private routerService: Router) { }
+              private routerService: Router,
+              private formbuilder: FormBuilder) { }
 
   ngOnInit() {
     this.LoadItems();
+  }
+  BuildMyForm (): void {
+    this.myformgroup = this.formbuilder.group({
+      name: '',
+      category: '',
+      color: '',
+      condition: '',
+      damaged: '',
+      price: '',
+      delivery_cost: ''
+    });
   }
 
   LoadItems(): void {
@@ -65,7 +79,6 @@ this.routerService.navigate(['/shop', item.id]);
   }
   countCategory (): void {
     const mapsos = this.items.map((item) => item.category);
-    const key = Object.values(mapsos)[2];
     this.amountlaptops = mapsos.filter((loko) => loko === 'laptops').length;
     this.amountphones = mapsos.filter((losa) => losa === 'smartphones').length;
     this.amounttv = mapsos.filter((tv) => tv === 'tv').length;

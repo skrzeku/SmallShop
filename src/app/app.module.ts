@@ -8,6 +8,8 @@ import {ConnectionBackend, Http, HttpModule} from '@angular/http';
 import {CoreModule} from './core-module/core-module.module';
 import {AppRoutingModule} from './app-routing.module';
 import {ShopRoutingModule} from './shop/shop-routing.module';
+import {AboutModule} from './about/about.module';
+import {ContactModule} from './contact/contact.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import {ShopRoutingModule} from './shop/shop-routing.module';
     HttpModule,
     CoreModule,
     AppRoutingModule,
-    ShopRoutingModule
+    ShopRoutingModule,
+    AboutModule,
+    ContactModule
   ],
   providers: [ShopService],
   bootstrap: [AppComponent]

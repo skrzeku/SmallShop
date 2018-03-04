@@ -9,6 +9,7 @@ import {RouterModule} from '@angular/router';
 import {DetailsComponent} from './details/details.component';
 import {ShareDetailsComponent} from '../shared-module/share-details/share-details.component';
 import {ShopResolve} from './shop-resolve.service';
+import {ReactiveFormsModule} from '@angular/forms';
 
 
 
@@ -16,10 +17,11 @@ import {ShopResolve} from './shop-resolve.service';
   imports: [
     CommonModule,
     SharedModule,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule
   ],
-  exports: [ItemsComponent, NavigationComponent, SearchComponent, DetailsComponent],
+  exports: [ItemsComponent, NavigationComponent, DetailsComponent],
   providers: [ShopResolve],
-  declarations: [ItemsComponent, NavigationComponent, AmountItemsComponent, SearchComponent, DetailsComponent]
+  declarations: [ItemsComponent, NavigationComponent, AmountItemsComponent, DetailsComponent]
 })
 export class ShopModule { }
