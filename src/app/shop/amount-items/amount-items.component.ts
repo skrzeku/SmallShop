@@ -6,7 +6,7 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./amount-items.component.less']
 })
 export class AmountItemsComponent{
-@Input() amountItem: number;
+@Input() amountProduct: number;
   constructor() { }
 
 }

@@ -10,11 +10,11 @@ export class NavigationComponent implements OnInit {
   @Input () amountphones: number;
   @Input () amounttv: number;
   @Input () amountsoundbars: number;
-  summaryitems: number;
+  summaryproducts: number;
   @Output () summarys: EventEmitter<number> = new EventEmitter<number>();
-  @Input () newitems: number;
-  @Input () usedItem: number;
-  @Input () damageditem: number;
+  @Input () newproducts: number;
+  @Input () usedProduct: number;
+  @Input () damagedproduct: number;
   @Input () mapcost: number[];
   minprice: number;
   maxprice: number;
@@ -27,8 +27,8 @@ export class NavigationComponent implements OnInit {
     this.showmarginalprices();
   }
 check_summary (): void {
-    this.summaryitems = this.amountlaptops + this.amountsoundbars + this.amounttv + this.amountphones;
-    this.summarys.emit(this.summaryitems);
+    this.summaryproducts = this.amountlaptops + this.amountsoundbars + this.amounttv + this.amountphones;
+    this.summarys.emit(this.summaryproducts);
 }
 showmarginalprices (): void {
    this.minprice = Math.min(...this.mapcost);

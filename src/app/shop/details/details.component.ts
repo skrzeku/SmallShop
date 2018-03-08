@@ -2,7 +2,7 @@
 import {Component, Injectable, OnInit} from '@angular/core';
 import {ShopService} from '../shop.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Item} from '../models/item';
+import {Product} from '../models/product';
 
 @Component({
   selector: 'app-details',
@@ -11,7 +11,7 @@ import {Item} from '../models/item';
 })
 
 export class DetailsComponent implements OnInit {
-  item: Item;
+  product: Product;
   footerString: string;
 
   constructor(private ShopServices: ShopService,
@@ -20,7 +20,7 @@ export class DetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.LoadOneItem();
+    this.LoadOneProduct();
     this.make_string_footer();
   }
 
@@ -31,34 +31,34 @@ export class DetailsComponent implements OnInit {
     this.footerString = 'Przedmiotu tego nie można kupić, stanowi on jedynie element projektu tej aplikacji. Aplikacja ta nie ma na celu naruszenia praw autorskich, jak również nie jest reklamą danego produktu. Produkt ten został wybrany w sposób przypadkowy. Wszystkie informacje o produkcie zostały pobrane w legalny sposób ze źródeł udostępnionych przez producenta.';
   }
 
-  LoadOneItem(): void {
-    /* OLD Version, but very slowly!!!
-      // +convert string to number
-      const id = +this.rt.snapshot.params['id'];
+  LoadOneProduct(): void {
+                                  /* OLD Version, but very slowly!!!
+                            // +convert string to number
+                            const id = +this.rt.snapshot.params['id'];
 
-      this.ShopServices.getoneitem(id).subscribe((item) => {
-        this.item = item;
-      }); */
-    // new faster version!!
-    // data give u abilities to read a property 'item' from shop-routing.module.ts (resolve)
+                            this.ShopServices.getoneproduct(id).subscribe((product) => {
+                              this.product = product;
+                            }); */
+                          // new faster version!!
+                          // data give u abilities to read a property 'product' from shop-routing.module.ts (resolve)
 
-    this.item = this.rt.snapshot.data['item'];
+    this.product = this.rt.snapshot.data['product'];
   }
-  ShowNextItem(item: Item) {
-    this.routeService.navigate(['/shop', item.id + 1]);
-    this.LoadOLdItem();
-  }
-
-  ShowPrevItem(item: Item) {
-    this.routeService.navigate(['/shop', item.id - 1]);
-    this.LoadOLdItem();
+  ShowNextProduct(product: Product) {
+    this.routeService.navigate(['/shop', this.product.id + 1]);
+    this.LoadOLdProduct();
   }
 
-  LoadOLdItem(): void {
+  ShowPrevProduct(product: Product) {
+    this.routeService.navigate(['/shop', this.product.id - 1]);
+    this.LoadOLdProduct();
+  }
+
+  LoadOLdProduct(): void {
     const id = +this.rt.snapshot.params['id'];
 
-    this.ShopServices.getoneitem(id).subscribe((item) => {
-      this.item = item;
+    this.ShopServices.getoneproduct(id).subscribe((product) => {
+      this.product = product;
     });
   }
 

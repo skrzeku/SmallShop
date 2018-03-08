@@ -1,0 +1,76 @@
+<!-- <app-header>
+  <p levels>products</p>
+  <div content><h3>Some text</h3></div>
+</app-header>
+ -->
+
+<div class="container-fluid">
+  <div class="row" *ngIf="products && products.length > 0; else noProducts">
+    <div class="col-sm-2 leftnavigation"><app-navigation #showgrosschild [mapcost]="mapcost" [amounttv]="amounttv" [amountlaptops]="amountlaptops" [amountsoundbars]="amountsoundbars" [amountphones]="amountphones" [newproducts]="newproducts" [usedProduct]="usedProduct" [damagedproduct]="damagedproduct" (summarys)="showvalue($event)"></app-navigation></div>
+
+    <div class="col-sm-10">
+      <div class="row">
+    <div class="col-sm-12"><app-amount-items [amountProduct]="amountProduct"></app-amount-items></div>
+
+        <!-- directive [routerLink]="['/shop', product.id]" can be replaced by router.navigate to run routing from level of class component-->
+
+    <div class="col-sm-1 lessmargins" *ngFor="let product of products" (click)="DetailsNavigate(product)" [ngClass]="product.condition=='new' ? 'condition' : 'usecondition'">
+      <div class="smalldivs">{{product?.name}}</div>
+      <div class="smalldivs">Color: {{product?.color}}</div>
+      <div class="smalldivs">Price: {{product?.price}}</div>
+
+    </div></div>
+      <button (click)="showgrosschild.showgrossprices()" class="btn btn-primary float-md-right">Show</button>
+    <div class="text-right">Current min gross price: {{showgrosschild.grossminprice}}</div>
+      <div class="text-right">Current max gross price: {{showgrosschild.grossmaxprice}}</div>
+      <button type="button" class="btn btn-group float-right" (click)="BuildMyForm()">Add new Product</button>
+
+
+      <div class="offset-sm-8"> <div class="form_addnewproduct" *ngIf="myformgroup">
+        <form [formGroup]="myformgroup">
+          <label>Product name:</label>
+          <input formControlName="name" type="text" placeholder="name" class="form-control" [ngClass]="{'error_l' : !myformgroup.get('name').valid && myformgroup.get('name').dirty}">
+
+          <!-- dirty mean w8 for first touch like write first characters-->
+          <p *ngIf="!myformgroup.get('name').valid && myformgroup.get('name').dirty" class="error_p" id="p1">This field is requaired and must constains 4-12 characters </p>
+
+          <label>Category:</label>
+          <input formControlName="category" type="text" placeholder="category" class="form-control">
+          <p *ngIf="!myformgroup.get('category').valid && myformgroup.get('category').dirty" class="error_p">This field is requaired.</p>
+
+          <label>Price: </label>
+          <input formControlName="price" type="number" placeholder="price" class="form-control">
+          <p *ngIf="!myformgroup.get('price').valid && myformgroup.get('price').dirty" class="error_p">This field is requaired and value should be between 0-99999</p>
+
+          <label>Color:</label>
+          <input formControlName="color" type="text" placeholder="Color" class="form-control">
+          <p *ngIf="!myformgroup.get('color').valid && myformgroup.get('color').dirty" class="error_p">This field is requaired.</p>
+
+          <label>Condition:</label>
+          <input formControlName="condition" type="text" placeholder="Condition" class="form-control">
+          <p *ngIf="!myformgroup.get('condition').valid && myformgroup.get('condition').dirty" class="error_p">This field is requaired.</p>
+
+          <label>Is damaged?:</label>
+          <input formControlName="damaged" type="text" placeholder="true or false" class="form-control">
+          <p *ngIf="!myformgroup.get('damaged').valid && myformgroup.get('damaged').dirty" class="error_p">This field is requaired.</p>
+
+          <label>Delivery cost:</label>
+          <input formControlName="delivery_cost" type="number" placeholder="cost" class="form-control">
+          <p *ngIf="!myformgroup.get('delivery_cost').valid && myformgroup.get('delivery_cost').dirty" class="error_p">Cost can't be less than 0</p>
+        </form>
+        <button [disabled]="myformgroup.invalid" type="submit" (click)="addnewproduct()" class="btn btn-primary float-right btnmargin">Submit</button>
+        <button type="button" (click)="myformgroup.reset()" class="btn btn-danger float-right btnmargin">Clean</button>
+
+
+        <pre class="lessmargins">{{ myformgroup.value | json}}</pre>
+        <pre> Show my valid value: {{ myformgroup.get('name').valid | json}}</pre>
+        <pre> Show my valid value: {{ myformgroup.get('delivery_cost').valid | json}}</pre>
+      </div></div>
+
+
+
+<div class="text-left"><p>All of every available output products: {{sumproducts}}</p></div>
+
+  <ng-template #noProducts> <p>I can't find any shop products :(</p></ng-template>
+</div>
+

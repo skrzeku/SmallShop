@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Item} from './models/item';
+import {Product} from './models/product';
 import {Observable} from 'rxjs/Observable';
 import {Http} from '@angular/http';
 import 'rxjs';
@@ -10,13 +10,23 @@ export class ShopService {
 
   constructor(private http: Http) { }
 
-  getshopItems(): Observable<Item[]> {
+                        // observable need to subscribe() in components
+
+  getshopProducts(): Observable<Product[]> {
     return this.http.get(this.MyApiUrl)
       .map((res) => res.json());
   }
-  getoneitem(id: number): Observable<Item> {
-   // return this.http.get(`/${id}`)
+  getoneproduct(id: number): Observable<Product> {
+                         // return this.http.get(`/${id}`)
     return this.http.get(this.MyApiUrl + '/' + id)
+      .map((res) => res.json());
+  }
+  AddShopProduct(data): Observable<Product> {
+    return this.http.post(this.MyApiUrl, data)
+      .map((res) => res.json());
+  }
+  EditShopProduct(data): Observable<Product> {
+    return this.http.put(this.MyApiUrl, data)
       .map((res) => res.json());
   }
 }
