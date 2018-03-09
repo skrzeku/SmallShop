@@ -25,8 +25,9 @@ export class ShopService {
     return this.http.post(this.MyApiUrl, data)
       .map((res) => res.json());
   }
-  EditShopProduct(data): Observable<Product> {
-    return this.http.put(this.MyApiUrl, data)
+  Editproduct(id: number, data): Observable<Product> {
+    return this.http.put(this.MyApiUrl + `/${id}`, data)
       .map((res) => res.json());
   }
+
 }

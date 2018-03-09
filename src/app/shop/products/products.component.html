@@ -26,7 +26,7 @@
       <button type="button" class="btn btn-group float-right" (click)="BuildMyForm()">Add new Product</button>
 
 
-      <div class="offset-sm-8"> <div class="form_addnewproduct" *ngIf="myformgroup">
+      <div class="col-sm-4 offset-sm-4"> <div class="form_addnewproduct" *ngIf="myformgroup">
         <form [formGroup]="myformgroup">
           <label>Product name:</label>
           <input formControlName="name" type="text" placeholder="name" class="form-control" [ngClass]="{'error_l' : !myformgroup.get('name').valid && myformgroup.get('name').dirty}">
@@ -62,9 +62,6 @@
         <button type="button" (click)="myformgroup.reset()" class="btn btn-danger float-right btnmargin">Clean</button>
 
 
-        <pre class="lessmargins">{{ myformgroup.value | json}}</pre>
-        <pre> Show my valid value: {{ myformgroup.get('name').valid | json}}</pre>
-        <pre> Show my valid value: {{ myformgroup.get('delivery_cost').valid | json}}</pre>
       </div></div>
 
 

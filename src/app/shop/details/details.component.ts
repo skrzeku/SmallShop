@@ -3,6 +3,7 @@ import {Component, Injectable, OnInit} from '@angular/core';
 import {ShopService} from '../shop.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Product} from '../models/product';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-details',
@@ -13,10 +14,14 @@ import {Product} from '../models/product';
 export class DetailsComponent implements OnInit {
   product: Product;
   footerString: string;
+  myformgroup: FormGroup;
 
   constructor(private ShopServices: ShopService,
+                              //ActivatedRoute give u RouterParams and snapshot
               private rt: ActivatedRoute,
-              private routeService: Router) {
+              private routeService: Router,
+              private shopservice: ShopService,
+              private formbuilder: FormBuilder) {
   }
 
   ngOnInit() {
@@ -29,6 +34,18 @@ export class DetailsComponent implements OnInit {
   // void to show a footer text
   make_string_footer(): void {
     this.footerString = 'Przedmiotu tego nie można kupić, stanowi on jedynie element projektu tej aplikacji. Aplikacja ta nie ma na celu naruszenia praw autorskich, jak również nie jest reklamą danego produktu. Produkt ten został wybrany w sposób przypadkowy. Wszystkie informacje o produkcie zostały pobrane w legalny sposób ze źródeł udostępnionych przez producenta.';
+  }
+                      // coppied from products.component
+  BuildMyForm (): void {
+    this.myformgroup = this.formbuilder.group({
+      name: [this.product.name, [Validators.required, Validators.minLength(4), Validators.maxLength(12)]],
+      category: [this.product.category, Validators.required],
+      color: [this.product.color, Validators.required],
+      condition: [this.product.condition, Validators.required],
+      damaged: [this.product.damaged, Validators.required],
+      price: [this.product.price, [Validators.required, Validators.min(0), Validators.max(99999)]],
+      delivery_cost: [this.product.delivery_cost, [Validators.required, Validators.min(0)]]
+    });
   }
 
   LoadOneProduct(): void {
@@ -59,6 +76,13 @@ export class DetailsComponent implements OnInit {
 
     this.ShopServices.getoneproduct(id).subscribe((product) => {
       this.product = product;
+    });
+  }
+                        // After click update go to '/shop' by using service: Router.navigate
+
+  EditProduct (): void {
+    this.shopservice.Editproduct(this.product.id, this.myformgroup.value).subscribe(() => {
+      this.routeService.navigate(['/shop']);
     });
   }
 
