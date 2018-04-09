@@ -16,6 +16,7 @@ export class DetailsComponent implements OnInit {
   footerString: string;
   myformgroup: FormGroup;
 
+
   constructor(private ShopServices: ShopService,
                               //ActivatedRoute give u RouterParams and snapshot
               private rt: ActivatedRoute,
@@ -82,6 +83,12 @@ export class DetailsComponent implements OnInit {
 
   EditProduct (): void {
     this.shopservice.Editproduct(this.product.id, this.myformgroup.value).subscribe(() => {
+      this.routeService.navigate(['/shop']);
+    });
+  }
+  DeleteProduct (): void {
+    this.shopservice.Deleteproduct(this.product.id).subscribe(() => {
+      //event.stopPropagation(); -- when u have 2 or more clicks very close, this command give u a abbilities to focus on mainly click!
       this.routeService.navigate(['/shop']);
     });
   }

@@ -29,5 +29,9 @@ export class ShopService {
     return this.http.put(this.MyApiUrl + `/${id}`, data)
       .map((res) => res.json());
   }
+  Deleteproduct(id: number): Observable<Product> {
+    return this.http.delete(this.MyApiUrl + `/${id}`)
+      .map((res) => res.json());
+  }
 
 }

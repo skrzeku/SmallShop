@@ -8,11 +8,9 @@ import {RouterModule} from '@angular/router';
 import {DetailsComponent} from './details/details.component';
 import {ShopResolve} from './shop-resolve.service';
 import {ReactiveFormsModule} from '@angular/forms';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-
-
-
-
+import {MdTooltip, MdTooltipModule} from '@angular/material';
+import {BrowserModule} from '@angular/platform-browser';
+import {SearchComponent} from './search/search.component';
 
 
 @NgModule({
@@ -22,10 +20,11 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     RouterModule,
     ReactiveFormsModule,
     /// comment forRoot() need to change!
-    NgbModule.forRoot()
+    //NgbModule.forRoot()
+    BrowserModule,
   ],
   exports: [ProductsComponent, NavigationComponent, DetailsComponent],
   providers: [ShopResolve],
-  declarations: [ProductsComponent, NavigationComponent, AmountItemsComponent, DetailsComponent]
+  declarations: [ProductsComponent, NavigationComponent, AmountItemsComponent, DetailsComponent, SearchComponent]
 })
 export class ShopModule { }

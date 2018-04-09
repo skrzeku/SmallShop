@@ -15,15 +15,15 @@
         <!-- directive [routerLink]="['/shop', product.id]" can be replaced by router.navigate to run routing from level of class component-->
 
     <div class="col-sm-1 lessmargins" *ngFor="let product of products" (click)="DetailsNavigate(product)" [ngClass]="product.condition=='new' ? 'condition' : 'usecondition'">
-      <div class="smalldivs">{{product?.name}}</div>
+      <div class="smalldivs">{{product?.name | uppercase }}</div>
       <div class="smalldivs">Color: {{product?.color}}</div>
-      <div class="smalldivs">Price: {{product?.price}}</div>
+      <div class="smalldivs">Price: {{product?.price | currency:'EUR':true}}</div>
 
     </div></div>
-      <button (click)="showgrosschild.showgrossprices()" class="btn btn-primary float-md-right">Show</button>
-    <div class="text-right">Current min gross price: {{showgrosschild.grossminprice}}</div>
-      <div class="text-right">Current max gross price: {{showgrosschild.grossmaxprice}}</div>
-      <button type="button" class="btn btn-group float-right" (click)="BuildMyForm()">Add new Product</button>
+      <button (click)="showgrosschild.showgrossprices()" class="btn btn-primary float-left btnmargin">Show</button>
+    <div class="text-left btnmargin">Current min gross price: {{showgrosschild.grossminprice}}</div>
+      <div class="text-left btnmargin">Current max gross price: {{showgrosschild.grossmaxprice}}</div>
+      <button type="button" class="btn btn-group float-right btnmargin" (click)="BuildMyForm()">Add new Product</button>
 
 
       <div class="col-sm-4 offset-sm-4"> <div class="form_addnewproduct" *ngIf="myformgroup">
@@ -35,7 +35,16 @@
           <p *ngIf="!myformgroup.get('name').valid && myformgroup.get('name').dirty" class="error_p" id="p1">This field is requaired and must constains 4-12 characters </p>
 
           <label>Category:</label>
+          <!--
           <input formControlName="category" type="text" placeholder="category" class="form-control">
+          -->
+          <select formControlName="category" class="form-control">
+            <option value="smartphones" selected>Smartphones</option>
+            <option value="laptops" selected>Laptops</option>
+            <option value="tv" selected>TV</option>
+            <option value="soundbars" selected>Soundbars</option>
+
+          </select>
           <p *ngIf="!myformgroup.get('category').valid && myformgroup.get('category').dirty" class="error_p">This field is requaired.</p>
 
           <label>Price: </label>

@@ -3,16 +3,18 @@
   <div logo>Logo</div>
 
   <div detail>
-    <h3>{{product.name}}</h3>
+
+    <h3>{{product.name | uppercase}}</h3>
     <div class="text-right">
-    <p>Current Price: {{product.price}}</p>
+    <p appMydirective>Current Price: {{product.price | currency: 'EUR':true}}</p>
     <p>Condition: {{product.condition}}</p>
-      <p>Delivery Cost: {{product.delivery_cost}}</p>
+      <p>Delivery Cost: {{product.delivery_cost | currency: 'EUR':true}}</p>
       <p>Category: {{product.category}}</p>
       <p>Color: {{product.color}}</p>
       <p>Damaged: {{product.damaged}}</p>
 
       <button class="btn btn-primary btnmargin" (click)="BuildMyForm()">Edit</button>
+      <button type="button" (click)="DeleteProduct()" class="btn btn-danger float-right">Delete</button>
     </div>
     <div class="col-sm-4 offset-sm-4"> <div class="form_addnewproduct mrbottom" *ngIf="myformgroup">
       <form [formGroup]="myformgroup">
@@ -47,7 +49,8 @@
         <p *ngIf="!myformgroup.get('delivery_cost').valid && myformgroup.get('delivery_cost').dirty" class="error_p">Cost can't be less than 0</p>
       </form>
       <button [disabled]="myformgroup.invalid" type="submit" class="btn btn-primary float-right btnmargin" (click)="EditProduct()">Update data</button>
-      <button type="button" (click)="myformgroup.reset()" class="btn btn-danger float-right btnmargin">Clean</button>
+      <button type="button" (click)="myformgroup.reset()" class="btn btn-group float-right btnmargin">Clean</button>
+
 
 
     </div></div>
@@ -55,8 +58,8 @@
   </div>
   <div buttons>
     <!-- ngbTooltip: need to import NgbModule.forRoot() -->
-    <button ngbTooltip="Tap 2 times to show previous product!" type="submit" (click)="ShowPrevProduct(product);">Previous Product</button>
-    <button ngbTooltip="Tap 2 times to show next product!" placement="bottom" (click)="ShowNextProduct(product); ">Next Product</button>
+    <button type="submit" (click)="ShowPrevProduct(product);">Previous Product</button>
+    <button placement="bottom" (click)="ShowNextProduct(product); ">Next Product</button>
   </div>
 
 <p footer>{{footerString}}</p>

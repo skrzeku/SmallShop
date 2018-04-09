@@ -1,11 +1,11 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.less']
 })
-export class NavigationComponent implements OnInit {
+export class NavigationComponent implements OnInit ,OnChanges {
   @Input () amountlaptops: number;
   @Input () amountphones: number;
   @Input () amounttv: number;
@@ -20,12 +20,23 @@ export class NavigationComponent implements OnInit {
   maxprice: number;
   grossmaxprice: number;
   grossminprice: number;
-  private fee = 1.23;
+  private fee: number = 1.23;
+
+  lastLapBoolean: boolean = false;
+  latPhoneBoolean: boolean = false;
+  lastProduct: number = 2;
   constructor() { }
   ngOnInit() {
     this.check_summary();
     this.showmarginalprices();
   }
+
+  //Life cycle of compontent ngOnChanges is listening changes of data bounds property! That means run function when 'bound' was changed.
+  ngOnChanges(Mychanges: SimpleChanges) {
+    this.lastLapBoolean = Mychanges['amountlaptops'].currentValue < this.lastProduct && Mychanges['amountlaptops'].currentValue > 0;
+    this.latPhoneBoolean = Mychanges['amountphones'].currentValue < this.lastProduct && Mychanges['amountphones'].currentValue > 0;
+  }
+
 check_summary (): void {
     this.summaryproducts = this.amountlaptops + this.amountsoundbars + this.amounttv + this.amountphones;
     this.summarys.emit(this.summaryproducts);
@@ -39,4 +50,5 @@ showgrossprices (): void {
 this.grossmaxprice = this.maxprice * this.fee;
 this.grossminprice = this.minprice * this.fee;
 }
+
 }

@@ -5,10 +5,13 @@
     <div class="col-sm-12 text-white">
       <h3>Category:</h3>
       <div>Smartphones: <span class="r">{{amountphones}}</span></div>
+      <span class="redone" *ngIf="lastPhoneBoolean">Last Smartphone Use promocode: 'LastPhone' to get 10% discount</span>
       <div>Laptops: <span class="r">{{amountlaptops}}</span></div>
+      <span *ngIf="lastLapBoolean" class="redone">Last Laptop Use promocode: 'LastLap' to get 10% discount</span>
       <div>TV: <span class="r">{{amounttv}}</span> </div>
       <div>Soundbars: <span class="r">{{amountsoundbars}}</span></div>
       <div class="sum">Summary: <span class="r">{{summaryproducts}}</span></div>
+
     </div>
     <div class="col-sm-12">
       <div class="text-white">
