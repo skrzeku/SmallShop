@@ -9,7 +9,6 @@ export class ShopService {
   private MyApiUrl = 'http://localhost:3000/api/shop';
 
   constructor(private http: Http) { }
-
                         // observable need to subscribe() in components
 
   getshopProducts(): Observable<Product[]> {

@@ -11,6 +11,8 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {MdTooltip, MdTooltipModule} from '@angular/material';
 import {BrowserModule} from '@angular/platform-browser';
 import {SearchComponent} from './search/search.component';
+import { FootComponent } from './amount-items/foot/foot.component';
+import {FootserviceService} from './footservice.service';
 
 
 @NgModule({
@@ -24,7 +26,7 @@ import {SearchComponent} from './search/search.component';
     BrowserModule,
   ],
   exports: [ProductsComponent, NavigationComponent, DetailsComponent],
-  providers: [ShopResolve],
-  declarations: [ProductsComponent, NavigationComponent, AmountItemsComponent, DetailsComponent, SearchComponent]
+  providers: [ShopResolve, FootserviceService],
+  declarations: [ProductsComponent, FootComponent, NavigationComponent, AmountItemsComponent, DetailsComponent, SearchComponent]
 })
 export class ShopModule { }

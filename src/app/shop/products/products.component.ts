@@ -6,6 +6,7 @@ import {NavigationComponent} from '../navigation/navigation.component';
 import {ShopService} from '../shop.service';
 import {Route, Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FootserviceService} from '../footservice.service';
 
 
 
@@ -36,7 +37,8 @@ export class ProductsComponent implements OnInit, AfterViewInit {
                          // 3 Services in Constructor
   constructor(private shopservice: ShopService,
               private routerService: Router,
-              private formbuilder: FormBuilder) { }
+              private formbuilder: FormBuilder,
+              private footserviceService: FootserviceService) { }
 
   ngOnInit() {
     this.LoadProducts();
@@ -61,6 +63,7 @@ this.shopservice.getshopProducts().subscribe((products) => {
   this.countproducts();
   this.countCategory();
   this.showcondition();
+  this.footserviceService.sharevalue(this.amountProduct);
   this.mapcostproducts();
 });
   }

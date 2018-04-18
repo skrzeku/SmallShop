@@ -10,7 +10,7 @@
 
     <div class="col-sm-10">
       <div class="row">
-    <div class="col-sm-12"><app-amount-items [amountProduct]="amountProduct"></app-amount-items></div>
+    <div class="col-sm-12"></div>
 
         <!-- directive [routerLink]="['/shop', product.id]" can be replaced by router.navigate to run routing from level of class component-->
 
@@ -76,6 +76,7 @@
 
 
 <div class="text-left"><p>All of every available output products: {{sumproducts}}</p></div>
+      <app-amount-items [amountProduct]="amountProduct"></app-amount-items>
 
   <ng-template #noProducts> <p>I can't find any shop products :(</p></ng-template>
 </div>
