@@ -32,10 +32,21 @@ export class NavigationComponent implements OnInit ,OnChanges {
   }
 
   //Life cycle of compontent ngOnChanges is listening changes of data bounds property! That means run function when 'bound' was changed.
+
   ngOnChanges(Mychanges: SimpleChanges) {
-    this.lastLapBoolean = Mychanges['amountlaptops'].currentValue < this.lastProduct && Mychanges['amountlaptops'].currentValue > 0;
-    this.latPhoneBoolean = Mychanges['amountphones'].currentValue < this.lastProduct && Mychanges['amountphones'].currentValue > 0;
-  }
+    for (let property in Mychanges) {
+      let change = Mychanges[property];
+
+      let CurrentVal = change.currentValue;
+      let PrevVal = change.previousValue;
+
+      if (property === 'amountlaptops') {
+        this.lastLapBoolean = CurrentVal < this.lastProduct && CurrentVal !== 0;
+      }
+      if (property === 'amountphones') {
+        this.latPhoneBoolean = CurrentVal < this.lastProduct && CurrentVal !== 0;
+      }
+    } }
 
 check_summary (): void {
     this.summaryproducts = this.amountlaptops + this.amountsoundbars + this.amounttv + this.amountphones;

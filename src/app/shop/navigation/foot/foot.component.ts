@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FootserviceService} from '../../footservice.service';
 import {Subscription} from 'rxjs/Subscription';
-import {PartialObserver} from 'rxjs/Observer';
-import {getQueryValue} from '@angular/core/src/view/query';
+
+
 
 
 
@@ -12,9 +12,9 @@ import {getQueryValue} from '@angular/core/src/view/query';
   styleUrls: ['./foot.component.less']
 })
 export class FootComponent implements OnInit, OnDestroy {
-
+  footmyvalue: string;
   costSubscription: Subscription;
-  footmyvalue: number;
+
 
   constructor(private foootserviceService: FootserviceService) { }
 
@@ -22,6 +22,7 @@ export class FootComponent implements OnInit, OnDestroy {
     this.costSubscription = this.foootserviceService.Footvalue$.subscribe((footmyvalue) => {
       this.footmyvalue = footmyvalue;
     });
+    console.log(this.footmyvalue);
   }
 
   ngOnDestroy() {

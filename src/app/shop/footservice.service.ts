@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import {Subject} from 'rxjs/Subject';
-import {async} from 'rxjs/scheduler/async';
 
 @Injectable()
 export class FootserviceService {
-  Footvalue$ = new Subject<number>();
+  Footvalue$ = new Subject<string>();
 
 
-  sharevalue (value: number): void {
+  sharevalue (value: string): void {
     this.Footvalue$.next(value);
     console.log(value);
   }

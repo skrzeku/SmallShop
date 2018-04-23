@@ -1,9 +1,11 @@
 
-import {Component, Injectable, OnInit} from '@angular/core';
+import {Component, Injectable, Input, OnInit, ViewChild} from '@angular/core';
 import {ShopService} from '../shop.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Product} from '../models/product';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ProductsComponent} from '../products/products.component';
+import {VoidService} from '../void.service';
 
 @Component({
   selector: 'app-details',
@@ -15,6 +17,8 @@ export class DetailsComponent implements OnInit {
   product: Product;
   footerString: string;
   myformgroup: FormGroup;
+  Loadmyproducts: any;
+  @ViewChild('myproductchild') myproductchild: ProductsComponent;
 
 
   constructor(private ShopServices: ShopService,
@@ -22,10 +26,12 @@ export class DetailsComponent implements OnInit {
               private rt: ActivatedRoute,
               private routeService: Router,
               private shopservice: ShopService,
-              private formbuilder: FormBuilder) {
+              private formbuilder: FormBuilder,
+              private voidService: VoidService) {
   }
 
   ngOnInit() {
+   // this.voidService.myvoid$.subscribe(myvoid => this.Loadmyproducts);
     this.LoadOneProduct();
     this.make_string_footer();
   }
@@ -90,6 +96,9 @@ export class DetailsComponent implements OnInit {
     this.shopservice.Deleteproduct(this.product.id).subscribe(() => {
       //event.stopPropagation(); -- when u have 2 or more clicks very close, this command give u a abbilities to focus on mainly click!
       this.routeService.navigate(['/shop']);
+
+
+
     });
   }
 

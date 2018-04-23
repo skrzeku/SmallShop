@@ -14,11 +14,8 @@
 
         <!-- directive [routerLink]="['/shop', product.id]" can be replaced by router.navigate to run routing from level of class component-->
 
-    <div class="col-sm-1 lessmargins" *ngFor="let product of products" (click)="DetailsNavigate(product)" [ngClass]="product.condition=='new' ? 'condition' : 'usecondition'">
-      <div class="smalldivs">{{product?.name | uppercase }}</div>
-      <div class="smalldivs">Color: {{product?.color}}</div>
-      <div class="smalldivs">Price: {{product?.price | currency:'EUR':true}}</div>
-
+        <div class="col-sm-1 lessmargins" *ngFor="let product of products"(click)="DetailsNavigate(product)" [ngClass]="product.condition=='new' ? 'condition' : 'usecondition'"><div>
+     <app-products-section [product]="product"></app-products-section> </div>
     </div></div>
       <button (click)="showgrosschild.showgrossprices()" class="btn btn-primary float-left btnmargin">Show</button>
     <div class="text-left btnmargin">Current min gross price: {{showgrosschild.grossminprice}}</div>
@@ -26,7 +23,7 @@
       <button type="button" class="btn btn-group float-right btnmargin" (click)="BuildMyForm()">Add new Product</button>
 
 
-      <div class="col-sm-4 offset-sm-4"> <div class="form_addnewproduct" *ngIf="myformgroup">
+      <div class="col-sm-4 offset-sm-4"> <div class="form_addnewproduct" *ngIf="formsIsShown">
         <form [formGroup]="myformgroup">
           <label>Product name:</label>
           <input formControlName="name" type="text" placeholder="name" class="form-control" [ngClass]="{'error_l' : !myformgroup.get('name').valid && myformgroup.get('name').dirty}">
@@ -60,7 +57,7 @@
           <p *ngIf="!myformgroup.get('condition').valid && myformgroup.get('condition').dirty" class="error_p">This field is requaired.</p>
 
           <label>Is damaged?:</label>
-          <input formControlName="damaged" type="text" placeholder="true or false" class="form-control">
+          <input formControlName="damaged" type="checkbox" (change)="ChangeValidators()">
           <p *ngIf="!myformgroup.get('damaged').valid && myformgroup.get('damaged').dirty" class="error_p">This field is requaired.</p>
 
           <label>Delivery cost:</label>
