@@ -10,6 +10,9 @@ import {AppRoutingModule} from './app-routing.module';
 import {ShopRoutingModule} from './shop/shop-routing.module';
 import {AboutModule} from './about/about.module';
 import {ContactModule} from './contact/contact.module';
+import {LoginRoutingModule} from './login/login/login-routing.module';
+import {LoginModule} from './login/login.module';
+import {AuthorizationService} from './authorization/authorization.service';
 
 @NgModule({
   declarations: [
@@ -19,13 +22,15 @@ import {ContactModule} from './contact/contact.module';
     BrowserModule,
     ShopModule,
     HttpModule,
+    LoginModule,
     CoreModule,
+    LoginRoutingModule,
     AppRoutingModule,
     ShopRoutingModule,
     AboutModule,
     ContactModule
   ],
-  providers: [ShopService],
+  providers: [ShopService, AuthorizationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
