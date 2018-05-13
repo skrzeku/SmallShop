@@ -6,7 +6,7 @@
 
   <div class="collapse navbar-collapse offset-2" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li [routerLink]="['/shop']" [routerLinkActive]="'active'"><a class="nav-link">Home</a>
+      <li [routerLink]="['shop']" [routerLinkActive]="'active'"><a class="nav-link">Home</a>
       </li>
       <!-- [routerLinkActive] add class "someclass" when current site is active-->
       <li [routerLink]="['/about']" [routerLinkActive]="'active'">
@@ -17,6 +17,9 @@
       </li>
       <li [routerLink]="['/login']" [routerLinkActive]="'active'">
         <a class="nav-link">Sing In</a>
+      </li>
+      <li>
+        <button type="submit" class="btn btn-danger" (click)="MyLogOut()">Log Out</button>
       </li>
 
     </ul>

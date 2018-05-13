@@ -1,36 +1,44 @@
 import { Injectable } from '@angular/core';
+import {Observable} from 'rxjs/Observable';
+import {Subject} from 'rxjs/Subject';
+import {LayoutService} from '../shared-module/services/layout.service';
+
 
 @Injectable()
 export class AuthorizationService {
 
-
+  constructor(private layoutservice: LayoutService) {}
   // just for test
   private credentials = {
-    login: 'pawel',
+    login: 'admin',
     password:  'admin'
   };
 
   private isLogged = false;
 
-  login (login, password) {
-
-
-          // Promise is a async method and return resolve when inputed datas are correctly and reject when u enter wrong passwords or login
-    return new Promise((resolve, reject) =>  {
-      if (login === this.credentials.login && password === this.credentials.password) {
-        resolve();
+  login(login, password) {
+    return new Promise((resolve, reject) => {
+      if (this.credentials.login === login && this.credentials.password === password) {
+        this.layoutservice.Show();
         this.isLogged = true;
-      }
-      else {
+        resolve();
+      } else {
         reject();
       }
-
     });
   }
+
+
           // Encapsulation method, it's like a good practice
-  isLoggedVoid() {
+  isLoggedVoid(): boolean {
     return this.isLogged;
   }
-  constructor() { }
+  logout (): void {
+    this.isLogged = false;
+    this.layoutservice.Hide();
+
+  }
+
+
 
 }

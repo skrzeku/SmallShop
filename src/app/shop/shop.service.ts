@@ -17,7 +17,7 @@ export class ShopService {
   }
   getoneproduct(id: number): Observable<Product> {
                          // return this.http.get(`/${id}`)
-    return this.http.get(this.MyApiUrl + '/' + id)
+    return this.http.get(this.MyApiUrl + `/${id}`)
       .map((res) => res.json());
   }
   AddShopProduct(data): Observable<Product> {

@@ -8,27 +8,25 @@ import {RouterModule} from '@angular/router';
 import {DetailsComponent} from './details/details.component';
 import {ShopResolve} from './shop-resolve.service';
 import {ReactiveFormsModule} from '@angular/forms';
-import {MdTooltip, MdTooltipModule} from '@angular/material';
-import {BrowserModule} from '@angular/platform-browser';
 import {SearchComponent} from './search/search.component';
 import { FootComponent } from './navigation/foot/foot.component';
 import {FootserviceService} from './footservice.service';
 import { ProductsSectionComponent } from './products-section/products-section.component';
 import {VoidService} from './void.service';
-
+import {ShopRoutingModule} from './shop-routing.module';
+import { ShopComponent } from './shop.component';
 
 @NgModule({
   imports: [
-    CommonModule,
     SharedModule,
     RouterModule,
+    CommonModule,
     ReactiveFormsModule,
-    /// comment forRoot() need to change!
-    //NgbModule.forRoot()
-    BrowserModule,
+    ShopRoutingModule
   ],
-  exports: [ProductsComponent, NavigationComponent, DetailsComponent],
+  exports: [ProductsComponent],
   providers: [ShopResolve, FootserviceService, VoidService],
-  declarations: [ProductsComponent, FootComponent, NavigationComponent, AmountItemsComponent, DetailsComponent, SearchComponent, ProductsSectionComponent]
+  declarations: [ProductsComponent, FootComponent, NavigationComponent
+    , AmountItemsComponent, DetailsComponent, SearchComponent, ProductsSectionComponent, ShopComponent]
 })
 export class ShopModule { }

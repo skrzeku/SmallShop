@@ -52,6 +52,7 @@ export class ProductsComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.LoadProducts();
    this.voidService.ShareVoid(this.LoadProducts());
+
   }
 
                                    //My first form with validator
