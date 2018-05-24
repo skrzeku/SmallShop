@@ -23,8 +23,8 @@ export class NaviComponent implements OnInit {
     this.getTime();
   }
   MyLogOut (): void {
-    this.myservice.logout();
-    this.router.navigate(['login']);
+    this.router.navigate(['']).then(() => this.myservice.logout());
+
   }
                             //Another My Way to build Timer
 

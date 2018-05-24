@@ -1,4 +1,7 @@
-import {AfterViewInit, Component, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {
+  AfterContentInit, AfterViewInit, Component, ElementRef, OnDestroy, OnInit, QueryList, Renderer2, ViewChild,
+  ViewChildren
+} from '@angular/core';
 import {Product} from '../models/product';
 import {NavigationComponent} from '../navigation/navigation.component';
 import {ShopService} from '../shop.service';
@@ -7,6 +10,10 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {FootserviceService} from '../footservice.service';
 import {ProductsSectionComponent} from '../products-section/products-section.component';
 import {VoidService} from '../void.service';
+import {LayoutService} from '../../shared-module/services/layout.service';
+import {Subscription} from 'rxjs/Subscription';
+import {AuthorizationService} from '../../authorization/authorization.service';
+import set = Reflect.set;
 
 
 
@@ -16,7 +23,7 @@ import {VoidService} from '../void.service';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.less']
 })
-export class ProductsComponent implements OnInit, AfterViewInit {
+export class ProductsComponent implements OnInit, AfterViewInit, OnDestroy, AfterContentInit {
   amountProduct: number;
   amountlaptops: number;
   amountphones: number;
@@ -33,9 +40,14 @@ export class ProductsComponent implements OnInit, AfterViewInit {
   laptops = [];
   myArray = [];
   longestvalue: number;
+  visible: boolean = false;
+  vis2: boolean = false;
   MostCondition: string;
   formsIsShown: boolean;
+  private mysubscription: Subscription;
+  MyNative: any;
   @ViewChild('showgrosschild') showgrosschild: NavigationComponent;
+  @ViewChild('MySpan') private MySpan: ElementRef;
   @ViewChildren(ProductsSectionComponent) ProductSession: QueryList<ProductsSectionComponent>;
 
   myformgroup: FormGroup;
@@ -44,16 +56,45 @@ export class ProductsComponent implements OnInit, AfterViewInit {
 
                          // 3 Services in Constructor
   constructor(private shopservice: ShopService,
+              private lay: LayoutService,
               private routerService: Router,
               private formbuilder: FormBuilder,
               private footserviceService: FootserviceService,
-              private voidService: VoidService) { }
+              private voidService: VoidService,
+              private render: Renderer2) { }
 
   ngOnInit() {
+
     this.LoadProducts();
-   this.voidService.ShareVoid(this.LoadProducts());
+
+
+    this.mysubscription = this.mysubscription = this.lay.VisibleSubject$.subscribe((val) => {
+      if (val) {
+        this.visible = val;
+        console.log(val);
+      }
+      else if (!val) {
+        console.log('error');
+      }
+
+
+    });
+
+setTimeout(() => {
+  this.ChangeMyStyleofSpan();
+}, 20);
+
+
+
 
   }
+  ngAfterContentInit() {
+  }
+  ngOnDestroy() {
+    this.mysubscription.unsubscribe();
+  }
+
+
 
                                    //My first form with validator
   BuildMyForm (): void {
@@ -82,35 +123,47 @@ export class ProductsComponent implements OnInit, AfterViewInit {
   }
 
   LoadProducts(): void {
-this.shopservice.getshopProducts().subscribe((products) => {
-  this.products = products;
-  this.countproducts();
-  this.countCategory();
-  this.showcondition();
-  this.footserviceService.sharevalue(this.MostCondition);
-  this.mapcostproducts();
+    this.shopservice.getshopProducts().subscribe((products) => {
+      this.products = products;
+      this.countproducts();
+      this.countCategory();
+      this.showcondition();
+      this.footserviceService.sharevalue(this.MostCondition);
 
-});
+      this.mapcostproducts();
+
+
+
+
+
+    });
   }
                           // router.navigate can be replaced by directive [routerLink] in file.html
-  DetailsNavigate(product) {
+  DetailsNavigate(product) : void {
 this.routerService.navigate(['/shop', product.id]);
+  }
+
+  ChangeMyStyleofSpan (): void {
+    const MySuperSpan = this.MySpan.nativeElement;
+if (this.visible) {
+  this.render.setProperty(MySuperSpan, 'disabled', false);
+  console.log('Visible:', this.visible);
+}
+else if (!this.visible) this.render.setProperty(MySuperSpan, 'disabled', true);
   }
 
                         // ngAfterViewInit give u a chance to w8 for load component. Run late than ngOnInit. I have to edit!!!
   ngAfterViewInit() {
+
+
+
+// i have to change it to make sort
 this.ProductSession.changes.subscribe(() => {
   const lol = this.ProductSession.map((product) => product.product.category);
   lol.filter((cat) => cat === 'laptops').every(() => this.isHidden = true);
-
-
-  console.log(this.isHidden);
-  console.log(lol);
 });
-
-
-
   }
+
   hidecomponents(): void {
 this.laptops.forEach(() => {
   this.isHidden = true;
@@ -133,8 +186,6 @@ this.laptops.forEach(() => {
     this.amountsoundbars = mapsos.filter((bars) => bars === 'soundbars').length;
 
 // console.log just for validate
-    console.log(this.amountphones);
-    console.log(this.amountlaptops);
 }
 showcondition (): void {
     this.newproducts = this.products.map((product) => product.condition)

@@ -1,4 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {LayoutDirection} from '@angular/material';
+import {LayoutService} from '../../shared-module/services/layout.service';
 
 @Component({
   selector: 'app-navigation',
@@ -29,6 +31,7 @@ export class NavigationComponent implements OnInit ,OnChanges {
   ngOnInit() {
     this.check_summary();
     this.showmarginalprices();
+
   }
 
   //Life cycle of compontent ngOnChanges is listening changes of data bounds property! That means run function when 'bound' was changed.

@@ -10,7 +10,7 @@
 
     <div class="col-sm-10">
       <div class="row">
-    <div class="col-sm-12"></div>
+    <div class="col-sm-12"><span *ngIf="visible">Siemano</span></div>
 
         <!-- directive [routerLink]="['/shop', product.id]" can be replaced by router.navigate to run routing from level of class component-->
 
@@ -20,7 +20,7 @@
       <button (click)="showgrosschild.showgrossprices()" class="btn btn-primary float-left btnmargin">Show</button>
     <div class="text-left btnmargin">Current min gross price: {{showgrosschild.grossminprice}}</div>
       <div class="text-left btnmargin">Current max gross price: {{showgrosschild.grossmaxprice}}</div>
-      <button type="button" class="btn btn-group float-right btnmargin" (click)="BuildMyForm()">Add new Product</button>
+      <button type="button" class="btn btn-group float-right btnmargin" (click)="BuildMyForm()"  #MySpan>Add new Product</button>
 
 
       <div class="col-sm-4 offset-sm-4"> <div class="form_addnewproduct" *ngIf="formsIsShown">
@@ -36,7 +36,7 @@
           <input formControlName="category" type="text" placeholder="category" class="form-control">
           -->
           <select formControlName="category" class="form-control">
-            <option value="smartphones" selected>Smartphones</option>
+            <option value="smartphones" selected  >Smartphones</option>
             <option value="laptops" selected>Laptops</option>
             <option value="tv" selected>TV</option>
             <option value="soundbars" selected>Soundbars</option>
@@ -72,7 +72,7 @@
 
 
 
-<div class="text-left"><p>All of every available output products: {{sumproducts}}</p></div>
+<div class="text-left" ><p>All of every available output products: {{sumproducts}}</p></div>
       <app-amount-items [amountProduct]="amountProduct"></app-amount-items>
 
   <ng-template #noProducts> <p>I can't find any shop products :(</p></ng-template>

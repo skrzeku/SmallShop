@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {LayoutService} from '../shared-module/services/layout.service';
 
 @Component({
   selector: 'app-info-contact',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InfoContactComponent implements OnInit {
 
+//vis: boolean = false;
+
   constructor() { }
 
   ngOnInit() {
+
   }
 
 }

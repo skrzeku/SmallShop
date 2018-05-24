@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {FootserviceService} from '../../footservice.service';
 import {Subscription} from 'rxjs/Subscription';
 
@@ -11,7 +11,7 @@ import {Subscription} from 'rxjs/Subscription';
   templateUrl: './foot.component.html',
   styleUrls: ['./foot.component.less']
 })
-export class FootComponent implements OnInit, OnDestroy {
+export class FootComponent implements OnInit, OnDestroy, AfterViewInit {
   footmyvalue: string;
   costSubscription: Subscription;
 
@@ -21,9 +21,14 @@ export class FootComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.costSubscription = this.foootserviceService.Footvalue$.subscribe((footmyvalue) => {
       this.footmyvalue = footmyvalue;
+      console.log('My foot String: ', this.footmyvalue);
     });
-    console.log(this.footmyvalue);
+
   }
+ngAfterViewInit() {
+
+}
+
 
   ngOnDestroy() {
     if (this.costSubscription) {

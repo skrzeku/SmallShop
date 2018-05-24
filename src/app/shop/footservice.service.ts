@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import {Subject} from 'rxjs/Subject';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class FootserviceService {
-  Footvalue$ = new Subject<string>();
+  Footvalue$ = new BehaviorSubject<string>(null);
 
 
   sharevalue (value: string): void {

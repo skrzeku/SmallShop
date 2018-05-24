@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
-import {Observable} from 'rxjs/Observable';
-import {Subject} from 'rxjs/Subject';
 import {LayoutService} from '../shared-module/services/layout.service';
+import {VoidService} from '../shop/void.service';
+
 
 
 @Injectable()
 export class AuthorizationService {
 
-  constructor(private layoutservice: LayoutService) {}
+  constructor(private layoutservice: LayoutService,
+              private voidserv: VoidService) {}
   // just for test
   private credentials = {
     login: 'admin',
@@ -19,8 +20,8 @@ export class AuthorizationService {
   login(login, password) {
     return new Promise((resolve, reject) => {
       if (this.credentials.login === login && this.credentials.password === password) {
-        this.layoutservice.Show();
         this.isLogged = true;
+
         resolve();
       } else {
         reject();
@@ -34,8 +35,12 @@ export class AuthorizationService {
     return this.isLogged;
   }
   logout (): void {
+              //It Works, but this is not a good practice
+
+    location.reload();
     this.isLogged = false;
-    this.layoutservice.Hide();
+    this.layoutservice.DisableButtons();
+
 
   }
 

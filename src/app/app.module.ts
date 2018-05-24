@@ -13,27 +13,28 @@ import {LoginModule} from './login/login.module';
 import {AuthorizationService} from './authorization/authorization.service';
 import {AuthorizationGuard} from './authorization/authorization.guard';
 import {CanloadGuard} from './authorization/canload.guard';
+import {SharedModule} from './shared-module/shared-module.module';
+import {VoidService} from './shop/void.service';
 import {LayoutService} from './shared-module/services/layout.service';
-import {CommonModule} from '@angular/common';
-import {LoginRoutingModule} from './login/login-routing.module';
-import {ShopRoutingModule} from './shop/shop-routing.module';
+import {FootserviceService} from './shop/footservice.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
-    CommonModule,
     HttpModule,
     CoreModule,
+    LoginModule,
     AppRoutingModule,
     AboutModule,
     ContactModule,
-    LoginModule,
-    LoginRoutingModule
+
+
+    SharedModule
   ],
-  providers: [ShopService, AuthorizationGuard, CanloadGuard, LayoutService, AuthorizationService],
+  providers: [ShopService, LayoutService, AuthorizationGuard, CanloadGuard, VoidService, AuthorizationService, FootserviceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

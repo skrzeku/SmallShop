@@ -9,13 +9,12 @@ import {visitAll} from '@angular/compiler';
 })
 export class AppComponent implements OnInit {
 
-  visible: boolean = false;
+  //visible: boolean = false;
 
   constructor (private layservice: LayoutService) {}
 ngOnInit () {
-    this.layservice.VisibleSubject$.subscribe(value => { this.visible = value;
-    });
+    //i dont need it, but this is the easist way!
+   //this.layservice.VisibleSubject$.subscribe(value => { this.visible = value;
+    //});
 }
-
-
 }
