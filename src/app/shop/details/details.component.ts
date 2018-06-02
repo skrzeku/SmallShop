@@ -1,5 +1,8 @@
 
-import {Component, ElementRef, Injectable, Input, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {
+  Component, ComponentFactoryResolver, ElementRef, Injectable, Input, OnInit, Renderer2, Type, ViewChild,
+  ViewContainerRef
+} from '@angular/core';
 import {ShopService} from '../shop.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Product} from '../models/product';
@@ -7,6 +10,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ProductsComponent} from '../products/products.component';
 import {VoidService} from '../void.service';
 import {LayoutService} from '../../shared-module/services/layout.service';
+import {DeadlineComponent} from './deadline/deadline.component';
 
 @Component({
   selector: 'app-details',
@@ -19,10 +23,12 @@ export class DetailsComponent implements OnInit {
   footerString: string;
   myformgroup: FormGroup;
   Loadmyproducts: any;
+  mydynamicoutput: number;
   visible: boolean = false;
   @ViewChild('myproductchild') myproductchild: ProductsComponent;
   @ViewChild('MyRefEdit') MyRefEdit: ElementRef;
   @ViewChild('MyRefDel') MyRefDel: ElementRef;
+  @ViewChild ('templateTime' , {read: ViewContainerRef}) templateTime: ViewContainerRef;
 
   constructor(private ShopServices: ShopService,
                               //ActivatedRoute give u RouterParams and snapshot
@@ -32,7 +38,8 @@ export class DetailsComponent implements OnInit {
               private formbuilder: FormBuilder,
               private voidService: VoidService,
               private layserv: LayoutService,
-              private rendered: Renderer2) {
+              private rendered: Renderer2,
+              private componentfactoryresolve: ComponentFactoryResolver) {
   }
 
   ngOnInit() {
@@ -41,19 +48,33 @@ export class DetailsComponent implements OnInit {
     this.make_string_footer();
     this.layserv.VisibleSubject$.subscribe(value => this.visible = value);
     this.MakeDisabled();
+    this.CreateDynamicDataComponent();
+  }
 
-
-
+  CreateDynamicDataComponent () {
+    if (this.templateTime.get(0) !== null) {
+      return;
+    }
+    const myfactory = this.componentfactoryresolve
+      .resolveComponentFactory(<Type <DeadlineComponent>> DeadlineComponent);
+    const templateRef = this.templateTime.createComponent(myfactory);
+    templateRef.instance.product = this.product;
+    templateRef.instance.equalDate.subscribe((val) => {
+      this.mydynamicoutput = val;
+    });
   }
 
 MakeDisabled (): void {
   const myref = this.MyRefEdit.nativeElement;
   const my2ref = this.MyRefDel.nativeElement;
     if (this.visible) {
+      this.rendered.setProperty(myref, 'disabled', false);
+      this.rendered.setProperty(my2ref, 'disabled', false);
+    }
+    else {
       this.rendered.setProperty(myref, 'disabled', true);
       this.rendered.setProperty(my2ref, 'disabled', true);
     }
-    else this.rendered.setProperty(myref, 'disabled', false);
 }
 
   // void to show a footer text

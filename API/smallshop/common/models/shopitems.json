@@ -38,6 +38,14 @@
     "delivery_cost": {
       "type": "number",
       "required": true
+    },
+    "start_date": {
+      "type": "string",
+      "required": true
+    },
+    "finish_date": {
+      "type": "string",
+      "required": true
     }
   },
   "validations": [],

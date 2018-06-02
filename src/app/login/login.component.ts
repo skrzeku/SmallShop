@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit{
   // both NgModels variables
   login: '';
   password: '';
+
   Failurelogin: boolean = false;
   visible: boolean = false;
 

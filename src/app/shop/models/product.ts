@@ -7,5 +7,7 @@ export interface Product {
   damaged: boolean;
   price: number;
   delivery_cost: number;
+  start_date: string;
+  finish_date: string;
 
 }

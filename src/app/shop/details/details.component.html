@@ -1,4 +1,4 @@
-
+<ng-template #templateTime></ng-template>
 <app-share-details>
   <div logo>Logo</div>
 
@@ -12,6 +12,9 @@
       <p>Category: {{product.category}}</p>
       <p>Color: {{product.color}}</p>
       <p>Damaged: {{product.damaged}}</p>
+      <p>Left Time: {{mydynamicoutput}}</p>
+      <p>Start Date: {{product.start_date | date: 'fullDate'}}</p>
+      <p>Finish Date: {{product.finish_date | date: 'fullDate' }}</p>
 
       <button class="btn btn-primary btnmargin" (click)="BuildMyForm()" #MyRefEdit>Edit</button>
       <button type="button" (click)="DeleteProduct()" class="btn btn-danger float-right" #MyRefDel>Delete</button>

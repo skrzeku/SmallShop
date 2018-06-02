@@ -1,13 +1,14 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {LayoutDirection} from '@angular/material';
 import {LayoutService} from '../../shared-module/services/layout.service';
 
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
-  styleUrls: ['./navigation.component.less']
+  styleUrls: ['./navigation.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NavigationComponent implements OnInit ,OnChanges {
+export class NavigationComponent implements OnInit , OnChanges {
   @Input () amountlaptops: number;
   @Input () amountphones: number;
   @Input () amounttv: number;
@@ -27,9 +28,10 @@ export class NavigationComponent implements OnInit ,OnChanges {
   lastLapBoolean: boolean = false;
   latPhoneBoolean: boolean = false;
   lastProduct: number = 2;
-  constructor() { }
+
+
   ngOnInit() {
-    this.check_summary();
+
     this.showmarginalprices();
 
   }
@@ -51,10 +53,12 @@ export class NavigationComponent implements OnInit ,OnChanges {
       }
     } }
 
-check_summary (): void {
-    this.summaryproducts = this.amountlaptops + this.amountsoundbars + this.amounttv + this.amountphones;
-    this.summarys.emit(this.summaryproducts);
-}
+  check_summary (): void {
+    const mysummary = this.amountlaptops + this.amountsoundbars + this.amounttv + this.amountphones;
+    this.summarys.emit(mysummary);
+  }
+
+
 showmarginalprices (): void {
    this.minprice = Math.min(...this.mapcost);
    this.maxprice = Math.max(...this.mapcost);

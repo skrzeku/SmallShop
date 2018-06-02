@@ -6,7 +6,7 @@ import { AmountItemsComponent } from './amount-items/amount-items.component';
 import {RouterModule} from '@angular/router';
 import {DetailsComponent} from './details/details.component';
 import {ShopResolve} from './shop-resolve.service';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SearchComponent} from './search/search.component';
 import { FootComponent } from './navigation/foot/foot.component';
 import {FootserviceService} from './footservice.service';
@@ -14,6 +14,7 @@ import { ProductsSectionComponent } from './products-section/products-section.co
 import {ShopRoutingModule} from './shop-routing.module';
 import { ShopComponent } from './shop.component';
 import {SharedModule} from '../shared-module/shared-module.module';
+import { DeadlineComponent } from './details/deadline/deadline.component';
 
 
 @NgModule({
@@ -22,13 +23,16 @@ import {SharedModule} from '../shared-module/shared-module.module';
     CommonModule,
     ShopRoutingModule,
     ReactiveFormsModule,
+    FormsModule,
 
     SharedModule
 
   ],
   exports: [ProductsComponent],
+                    //Every Dynamic components are entry Components!!
+  entryComponents: [DeadlineComponent],
   declarations: [ProductsComponent, FootComponent, NavigationComponent
-    , AmountItemsComponent, DetailsComponent, SearchComponent, ProductsSectionComponent, ShopComponent],
+    , AmountItemsComponent, DetailsComponent, SearchComponent, ProductsSectionComponent, ShopComponent, DeadlineComponent],
   providers: [ ShopResolve]
 })
 export class ShopModule { }

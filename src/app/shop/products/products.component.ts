@@ -12,8 +12,9 @@ import {ProductsSectionComponent} from '../products-section/products-section.com
 import {VoidService} from '../void.service';
 import {LayoutService} from '../../shared-module/services/layout.service';
 import {Subscription} from 'rxjs/Subscription';
-import {AuthorizationService} from '../../authorization/authorization.service';
-import set = Reflect.set;
+import {error} from 'util';
+import {getQueryValue} from '@angular/core/src/view/query';
+
 
 
 
@@ -47,8 +48,10 @@ export class ProductsComponent implements OnInit, AfterViewInit, OnDestroy, Afte
   private mysubscription: Subscription;
   MyNative: any;
   @ViewChild('showgrosschild') showgrosschild: NavigationComponent;
-  @ViewChild('MySpan') private MySpan: ElementRef;
+  @ViewChild('MySpan') MySpan: ElementRef;
   @ViewChildren(ProductsSectionComponent) ProductSession: QueryList<ProductsSectionComponent>;
+  days: number;
+  startdays: number;
 
   myformgroup: FormGroup;
 
@@ -68,7 +71,7 @@ export class ProductsComponent implements OnInit, AfterViewInit, OnDestroy, Afte
     this.LoadProducts();
 
 
-    this.mysubscription = this.mysubscription = this.lay.VisibleSubject$.subscribe((val) => {
+    this.mysubscription = this.lay.VisibleSubject$.subscribe((val) => {
       if (val) {
         this.visible = val;
         console.log(val);
@@ -82,7 +85,11 @@ export class ProductsComponent implements OnInit, AfterViewInit, OnDestroy, Afte
 
 setTimeout(() => {
   this.ChangeMyStyleofSpan();
-}, 20);
+}, 50);
+
+    //setTimeout(() => {
+      //this.ShowMyOutput();
+    //}, 100);
 
 
 
@@ -98,6 +105,7 @@ setTimeout(() => {
 
                                    //My first form with validator
   BuildMyForm (): void {
+
     this.formsIsShown = true;
     this.myformgroup = this.formbuilder.group({
       name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(12)]],
@@ -106,7 +114,11 @@ setTimeout(() => {
       condition: ['', Validators.required],
       damaged: '',
       price: ['', [Validators.required, Validators.min(0), Validators.max(99999)]],
-      delivery_cost: ['', [Validators.required, Validators.min(0)]]
+      delivery_cost: ['', [Validators.required, Validators.min(0)]],
+      start_date: new Date(),
+      days: [''],
+      finish_date: ['']
+
     });
   }
   ChangeValidators (): void {
@@ -121,6 +133,10 @@ setTimeout(() => {
     }
     checkcondition.updateValueAndValidity();
   }
+  showvalue(sumproducts: number): void {
+    this.sumproducts = sumproducts;
+    console.log('Sumvalue: ', this.sumproducts);
+  }
 
   LoadProducts(): void {
     this.shopservice.getshopProducts().subscribe((products) => {
@@ -129,9 +145,16 @@ setTimeout(() => {
       this.countCategory();
       this.showcondition();
       this.footserviceService.sharevalue(this.MostCondition);
-
       this.mapcostproducts();
 
+      setTimeout(() => {
+        if (this.showgrosschild) {
+          this.showgrosschild.check_summary();
+        }
+        else if (!this.showgrosschild) {
+          console.log('error!');
+        }
+      }, 20);
 
 
 
@@ -143,17 +166,22 @@ setTimeout(() => {
 this.routerService.navigate(['/shop', product.id]);
   }
 
-  ChangeMyStyleofSpan (): void {
-    const MySuperSpan = this.MySpan.nativeElement;
-if (this.visible) {
-  this.render.setProperty(MySuperSpan, 'disabled', false);
-  console.log('Visible:', this.visible);
-}
-else if (!this.visible) this.render.setProperty(MySuperSpan, 'disabled', true);
+   ChangeMyStyleofSpan (): void {
+      const MySuperSpan = this.MySpan.nativeElement;
+  if (this.visible) {
+   this.render.setProperty(MySuperSpan, 'disabled', false);
+   console.log('Visible:', this.visible);
+  }
+ else if (!this.visible) this.render.setProperty(MySuperSpan, 'disabled', true);
   }
 
                         // ngAfterViewInit give u a chance to w8 for load component. Run late than ngOnInit. I have to edit!!!
   ngAfterViewInit() {
+
+
+
+
+
 
 
 
@@ -171,13 +199,12 @@ this.laptops.forEach(() => {
   }
 
 
+
   countproducts(): void {
     this.amountProduct = this.products
       .length;
   }
-  showvalue(sumproducts: number): void {
-    this.sumproducts = sumproducts;
-  }
+
   countCategory (): void {
     const mapsos = this.products.map((product) => product.category);
     this.amountlaptops = mapsos.filter((loko) => loko === 'laptops').length;
@@ -215,12 +242,20 @@ showcondition (): void {
 }
 
 addnewproduct (): void {
-  this.shopservice.AddShopProduct(this.myformgroup.value).subscribe(() => {
 
+  const daysvalue = this.myformgroup.controls['days'].value;
+  const mydatevalue = this.myformgroup.controls['start_date'].value;
+  this.days = daysvalue * 1000 * 60 * 60 * 24;
+  this.startdays = +mydatevalue;
+
+
+
+  this.myformgroup.controls['finish_date'].setValue(this.startdays + this.days);
+
+  this.shopservice.AddShopProduct(this.myformgroup.value).subscribe(() => {
 this.formsIsShown = false;
 this.myformgroup.reset();
     this.LoadProducts();
-
   });
 }
 

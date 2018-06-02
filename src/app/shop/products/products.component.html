@@ -9,14 +9,19 @@
     <div class="col-sm-2 leftnavigation"><app-navigation #showgrosschild [mapcost]="mapcost" [amounttv]="amounttv" [amountlaptops]="amountlaptops" [amountsoundbars]="amountsoundbars" [amountphones]="amountphones" [newproducts]="newproducts" [usedProduct]="usedProduct" [damagedproduct]="damagedproduct" (summarys)="showvalue($event)"></app-navigation></div>
 
     <div class="col-sm-10">
-      <div class="row">
-    <div class="col-sm-12"><span *ngIf="visible">Siemano</span></div>
+      <div class="row topmr">
+
 
         <!-- directive [routerLink]="['/shop', product.id]" can be replaced by router.navigate to run routing from level of class component-->
+        <div class="col-sm-1 lessmargins" *ngFor="let product of products"(click)="DetailsNavigate(product)" [ngClass]="product.condition=='new' ? 'condition' : 'usecondition'">
 
-        <div class="col-sm-1 lessmargins" *ngFor="let product of products"(click)="DetailsNavigate(product)" [ngClass]="product.condition=='new' ? 'condition' : 'usecondition'"><div>
-     <app-products-section [product]="product"></app-products-section> </div>
-    </div></div>
+          <div>
+          <app-products-section [product]="product"></app-products-section>
+          </div>
+
+    </div> <!-- End Lessmargins ngFor-->
+
+      </div>
       <button (click)="showgrosschild.showgrossprices()" class="btn btn-primary float-left btnmargin">Show</button>
     <div class="text-left btnmargin">Current min gross price: {{showgrosschild.grossminprice}}</div>
       <div class="text-left btnmargin">Current max gross price: {{showgrosschild.grossmaxprice}}</div>
@@ -63,6 +68,9 @@
           <label>Delivery cost:</label>
           <input formControlName="delivery_cost" type="number" placeholder="cost" class="form-control">
           <p *ngIf="!myformgroup.get('delivery_cost').valid && myformgroup.get('delivery_cost').dirty" class="error_p">Cost can't be less than 0</p>
+          <label>Days:</label>
+          <input formControlName="days" type="number" placeholder="days" class="form-control">
+
         </form>
         <button [disabled]="myformgroup.invalid" type="submit" (click)="addnewproduct()" class="btn btn-primary float-right btnmargin">Submit</button>
         <button type="button" (click)="myformgroup.reset()" class="btn btn-danger float-right btnmargin">Clean</button>

@@ -11,11 +11,18 @@ import {Router} from '@angular/router';
 export class NaviComponent implements OnInit {
   clock:string = '000000';
   clocki:string = '';
+  date: Date = null;
 
   constructor(private myservice: AuthorizationService,
               private router: Router) { }
 
   ngOnInit() {
+
+    //Another Way
+     let interval = setInterval(() => {
+      this.date = new Date();
+    }, 1000);
+     //Another Way
     let timeoutId = setInterval(() => {
       let time = new Date();
       this.clock = ('0'+time.getHours()).substr(-2) + ('0'+time.getMinutes()).substr(-2) + ('0'+time.getSeconds()).substr(-2);

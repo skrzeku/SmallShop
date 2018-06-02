@@ -20,7 +20,7 @@ import {FootserviceService} from './shop/footservice.service';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
