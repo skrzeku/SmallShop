@@ -52,6 +52,8 @@ export class ProductsComponent implements OnInit, AfterViewInit, OnDestroy, Afte
   @ViewChildren(ProductsSectionComponent) ProductSession: QueryList<ProductsSectionComponent>;
   days: number;
   startdays: number;
+  Full_Path_image: string;
+  characters: string = '';
 
   myformgroup: FormGroup;
 
@@ -117,7 +119,10 @@ setTimeout(() => {
       delivery_cost: ['', [Validators.required, Validators.min(0)]],
       start_date: new Date(),
       days: [''],
-      finish_date: ['']
+      finish_date: [''],
+      image: [''],
+      path_image: [''],
+      description: ['', Validators.maxLength(550)]
 
     });
   }
@@ -133,9 +138,23 @@ setTimeout(() => {
     }
     checkcondition.updateValueAndValidity();
   }
+  CheckLength(event: string): void {
+    this.characters = event;
+
+  }
+
   showvalue(sumproducts: number): void {
     this.sumproducts = sumproducts;
     console.log('Sumvalue: ', this.sumproducts);
+  }
+  ClearDamaged () {
+
+    const conditionvalue = this.myformgroup.controls['condition'].value;
+
+    if (conditionvalue === 'new') {
+      this.myformgroup.controls['damaged'].setValue(false);
+    }
+    else return;
   }
 
   LoadProducts(): void {
@@ -247,10 +266,14 @@ addnewproduct (): void {
   const mydatevalue = this.myformgroup.controls['start_date'].value;
   this.days = daysvalue * 1000 * 60 * 60 * 24;
   this.startdays = +mydatevalue;
+  const image = this.myformgroup.controls['image'].value;
+  this.Full_Path_image = '../../../assets/images/' + image + '.jpeg';
 
-
+        //Void to Return false of Damaged when condition === new was Selected!
+   this.ClearDamaged();
 
   this.myformgroup.controls['finish_date'].setValue(this.startdays + this.days);
+  this.myformgroup.controls['path_image'].setValue(this.Full_Path_image);
 
   this.shopservice.AddShopProduct(this.myformgroup.value).subscribe(() => {
 this.formsIsShown = false;

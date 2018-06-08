@@ -25,10 +25,13 @@ export class DetailsComponent implements OnInit {
   Loadmyproducts: any;
   mydynamicoutput: number;
   visible: boolean = false;
+  path_image: string;
+  Left_time: number;
+  path_name: string = 'iphone7.jpeg';
   @ViewChild('myproductchild') myproductchild: ProductsComponent;
   @ViewChild('MyRefEdit') MyRefEdit: ElementRef;
   @ViewChild('MyRefDel') MyRefDel: ElementRef;
-  @ViewChild ('templateTime' , {read: ViewContainerRef}) templateTime: ViewContainerRef;
+  //@ViewChild ('templateTime' , {read: ViewContainerRef}) templateTime: ViewContainerRef;
 
   constructor(private ShopServices: ShopService,
                               //ActivatedRoute give u RouterParams and snapshot
@@ -48,9 +51,17 @@ export class DetailsComponent implements OnInit {
     this.make_string_footer();
     this.layserv.VisibleSubject$.subscribe(value => this.visible = value);
     this.MakeDisabled();
-    this.CreateDynamicDataComponent();
+    //this.CreateDynamicDataComponent();
+    this.checkMyPath();
+    this.DateVoid();
   }
 
+checkMyPath ()  {
+    this.path_image = '../../../assets/images/' + this.path_name;
+}
+
+                    //Dynamic Component by Component Factory Resolver dont need Right Now!
+  /*
   CreateDynamicDataComponent () {
     if (this.templateTime.get(0) !== null) {
       return;
@@ -58,10 +69,19 @@ export class DetailsComponent implements OnInit {
     const myfactory = this.componentfactoryresolve
       .resolveComponentFactory(<Type <DeadlineComponent>> DeadlineComponent);
     const templateRef = this.templateTime.createComponent(myfactory);
+
+        //componentRef allow to instance, so every field of class and add referneco to every method
     templateRef.instance.product = this.product;
     templateRef.instance.equalDate.subscribe((val) => {
       this.mydynamicoutput = val;
     });
+  } */
+
+  DateVoid () {
+
+    const timeleft = +this.product.finish_date - +new Date();
+    this.Left_time = Math.round(timeleft / (1000 * 60 * 60 * 24));
+
   }
 
 MakeDisabled (): void {

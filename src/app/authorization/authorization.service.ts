@@ -15,7 +15,7 @@ export class AuthorizationService {
     password:  'admin'
   };
 
-  private isLogged = false;
+  isLogged:boolean = false;
 
   login(login, password) {
     return new Promise((resolve, reject) => {

@@ -1,6 +1,10 @@
-<ng-template #templateTime></ng-template>
+
+<!--  Dynamic Component by Factory Resolver (no need right now)
+<ng-template #templateTime></ng-template> -->
+
+
 <app-share-details>
-  <div logo>Logo</div>
+  <div logo class="logo"><img style="max-width: 100%" src="{{product.path_image}}"></div>
 
   <div detail>
 
@@ -11,13 +15,15 @@
       <p>Delivery Cost: {{product.delivery_cost | currency: 'EUR':true}}</p>
       <p>Category: {{product.category}}</p>
       <p>Color: {{product.color}}</p>
-      <p>Damaged: {{product.damaged}}</p>
-      <p>Left Time: {{mydynamicoutput}}</p>
+      <p *ngIf="product.damaged">Damaged: {{product.damaged}}</p>
+      <p>Left Time: {{Left_time}}</p>
       <p>Start Date: {{product.start_date | date: 'fullDate'}}</p>
       <p>Finish Date: {{product.finish_date | date: 'fullDate' }}</p>
+      
+      <div class="description logo"></div>
 
       <button class="btn btn-primary btnmargin" (click)="BuildMyForm()" #MyRefEdit>Edit</button>
-      <button type="button" (click)="DeleteProduct()" class="btn btn-danger float-right" #MyRefDel>Delete</button>
+      <button type="button" (click)="DeleteProduct()" class="btn btn-danger btnmargin" #MyRefDel>Delete</button>
     </div>
     <div class="col-sm-4 offset-sm-4"> <div class="form_addnewproduct mrbottom" *ngIf="myformgroup">
       <form [formGroup]="myformgroup">

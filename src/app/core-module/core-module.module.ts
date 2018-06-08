@@ -9,7 +9,8 @@ import {BrowserModule} from '@angular/platform-browser';
   imports: [
     CommonModule,
     RouterModule,
-    BrowserModule
+    BrowserModule,
+    SharedModule
   ],
   exports: [NaviComponent],
   declarations: [NaviComponent]

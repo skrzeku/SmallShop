@@ -19,17 +19,30 @@
           <app-products-section [product]="product"></app-products-section>
           </div>
 
+
     </div> <!-- End Lessmargins ngFor-->
 
-      </div>
-      <button (click)="showgrosschild.showgrossprices()" class="btn btn-primary float-left btnmargin">Show</button>
+        <!-- Output!-->
+        <div class="col-sm-12"><p class="text-right">All of every available products: {{sumproducts}}</p></div>
+
+
+      </div> <!-- End col-sm-10 -->
+
+                        <!-- Just for tests!-->
+      <!-- <button (click)="showgrosschild.showgrossprices()" class="btn btn-primary float-left btnmargin">Show</button>
     <div class="text-left btnmargin">Current min gross price: {{showgrosschild.grossminprice}}</div>
-      <div class="text-left btnmargin">Current max gross price: {{showgrosschild.grossmaxprice}}</div>
-      <button type="button" class="btn btn-group float-right btnmargin" (click)="BuildMyForm()"  #MySpan>Add new Product</button>
+      <div class="text-left btnmargin">Current max gross price: {{showgrosschild.grossmaxprice}}</div> -->
 
 
-      <div class="col-sm-4 offset-sm-4"> <div class="form_addnewproduct" *ngIf="formsIsShown">
-        <form [formGroup]="myformgroup">
+
+      <button type="button" class="btn btn-group float-right btnmargin btn-primary" (click)="BuildMyForm()"  #MySpan>Add new Product</button>
+
+
+      <div class="col-sm-9 offset-sm-1"> <div class="form_addnewproduct" *ngIf="formsIsShown">
+
+        <form [formGroup]="myformgroup" class="topmr">
+          <div class="row">
+          <div class="col-sm-4">
           <label>Product name:</label>
           <input formControlName="name" type="text" placeholder="name" class="form-control" [ngClass]="{'error_l' : !myformgroup.get('name').valid && myformgroup.get('name').dirty}">
 
@@ -42,9 +55,9 @@
           -->
           <select formControlName="category" class="form-control">
             <option value="smartphones" selected  >Smartphones</option>
-            <option value="laptops" selected>Laptops</option>
-            <option value="tv" selected>TV</option>
-            <option value="soundbars" selected>Soundbars</option>
+            <option value="laptops" >Laptops</option>
+            <option value="tv">TV</option>
+            <option value="soundbars">Soundbars</option>
 
           </select>
           <p *ngIf="!myformgroup.get('category').valid && myformgroup.get('category').dirty" class="error_p">This field is requaired.</p>
@@ -58,18 +71,54 @@
           <p *ngIf="!myformgroup.get('color').valid && myformgroup.get('color').dirty" class="error_p">This field is requaired.</p>
 
           <label>Condition:</label>
-          <input formControlName="condition" type="text" placeholder="Condition" class="form-control">
+          <select formControlName="condition" class="form-control">
+            <option value="new" selected>New</option>
+            <option value="used" >Used</option>
+          </select>
+<!--
+          <input formControlName="condition" type="text" placeholder="Condition" class="form-control"> -->
           <p *ngIf="!myformgroup.get('condition').valid && myformgroup.get('condition').dirty" class="error_p">This field is requaired.</p>
 
+
+          <div *ngIf="myformgroup.get('condition').value == 'used'">
           <label>Is damaged?:</label>
           <input formControlName="damaged" type="checkbox" (change)="ChangeValidators()">
+          </div>
+
           <p *ngIf="!myformgroup.get('damaged').valid && myformgroup.get('damaged').dirty" class="error_p">This field is requaired.</p>
 
           <label>Delivery cost:</label>
           <input formControlName="delivery_cost" type="number" placeholder="cost" class="form-control">
           <p *ngIf="!myformgroup.get('delivery_cost').valid && myformgroup.get('delivery_cost').dirty" class="error_p">Cost can't be less than 0</p>
-          <label>Days:</label>
-          <input formControlName="days" type="number" placeholder="days" class="form-control">
+
+          </div>
+
+          <div class="col-sm-8">
+            <label>Time (days):</label>
+            <input formControlName="days" type="number" placeholder="days" class="form-control">
+            <label>Image:</label>
+            <!-- Not this time
+            <input type="file" name="file" accept=".jpg, .jpeg, .png" (change)="upload($event.target.files)">
+            -->
+            <select formControlName="image" class="form-control">
+              <option value="iphone8" selected>Iphone 8</option>
+              <option value="iphone7" >Iphone 7</option>
+              <option value="iphoneX" >Iphone X</option>
+              <option value="iphone6" >Iphone 6</option>
+              <option value="MacbookAir" >MacBook Air</option>
+            </select>
+
+          <label>Description:</label>
+            <span></span>
+          <textarea formControlName="description" class="form-control" placeholder="description" rows="12" cols="50" (input)="CheckLength($event.target.value)"></textarea>
+            <p class="text-sm-left">Current characters: {{characters.length}}/550</p>
+            <p *ngIf="!myformgroup.get('description').valid" class="error_p">Your Description is too long! (max 550 characters)</p>
+
+          <!--
+          <input type="text" formControlName="description" placeholder="description" class="form-control" style="height: 100px">
+          -->
+          </div>
+          </div>
 
         </form>
         <button [disabled]="myformgroup.invalid" type="submit" (click)="addnewproduct()" class="btn btn-primary float-right btnmargin">Submit</button>
@@ -80,8 +129,8 @@
 
 
 
-<div class="text-left" ><p>All of every available output products: {{sumproducts}}</p></div>
-      <app-amount-items [amountProduct]="amountProduct"></app-amount-items>
+
+      <!-- <app-amount-items [amountProduct]="amountProduct"></app-amount-items> -->
 
   <ng-template #noProducts> <p>I can't find any shop products :(</p></ng-template>
 </div>

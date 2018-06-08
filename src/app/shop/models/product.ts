@@ -9,5 +9,8 @@ export interface Product {
   delivery_cost: number;
   start_date: string;
   finish_date: string;
+  path_image: string;
+  description: string;
+
 
 }

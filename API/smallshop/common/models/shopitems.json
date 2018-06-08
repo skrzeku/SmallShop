@@ -46,6 +46,14 @@
     "finish_date": {
       "type": "string",
       "required": true
+    },
+    "path_image": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "string",
+      "required": false
     }
   },
   "validations": [],

@@ -28,6 +28,10 @@ ngOnInit() {
   //this.voidserv.ShareVoid(this.SendValues());
   //this.layservice.VisibleSubject$.subscribe(value => { this.visible = value; });
 }
+LogAsGuest() {
+  this.authservice.isLogged = true;
+  this.router.navigate(['shop']);
+}
 
   SendValues() {
     this.authservice.login(this.login, this.password).then(this.Success.bind(this), this.Failure.bind(this));

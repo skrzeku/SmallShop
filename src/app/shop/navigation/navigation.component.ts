@@ -24,6 +24,11 @@ export class NavigationComponent implements OnInit , OnChanges {
   grossmaxprice: number;
   grossminprice: number;
   private fee: number = 1.23;
+  CheckboxNew: boolean;
+  CheckboxUsed: boolean;
+  CheckboxDamaged: boolean;
+  MinPrice: number;
+  MaxPrice: number;
 
   lastLapBoolean: boolean = false;
   latPhoneBoolean: boolean = false;
@@ -34,6 +39,21 @@ export class NavigationComponent implements OnInit , OnChanges {
 
     this.showmarginalprices();
 
+  }
+  Check_MinMaxPrice (): void {
+  console.log(this.MinPrice);
+  console.log(this.MaxPrice);
+  }
+
+  check_Boxes (): void {
+    this.Check_MinMaxPrice();
+    if (this.CheckboxNew) {
+      console.log(this.CheckboxNew);
+    }
+    else if (!this.CheckboxNew) {
+      console.log("Check False");
+    }
+    else console.log("ERROR CheckBoxes!");
   }
 
   //Life cycle of compontent ngOnChanges is listening changes of data bounds property! That means run function when 'bound' was changed.
@@ -54,8 +74,8 @@ export class NavigationComponent implements OnInit , OnChanges {
     } }
 
   check_summary (): void {
-    const mysummary = this.amountlaptops + this.amountsoundbars + this.amounttv + this.amountphones;
-    this.summarys.emit(mysummary);
+    this.summaryproducts = this.amountlaptops + this.amountsoundbars + this.amounttv + this.amountphones;
+    this.summarys.emit(this.summaryproducts);
   }
 
 

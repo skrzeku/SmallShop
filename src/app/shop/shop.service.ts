@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Product} from './models/product';
 import {Observable} from 'rxjs/Observable';
-import {Http} from '@angular/http';
+import {Http, ResponseContentType, Response} from '@angular/http';
 import 'rxjs';
 
 @Injectable()
@@ -31,6 +31,11 @@ export class ShopService {
   Deleteproduct(id: number): Observable<Product> {
     return this.http.delete(this.MyApiUrl + `/${id}`)
       .map((res) => res.json());
+  }
+  getImage(imageUrl: string): Observable<File> {
+    return this.http
+      .get(imageUrl, { responseType: ResponseContentType.Blob })
+      .map((res: Response) => res.blob());
   }
 
 }

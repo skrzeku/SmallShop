@@ -2,7 +2,7 @@
 module.exports = function (app) {
   const data = [
     {
-      name: 'iphone',
+      name: 'iphone 6',
       category: 'smartphones',
       color: 'gold',
       condition: 'new',
@@ -10,7 +10,9 @@ module.exports = function (app) {
       price: 1999,
       delivery_cost: 35,
       start_date: '2018-06-01T17:16:39.259Z',
-      finish_date: '2018-07-01T17:16:39.260Z'
+      finish_date: '2018-07-01T17:16:39.260Z',
+      path_image: '../../../assets/images/iphone6.jpeg',
+      description: 'iphone6sssgss'
     },
     {
       name: 'Macbook Air',
@@ -21,7 +23,9 @@ module.exports = function (app) {
       price: 2500,
       delivery_cost: 50,
       start_date: '2018-06-01T17:16:39.259Z',
-      finish_date: '2018-07-01T17:16:39.260Z'
+      finish_date: '2018-07-01T17:16:39.260Z',
+      path_image: '../../../assets/images/MacbookAir.jpeg',
+      description: 'iphone6sssgsscsdss'
     },
     {
       name: 'Iphone 7',
@@ -32,7 +36,9 @@ module.exports = function (app) {
       price: 1999,
       delivery_cost: 35,
       start_date: '2018-06-01T17:16:39.259Z',
-      finish_date: '2018-07-01T17:16:39.260Z'
+      finish_date: '2018-07-01T17:16:39.260Z',
+      path_image: '../../../assets/images/iphone7.jpeg',
+      description: 'iphone6sssdsdsdsdgss'
     },
     {
       name: 'Iphone 8',
@@ -43,7 +49,9 @@ module.exports = function (app) {
       price: 1999,
       delivery_cost: 35,
       start_date: '2018-06-01T17:16:39.259Z',
-      finish_date: '2018-07-01T17:16:39.260Z'
+      finish_date: '2018-07-01T17:16:39.260Z',
+      path_image: '../../../assets/images/iphone8.jpeg',
+      description: 'iphone6sssgssdsdsdsdwwewe'
     },
     {
       name: 'Iphone 6',
@@ -54,7 +62,9 @@ module.exports = function (app) {
       price: 1999,
       delivery_cost: 35,
       start_date: '2018-06-01T17:16:39.259Z',
-      finish_date: '2018-07-01T17:16:39.260Z'
+      finish_date: '2018-07-01T17:16:39.260Z',
+      path_image: '../../../assets/images/iphone6.jpeg',
+      description: 'iphonsdse6sssgss'
     },
     {
       name: 'Iphone X Plus',
@@ -65,7 +75,9 @@ module.exports = function (app) {
       price: 1999,
       delivery_cost: 35,
       start_date: '2018-06-01T17:16:39.259Z',
-      finish_date: '2018-07-01T17:16:39.260Z'
+      finish_date: '2018-07-01T17:16:39.260Z',
+      path_image: '../../../assets/images/iphoneX.jpeg',
+      description: 'iphone6sssgssdsds'
     },
     {
       name: 'Iphone X',
@@ -76,7 +88,9 @@ module.exports = function (app) {
       price: 1999,
       delivery_cost: 35,
       start_date: '2018-06-01T17:16:39.259Z',
-      finish_date: '2018-07-01T17:16:39.260Z'
+      finish_date: '2018-07-01T17:16:39.260Z',
+      path_image: '../../../assets/images/iphoneX.jpeg',
+      description: 'iphone6sssgssdsdsds'
     },
     {
       name: 'Samsung S8',
@@ -87,7 +101,9 @@ module.exports = function (app) {
       price: 567,
       delivery_cost: 35,
       start_date: '2018-06-01T17:16:39.259Z',
-      finish_date: '2018-07-01T17:16:39.260Z'
+      finish_date: '2018-07-01T17:16:39.260Z',
+      path_image: '../../../assets/images/iphoneX.jpeg',
+      description: 'iphone6ssssddssamsunggss'
     },
     {
       name: 'Samsung S8',
@@ -98,7 +114,9 @@ module.exports = function (app) {
       price: 567,
       delivery_cost: 35,
       start_date: '2018-06-01T17:16:39.259Z',
-      finish_date: '2018-07-01T17:16:39.260Z'
+      finish_date: '2018-07-01T17:16:39.260Z',
+      path_image: '../../../assets/images/iphoneX.jpeg',
+      description: 'iphone6ssdssdsgfgfsgss'
     },
     {
       name: 'Samsung S8',
@@ -109,7 +127,9 @@ module.exports = function (app) {
       price: 567,
       delivery_cost: 35,
       start_date: '2018-06-01T17:16:39.259Z',
-      finish_date: '2018-07-01T17:16:39.260Z'
+      finish_date: '2018-07-01T17:16:39.260Z',
+      path_image: '../../../assets/images/iphoneX.jpeg',
+      description: 'iphone6ssdsdssgss'
     },
     {
       name: 'Samsung S8',
@@ -120,7 +140,9 @@ module.exports = function (app) {
       price: 567,
       delivery_cost: 35,
       start_date: '2018-06-01T17:16:39.259Z',
-      finish_date: '2018-07-01T17:16:39.260Z'
+      finish_date: '2018-07-01T17:16:39.260Z',
+      path_image: '../../../assets/images/iphoneX.jpeg',
+      description: 'iphone6ssssdsdsgss'
     },
     {
       name: 'Samsung S8',
@@ -131,7 +153,9 @@ module.exports = function (app) {
       price: 567,
       delivery_cost: 35,
       start_date: '2018-06-01T17:16:39.259Z',
-      finish_date: '2018-07-01T17:16:39.260Z'
+      finish_date: '2018-07-01T17:16:39.260Z',
+      path_image: '../../../assets/images/iphoneX.jpeg',
+      description: 'iphone6sssgsdsdsdss'
     },
     {
       name: 'Samsung S8',
@@ -142,7 +166,9 @@ module.exports = function (app) {
       price: 567,
       delivery_cost: 35,
       start_date: '2018-06-01T17:16:39.259Z',
-      finish_date: '2018-07-01T17:16:39.260Z'
+      finish_date: '2018-07-01T17:16:39.260Z',
+      path_image: '../../../assets/images/iphoneX.jpeg',
+      description: 'iphone6sdsdsssgss'
     },
     {
       name: 'Samsung S8',
@@ -153,7 +179,9 @@ module.exports = function (app) {
       price: 567,
       delivery_cost: 35,
       start_date: '2018-06-01T17:16:39.259Z',
-      finish_date: '2018-07-01T17:16:39.260Z'
+      finish_date: '2018-07-01T17:16:39.260Z',
+      path_image: '../../../assets/images/iphoneX.jpeg',
+      description: 'iphodssdsne6sssgss'
     },
     {
       name: 'Samsung S8',
@@ -164,7 +192,9 @@ module.exports = function (app) {
       price: 567,
       delivery_cost: 35,
       start_date: '2018-06-01T17:16:39.259Z',
-      finish_date: '2018-07-01T17:16:39.260Z'
+      finish_date: '2018-07-01T17:16:39.260Z',
+      path_image: '../../../assets/images/iphoneX.jpeg',
+      description: 'iphone6sssgsssdsds'
     }
 
 
