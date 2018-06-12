@@ -1,6 +1,8 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {LayoutDirection} from '@angular/material';
 import {LayoutService} from '../../shared-module/services/layout.service';
+import {FilterBy} from '../../shared-module/pipes/fillterBy';
+import {Product} from '../models/product';
 
 @Component({
   selector: 'app-navigation',
@@ -15,6 +17,7 @@ export class NavigationComponent implements OnInit , OnChanges {
   @Input () amountsoundbars: number;
   summaryproducts: number;
   @Output () summarys: EventEmitter<number> = new EventEmitter<number>();
+  @Output () checked: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Input () newproducts: number;
   @Input () usedProduct: number;
   @Input () damagedproduct: number;
@@ -29,31 +32,48 @@ export class NavigationComponent implements OnInit , OnChanges {
   CheckboxDamaged: boolean;
   MinPrice: number;
   MaxPrice: number;
+  product: Product[];
+  FillterName: string;
+  FilterValue: any;
+  FilterValue2: any;
 
   lastLapBoolean: boolean = false;
   latPhoneBoolean: boolean = false;
   lastProduct: number = 2;
 
-
+    constructor (private mypipe: FilterBy)  {}
   ngOnInit() {
 
     this.showmarginalprices();
 
   }
   Check_MinMaxPrice (): void {
-  console.log(this.MinPrice);
-  console.log(this.MaxPrice);
+      if (this.MinPrice === null) {
+        this.MinPrice = this.minprice;
+      }
+      if (this.MaxPrice === null) {
+        this.MaxPrice = this.maxprice;
+      }
   }
 
   check_Boxes (): void {
-    this.Check_MinMaxPrice();
+      this.showmarginalprices();
+
     if (this.CheckboxNew) {
-      console.log(this.CheckboxNew);
+      this.FillterName = 'condition';
+      this.FilterValue = 'used';
+      this.FilterValue2 = 'new';
+      this.Check_MinMaxPrice();
     }
     else if (!this.CheckboxNew) {
-      console.log("Check False");
+      this.FillterName = undefined;
+      this.FilterValue = undefined;
+      this.FilterValue2 = undefined;
+      this.Check_MinMaxPrice();
     }
-    else console.log("ERROR CheckBoxes!");
+    this.checked.emit(true);
+    this.MaxPrice = null;
+    this.MinPrice = null;
   }
 
   //Life cycle of compontent ngOnChanges is listening changes of data bounds property! That means run function when 'bound' was changed.

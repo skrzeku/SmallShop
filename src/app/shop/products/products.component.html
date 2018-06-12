@@ -6,14 +6,15 @@
 
 <div class="container-fluid">
   <div class="row" *ngIf="products && products.length > 0; else noProducts">
-    <div class="col-sm-2 leftnavigation"><app-navigation #showgrosschild [mapcost]="mapcost" [amounttv]="amounttv" [amountlaptops]="amountlaptops" [amountsoundbars]="amountsoundbars" [amountphones]="amountphones" [newproducts]="newproducts" [usedProduct]="usedProduct" [damagedproduct]="damagedproduct" (summarys)="showvalue($event)"></app-navigation></div>
+    <div class="col-sm-2 leftnavigation"><app-navigation #showgrosschild [mapcost]="mapcost" [amounttv]="amounttv" [amountlaptops]="amountlaptops" [amountsoundbars]="amountsoundbars" [amountphones]="amountphones" [newproducts]="newproducts" [usedProduct]="usedProduct" [damagedproduct]="damagedproduct" (summarys)="showvalue($event)" (checked)="showoutput($event)"></app-navigation></div>
 
     <div class="col-sm-10">
       <div class="row topmr">
 
 
         <!-- directive [routerLink]="['/shop', product.id]" can be replaced by router.navigate to run routing from level of class component-->
-        <div class="col-sm-1 lessmargins" *ngFor="let product of products"(click)="DetailsNavigate(product)" [ngClass]="product.condition=='new' ? 'condition' : 'usecondition'">
+        <div class="col-sm-1 lessmargins" *ngFor="let product of FilterProducts" (click)="DetailsNavigate(product)"
+             [ngClass]="product.condition=='new' ? 'condition' : 'usecondition'" #PipeFillter>
 
           <div>
           <app-products-section [product]="product"></app-products-section>
@@ -36,6 +37,8 @@
 
 
       <button type="button" class="btn btn-group float-right btnmargin btn-primary" (click)="BuildMyForm()"  #MySpan>Add new Product</button>
+
+      <button type="submit" class="btn btn-danger float-left" (click)="changeMyPipe()">ChangePipe</button>
 
 
       <div class="col-sm-9 offset-sm-1"> <div class="form_addnewproduct" *ngIf="formsIsShown">

@@ -15,6 +15,7 @@ import {ShopRoutingModule} from './shop-routing.module';
 import { ShopComponent } from './shop.component';
 import {SharedModule} from '../shared-module/shared-module.module';
 import { DeadlineComponent } from './details/deadline/deadline.component';
+import {FilterBy} from '../shared-module/pipes/fillterBy';
 
 
 @NgModule({
@@ -33,6 +34,6 @@ import { DeadlineComponent } from './details/deadline/deadline.component';
   entryComponents: [DeadlineComponent],
   declarations: [ProductsComponent, FootComponent, NavigationComponent
     , AmountItemsComponent, DetailsComponent, SearchComponent, ProductsSectionComponent, ShopComponent, DeadlineComponent],
-  providers: [ ShopResolve]
+  providers: [ ShopResolve, FilterBy]
 })
 export class ShopModule { }

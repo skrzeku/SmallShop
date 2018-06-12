@@ -36,6 +36,8 @@ ngAfterViewInit() {
 
 
 }
+
+        //very usefull thing!!
 checkfootvalue () {
     if (this.footmyvalue === 'Used') {
       this.usedOne = true;

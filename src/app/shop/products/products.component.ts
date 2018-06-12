@@ -1,5 +1,7 @@
 import {
-  AfterContentInit, AfterViewInit, Component, ElementRef, OnDestroy, OnInit, QueryList, Renderer2, ViewChild,
+  AfterContentInit, AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnChanges, OnDestroy, OnInit, QueryList, Renderer2,
+  SimpleChanges,
+  ViewChild,
   ViewChildren
 } from '@angular/core';
 import {Product} from '../models/product';
@@ -14,6 +16,7 @@ import {LayoutService} from '../../shared-module/services/layout.service';
 import {Subscription} from 'rxjs/Subscription';
 import {error} from 'util';
 import {getQueryValue} from '@angular/core/src/view/query';
+import {FilterBy} from '../../shared-module/pipes/fillterBy';
 
 
 
@@ -22,9 +25,10 @@ import {getQueryValue} from '@angular/core/src/view/query';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
-  styleUrls: ['./products.component.less']
+  styleUrls: ['./products.component.less'],
+  providers: [FilterBy]
 })
-export class ProductsComponent implements OnInit, AfterViewInit, OnDestroy, AfterContentInit {
+export class ProductsComponent implements OnInit, AfterViewInit, OnDestroy, AfterContentInit, OnChanges {
   amountProduct: number;
   amountlaptops: number;
   amountphones: number;
@@ -49,11 +53,17 @@ export class ProductsComponent implements OnInit, AfterViewInit, OnDestroy, Afte
   MyNative: any;
   @ViewChild('showgrosschild') showgrosschild: NavigationComponent;
   @ViewChild('MySpan') MySpan: ElementRef;
+  @ViewChild('PipeFillter') PipeFillter: ElementRef;
   @ViewChildren(ProductsSectionComponent) ProductSession: QueryList<ProductsSectionComponent>;
   days: number;
   startdays: number;
   Full_Path_image: string;
   characters: string = '';
+  checkedboolean: boolean = false;
+  outputcheck: string = 'condition';
+  onefilter: any;
+  FilterProducts = [];
+
 
   myformgroup: FormGroup;
 
@@ -66,9 +76,11 @@ export class ProductsComponent implements OnInit, AfterViewInit, OnDestroy, Afte
               private formbuilder: FormBuilder,
               private footserviceService: FootserviceService,
               private voidService: VoidService,
-              private render: Renderer2) { }
+              private render: Renderer2,
+              private mypipes: FilterBy) { }
 
   ngOnInit() {
+    this.returnPipe();
 
     this.LoadProducts();
 
@@ -84,6 +96,7 @@ export class ProductsComponent implements OnInit, AfterViewInit, OnDestroy, Afte
 
 
     });
+
 
 setTimeout(() => {
   this.ChangeMyStyleofSpan();
@@ -102,6 +115,31 @@ setTimeout(() => {
   ngOnDestroy() {
     this.mysubscription.unsubscribe();
   }
+  ngOnChanges() {
+
+
+  }
+  returnPipe () {
+    return this.onefilter = "'condition' : 'used'";
+  }
+
+
+  changeMyPipe() {
+    this.checkedboolean = true;
+  }
+
+  LoadFilterProducts (name: string, value: any, value2: any, pricemin: number, pricemax: number) {
+
+    if (!this.checkedboolean) {
+      this.FilterProducts = this.products;
+    }
+    else if (this.checkedboolean) {
+      this.FilterProducts = this.products.filter((lol) => lol[name] === value || value2)
+        .filter((priceitem) => priceitem['price'] >= pricemin && priceitem['price'] <= pricemax );
+    }
+
+  }
+
 
 
 
@@ -157,14 +195,45 @@ setTimeout(() => {
     else return;
   }
 
+            //Run when output will be emit!! Important dependecies
+
+  showoutput(value: boolean): void {
+
+    if (value) {
+      this.checkedboolean = true;
+
+      //Variables getting from Navigaion Component
+
+      const filterName = this.showgrosschild.FillterName;
+      const filterValue = this.showgrosschild.FilterValue;
+      const filterValue2 = this.showgrosschild.FilterValue2;
+      const minprice = this.showgrosschild.MinPrice;
+      const maxprice = this.showgrosschild.MaxPrice;
+
+      if (maxprice  === undefined) {
+        this.LoadFilterProducts(filterName, filterValue, filterValue2, this.showgrosschild.minprice, this.showgrosschild.maxprice );
+      }
+
+      else {
+        this.LoadFilterProducts(filterName, filterValue, filterValue2, minprice, maxprice );
+      }
+    }
+    else if (!value) {
+      this.checkedboolean = false;
+    }
+
+  }
+
   LoadProducts(): void {
     this.shopservice.getshopProducts().subscribe((products) => {
       this.products = products;
+      this.LoadFilterProducts('', '', '', null, null );
       this.countproducts();
       this.countCategory();
       this.showcondition();
       this.footserviceService.sharevalue(this.MostCondition);
       this.mapcostproducts();
+      console.log(this.onefilter);
 
       setTimeout(() => {
         if (this.showgrosschild) {
@@ -181,7 +250,7 @@ setTimeout(() => {
     });
   }
                           // router.navigate can be replaced by directive [routerLink] in file.html
-  DetailsNavigate(product) : void {
+  DetailsNavigate(product): void {
 this.routerService.navigate(['/shop', product.id]);
   }
 
