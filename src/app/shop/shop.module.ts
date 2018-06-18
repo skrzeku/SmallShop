@@ -16,6 +16,7 @@ import { ShopComponent } from './shop.component';
 import {SharedModule} from '../shared-module/shared-module.module';
 import { DeadlineComponent } from './details/deadline/deadline.component';
 import {FilterBy} from '../shared-module/pipes/fillterBy';
+import {MyfilterPipe} from '../shared-module/pipes/myfilter.pipe';
 
 
 @NgModule({
@@ -34,6 +35,6 @@ import {FilterBy} from '../shared-module/pipes/fillterBy';
   entryComponents: [DeadlineComponent],
   declarations: [ProductsComponent, FootComponent, NavigationComponent
     , AmountItemsComponent, DetailsComponent, SearchComponent, ProductsSectionComponent, ShopComponent, DeadlineComponent],
-  providers: [ ShopResolve, FilterBy]
+  providers: [ ShopResolve, FilterBy, MyfilterPipe]
 })
 export class ShopModule { }

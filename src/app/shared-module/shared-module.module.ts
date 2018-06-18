@@ -6,15 +6,17 @@ import { MydirectiveDirective } from './directives/mydirective.directive';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import {LayoutService} from './services/layout.service';
 import {FilterBy} from './pipes/fillterBy';
+import { MyfilterPipe } from './pipes/myfilter.pipe';
+import {Filter} from './models/Filter';
 
 @NgModule({
   imports: [
     CommonModule
   ],
   exports: [
-    HeaderComponent, ShareDetailsComponent, MydirectiveDirective, PageNotFoundComponent, FilterBy
+    HeaderComponent, ShareDetailsComponent, MydirectiveDirective, PageNotFoundComponent, FilterBy, MyfilterPipe
   ],
-  declarations: [HeaderComponent, ShareDetailsComponent, MydirectiveDirective, PageNotFoundComponent, FilterBy]
+  declarations: [HeaderComponent, ShareDetailsComponent, MydirectiveDirective, PageNotFoundComponent, FilterBy, MyfilterPipe]
 })
 export class SharedModule {
 }

@@ -33,9 +33,11 @@ export class NavigationComponent implements OnInit , OnChanges {
   MinPrice: number;
   MaxPrice: number;
   product: Product[];
-  FillterName: string;
-  FilterValue: any;
-  FilterValue2: any;
+  FillterName: string = 'condition';
+  FillterName2: string = '';
+  FilterValue: any = '';
+  FilterValue2: any = '';
+  myArray = [];
 
   lastLapBoolean: boolean = false;
   latPhoneBoolean: boolean = false;
@@ -43,10 +45,11 @@ export class NavigationComponent implements OnInit , OnChanges {
 
     constructor (private mypipe: FilterBy)  {}
   ngOnInit() {
-
+    this.PushMyObjects();
     this.showmarginalprices();
 
   }
+
   Check_MinMaxPrice (): void {
       if (this.MinPrice === null) {
         this.MinPrice = this.minprice;
@@ -54,26 +57,54 @@ export class NavigationComponent implements OnInit , OnChanges {
       if (this.MaxPrice === null) {
         this.MaxPrice = this.maxprice;
       }
+      this.myArray[1].value = this.MinPrice;
+      this.myArray[1].value2 = this.MaxPrice;
   }
 
   check_Boxes (): void {
-      this.showmarginalprices();
 
     if (this.CheckboxNew) {
-      this.FillterName = 'condition';
-      this.FilterValue = 'used';
-      this.FilterValue2 = 'new';
-      this.Check_MinMaxPrice();
+      this.myArray[0].value2 = 'new';
     }
-    else if (!this.CheckboxNew) {
-      this.FillterName = undefined;
-      this.FilterValue = undefined;
-      this.FilterValue2 = undefined;
-      this.Check_MinMaxPrice();
+    if (this.CheckboxUsed) {
+      this.myArray[0].value = 'used';
     }
+    if (!this.CheckboxUsed) {
+      this.myArray[0].value = null;
+    }
+    if (!this.CheckboxNew) {
+      this.myArray[0].value2 = null;
+    }
+    if (this.CheckboxDamaged) {
+      this.myArray[2].value = true;
+    }
+    if (!this.CheckboxDamaged) {
+      this.myArray[2].value = false;
+    }
+
+    this.Check_MinMaxPrice();
     this.checked.emit(true);
+
     this.MaxPrice = null;
     this.MinPrice = null;
+  }
+
+  PushMyObjects (): void {
+    this.myArray.push({
+        name: this.FillterName,
+        value: this.FilterValue,
+        value2: this.FilterValue2
+      },
+      {
+        name: 'price',
+        value: this.MinPrice,
+        value2: this.MaxPrice
+      },
+      {
+        name: 'damaged',
+        value: false,
+        value2: undefined
+      });
   }
 
   //Life cycle of compontent ngOnChanges is listening changes of data bounds property! That means run function when 'bound' was changed.

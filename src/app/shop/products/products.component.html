@@ -13,7 +13,7 @@
 
 
         <!-- directive [routerLink]="['/shop', product.id]" can be replaced by router.navigate to run routing from level of class component-->
-        <div class="col-sm-1 lessmargins" *ngFor="let product of FilterProducts" (click)="DetailsNavigate(product)"
+        <div class="col-sm-1 lessmargins" *ngFor="let product of products | myfilter: filters" (click)="DetailsNavigate(product)"
              [ngClass]="product.condition=='new' ? 'condition' : 'usecondition'" #PipeFillter>
 
           <div>

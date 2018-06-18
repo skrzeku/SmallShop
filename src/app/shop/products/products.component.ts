@@ -1,6 +1,5 @@
 import {
   AfterContentInit, AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnChanges, OnDestroy, OnInit, QueryList, Renderer2,
-  SimpleChanges,
   ViewChild,
   ViewChildren
 } from '@angular/core';
@@ -17,6 +16,8 @@ import {Subscription} from 'rxjs/Subscription';
 import {error} from 'util';
 import {getQueryValue} from '@angular/core/src/view/query';
 import {FilterBy} from '../../shared-module/pipes/fillterBy';
+import {MyfilterPipe} from '../../shared-module/pipes/myfilter.pipe';
+import {Filter} from '../../shared-module/models/Filter';
 
 
 
@@ -26,7 +27,7 @@ import {FilterBy} from '../../shared-module/pipes/fillterBy';
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.less'],
-  providers: [FilterBy]
+  providers: [FilterBy, MyfilterPipe]
 })
 export class ProductsComponent implements OnInit, AfterViewInit, OnDestroy, AfterContentInit, OnChanges {
   amountProduct: number;
@@ -62,7 +63,25 @@ export class ProductsComponent implements OnInit, AfterViewInit, OnDestroy, Afte
   checkedboolean: boolean = false;
   outputcheck: string = 'condition';
   onefilter: any;
+  mynumber: number;
   FilterProducts = [];
+  filters: Filter[] = [
+    /*{
+      name: 'price',
+      value: undefined,
+      value2: 3000
+    },
+    {
+      name: 'price',
+      value: 1000,
+      value2: undefined
+    },
+    {
+      name: 'condition',
+      value: '',  //default used
+      value2: 'new'    //default new
+    } */
+  ];
 
 
   myformgroup: FormGroup;
@@ -77,10 +96,10 @@ export class ProductsComponent implements OnInit, AfterViewInit, OnDestroy, Afte
               private footserviceService: FootserviceService,
               private voidService: VoidService,
               private render: Renderer2,
-              private mypipes: FilterBy) { }
+              private mypipes: FilterBy,
+              private myfilter : MyfilterPipe) { }
 
   ngOnInit() {
-    this.returnPipe();
 
     this.LoadProducts();
 
@@ -102,9 +121,6 @@ setTimeout(() => {
   this.ChangeMyStyleofSpan();
 }, 50);
 
-    //setTimeout(() => {
-      //this.ShowMyOutput();
-    //}, 100);
 
 
 
@@ -118,10 +134,9 @@ setTimeout(() => {
   ngOnChanges() {
 
 
+
   }
-  returnPipe () {
-    return this.onefilter = "'condition' : 'used'";
-  }
+
 
 
   changeMyPipe() {
@@ -200,28 +215,33 @@ setTimeout(() => {
   showoutput(value: boolean): void {
 
     if (value) {
-      this.checkedboolean = true;
-
-      //Variables getting from Navigaion Component
-
       const filterName = this.showgrosschild.FillterName;
       const filterValue = this.showgrosschild.FilterValue;
       const filterValue2 = this.showgrosschild.FilterValue2;
       const minprice = this.showgrosschild.MinPrice;
       const maxprice = this.showgrosschild.MaxPrice;
+      const filterName2 = this.showgrosschild.FillterName2;
 
-      if (maxprice  === undefined) {
-        this.LoadFilterProducts(filterName, filterValue, filterValue2, this.showgrosschild.minprice, this.showgrosschild.maxprice );
-      }
+      this.filters = this.showgrosschild.myArray;
 
-      else {
-        this.LoadFilterProducts(filterName, filterValue, filterValue2, minprice, maxprice );
-      }
+      console.log(this.filters);
+
     }
     else if (!value) {
       this.checkedboolean = false;
     }
 
+    //Variables getting from Navigaion Component
+    /*
+
+
+          if (maxprice  === undefined) {
+            this.LoadFilterProducts(filterName, filterValue, filterValue2, this.showgrosschild.minprice, this.showgrosschild.maxprice );
+          }
+
+          else {
+            this.LoadFilterProducts(filterName, filterValue, filterValue2, minprice, maxprice );
+          } */
   }
 
   LoadProducts(): void {
