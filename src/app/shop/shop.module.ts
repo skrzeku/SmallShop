@@ -9,13 +9,11 @@ import {ShopResolve} from './shop-resolve.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SearchComponent} from './search/search.component';
 import { FootComponent } from './navigation/foot/foot.component';
-import {FootserviceService} from './footservice.service';
 import { ProductsSectionComponent } from './products-section/products-section.component';
 import {ShopRoutingModule} from './shop-routing.module';
 import { ShopComponent } from './shop.component';
 import {SharedModule} from '../shared-module/shared-module.module';
 import { DeadlineComponent } from './details/deadline/deadline.component';
-import {FilterBy} from '../shared-module/pipes/fillterBy';
 import {MyfilterPipe} from '../shared-module/pipes/myfilter.pipe';
 
 
@@ -35,6 +33,6 @@ import {MyfilterPipe} from '../shared-module/pipes/myfilter.pipe';
   entryComponents: [DeadlineComponent],
   declarations: [ProductsComponent, FootComponent, NavigationComponent
     , AmountItemsComponent, DetailsComponent, SearchComponent, ProductsSectionComponent, ShopComponent, DeadlineComponent],
-  providers: [ ShopResolve, FilterBy, MyfilterPipe]
+  providers: [ ShopResolve, MyfilterPipe]
 })
 export class ShopModule { }

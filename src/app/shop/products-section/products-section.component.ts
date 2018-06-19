@@ -8,7 +8,6 @@ import {Product} from '../models/product';
 })
 export class ProductsSectionComponent implements OnInit {
 @Input() product: Product;
-@Input() ishidden: string;
   constructor() { }
 
   ngOnInit() {

@@ -1,7 +1,4 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {LayoutDirection} from '@angular/material';
-import {LayoutService} from '../../shared-module/services/layout.service';
-import {FilterBy} from '../../shared-module/pipes/fillterBy';
 import {Product} from '../models/product';
 
 @Component({
@@ -24,9 +21,6 @@ export class NavigationComponent implements OnInit , OnChanges {
   @Input () mapcost: number[];
   minprice: number;
   maxprice: number;
-  grossmaxprice: number;
-  grossminprice: number;
-  private fee: number = 1.23;
   CheckboxNew: boolean;
   CheckboxUsed: boolean;
   CheckboxDamaged: boolean;
@@ -34,7 +28,6 @@ export class NavigationComponent implements OnInit , OnChanges {
   MaxPrice: number;
   product: Product[];
   FillterName: string = 'condition';
-  FillterName2: string = '';
   FilterValue: any = '';
   FilterValue2: any = '';
   myArray = [];
@@ -43,7 +36,7 @@ export class NavigationComponent implements OnInit , OnChanges {
   latPhoneBoolean: boolean = false;
   lastProduct: number = 2;
 
-    constructor (private mypipe: FilterBy)  {}
+    constructor ()  {}
   ngOnInit() {
     this.PushMyObjects();
     this.showmarginalprices();
@@ -134,10 +127,6 @@ showmarginalprices (): void {
    this.minprice = Math.min(...this.mapcost);
    this.maxprice = Math.max(...this.mapcost);
    console.log(this.minprice);
-}
-showgrossprices (): void {
-this.grossmaxprice = this.maxprice * this.fee;
-this.grossminprice = this.minprice * this.fee;
 }
 
 }

@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import {Subject} from 'rxjs/Subject';
-import {AsyncSubject} from 'rxjs/AsyncSubject';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 
@@ -15,11 +13,9 @@ export class LayoutService {
 
   EnableButton (): void {
     this.VisibleSubject$.next(true);
-    console.log('Visible Subject returns:', this.VisibleSubject$);
   }
 
   DisableButtons (): void {
     this.VisibleSubject$.next(false);
-    console.log('Visible Subject returns:', this.VisibleSubject$);
   }
 }

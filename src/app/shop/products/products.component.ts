@@ -1,5 +1,5 @@
 import {
-  AfterContentInit, AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnChanges, OnDestroy, OnInit, QueryList, Renderer2,
+  AfterContentInit, AfterViewInit, Component, ElementRef, OnChanges, OnDestroy, OnInit, QueryList, Renderer2,
   ViewChild,
   ViewChildren
 } from '@angular/core';
@@ -13,10 +13,6 @@ import {ProductsSectionComponent} from '../products-section/products-section.com
 import {VoidService} from '../void.service';
 import {LayoutService} from '../../shared-module/services/layout.service';
 import {Subscription} from 'rxjs/Subscription';
-import {error} from 'util';
-import {getQueryValue} from '@angular/core/src/view/query';
-import {FilterBy} from '../../shared-module/pipes/fillterBy';
-import {MyfilterPipe} from '../../shared-module/pipes/myfilter.pipe';
 import {Filter} from '../../shared-module/models/Filter';
 
 
@@ -27,9 +23,8 @@ import {Filter} from '../../shared-module/models/Filter';
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.less'],
-  providers: [FilterBy, MyfilterPipe]
 })
-export class ProductsComponent implements OnInit, AfterViewInit, OnDestroy, AfterContentInit, OnChanges {
+export class ProductsComponent implements OnInit, AfterViewInit, OnDestroy {
   amountProduct: number;
   amountlaptops: number;
   amountphones: number;
@@ -40,48 +35,22 @@ export class ProductsComponent implements OnInit, AfterViewInit, OnDestroy, Afte
   usedProduct: number;
   damagedproduct: number;
   mapcost: number[];
-  grossmaxprice: number;
-  grossminprice: number;
-  isHidden: boolean;
   laptops = [];
   myArray = [];
   longestvalue: number;
   visible: boolean = false;
-  vis2: boolean = false;
   MostCondition: string;
   formsIsShown: boolean;
   private mysubscription: Subscription;
-  MyNative: any;
   @ViewChild('showgrosschild') showgrosschild: NavigationComponent;
   @ViewChild('MySpan') MySpan: ElementRef;
-  @ViewChild('PipeFillter') PipeFillter: ElementRef;
   @ViewChildren(ProductsSectionComponent) ProductSession: QueryList<ProductsSectionComponent>;
   days: number;
   startdays: number;
   Full_Path_image: string;
   characters: string = '';
   checkedboolean: boolean = false;
-  outputcheck: string = 'condition';
-  onefilter: any;
-  mynumber: number;
-  FilterProducts = [];
-  filters: Filter[] = [
-    /*{
-      name: 'price',
-      value: undefined,
-      value2: 3000
-    },
-    {
-      name: 'price',
-      value: 1000,
-      value2: undefined
-    },
-    {
-      name: 'condition',
-      value: '',  //default used
-      value2: 'new'    //default new
-    } */
-  ];
+  filters: Filter[] = [];
 
 
   myformgroup: FormGroup;
@@ -95,9 +64,7 @@ export class ProductsComponent implements OnInit, AfterViewInit, OnDestroy, Afte
               private formbuilder: FormBuilder,
               private footserviceService: FootserviceService,
               private voidService: VoidService,
-              private render: Renderer2,
-              private mypipes: FilterBy,
-              private myfilter : MyfilterPipe) { }
+              private render: Renderer2) { }
 
   ngOnInit() {
 
@@ -112,8 +79,6 @@ export class ProductsComponent implements OnInit, AfterViewInit, OnDestroy, Afte
       else if (!val) {
         console.log('error');
       }
-
-
     });
 
 
@@ -121,28 +86,13 @@ setTimeout(() => {
   this.ChangeMyStyleofSpan();
 }, 50);
 
-
-
-
-
-  }
-  ngAfterContentInit() {
   }
   ngOnDestroy() {
     this.mysubscription.unsubscribe();
   }
-  ngOnChanges() {
 
-
-
-  }
-
-
-
-  changeMyPipe() {
-    this.checkedboolean = true;
-  }
-
+            //Another Version of filters!
+  /*
   LoadFilterProducts (name: string, value: any, value2: any, pricemin: number, pricemax: number) {
 
     if (!this.checkedboolean) {
@@ -155,6 +105,7 @@ setTimeout(() => {
 
   }
 
+*/
 
 
 
@@ -176,9 +127,11 @@ setTimeout(() => {
       image: [''],
       path_image: [''],
       description: ['', Validators.maxLength(550)]
-
     });
   }
+
+  //No needed right now!
+  /*
   ChangeValidators (): void {
     const checkdamage = this.myformgroup.get('damaged');
     const checkcondition = this.myformgroup.get('condition');
@@ -191,41 +144,35 @@ setTimeout(() => {
     }
     checkcondition.updateValueAndValidity();
   }
+  */
+
   CheckLength(event: string): void {
     this.characters = event;
-
   }
+
 
   showvalue(sumproducts: number): void {
     this.sumproducts = sumproducts;
     console.log('Sumvalue: ', this.sumproducts);
   }
+
+
   ClearDamaged () {
 
     const conditionvalue = this.myformgroup.controls['condition'].value;
-
     if (conditionvalue === 'new') {
       this.myformgroup.controls['damaged'].setValue(false);
     }
     else return;
   }
 
+
             //Run when output will be emit!! Important dependecies
 
   showoutput(value: boolean): void {
 
     if (value) {
-      const filterName = this.showgrosschild.FillterName;
-      const filterValue = this.showgrosschild.FilterValue;
-      const filterValue2 = this.showgrosschild.FilterValue2;
-      const minprice = this.showgrosschild.MinPrice;
-      const maxprice = this.showgrosschild.MaxPrice;
-      const filterName2 = this.showgrosschild.FillterName2;
-
       this.filters = this.showgrosschild.myArray;
-
-      console.log(this.filters);
-
     }
     else if (!value) {
       this.checkedboolean = false;
@@ -233,8 +180,6 @@ setTimeout(() => {
 
     //Variables getting from Navigaion Component
     /*
-
-
           if (maxprice  === undefined) {
             this.LoadFilterProducts(filterName, filterValue, filterValue2, this.showgrosschild.minprice, this.showgrosschild.maxprice );
           }
@@ -247,13 +192,12 @@ setTimeout(() => {
   LoadProducts(): void {
     this.shopservice.getshopProducts().subscribe((products) => {
       this.products = products;
-      this.LoadFilterProducts('', '', '', null, null );
+      //this.LoadFilterProducts('', '', '', null, null );
       this.countproducts();
       this.countCategory();
       this.showcondition();
       this.footserviceService.sharevalue(this.MostCondition);
       this.mapcostproducts();
-      console.log(this.onefilter);
 
       setTimeout(() => {
         if (this.showgrosschild) {
@@ -263,17 +207,17 @@ setTimeout(() => {
           console.log('error!');
         }
       }, 20);
-
-
-
-
     });
   }
+
+
                           // router.navigate can be replaced by directive [routerLink] in file.html
   DetailsNavigate(product): void {
 this.routerService.navigate(['/shop', product.id]);
   }
 
+
+                        //Change style of html element by using ElementRef and renderer2
    ChangeMyStyleofSpan (): void {
       const MySuperSpan = this.MySpan.nativeElement;
   if (this.visible) {
@@ -284,28 +228,7 @@ this.routerService.navigate(['/shop', product.id]);
   }
 
                         // ngAfterViewInit give u a chance to w8 for load component. Run late than ngOnInit. I have to edit!!!
-  ngAfterViewInit() {
-
-
-
-
-
-
-
-
-// i have to change it to make sort
-this.ProductSession.changes.subscribe(() => {
-  const lol = this.ProductSession.map((product) => product.product.category);
-  lol.filter((cat) => cat === 'laptops').every(() => this.isHidden = true);
-});
-  }
-
-  hidecomponents(): void {
-this.laptops.forEach(() => {
-  this.isHidden = true;
-});
-  }
-
+  ngAfterViewInit() {}
 
 
   countproducts(): void {
@@ -319,10 +242,11 @@ this.laptops.forEach(() => {
     this.amountphones = mapsos.filter((losa) => losa === 'smartphones').length;
     this.amounttv = mapsos.filter((tv) => tv === 'tv').length;
     this.amountsoundbars = mapsos.filter((bars) => bars === 'soundbars').length;
+    }
 
-// console.log just for validate
-}
-showcondition (): void {
+
+
+  showcondition (): void {
     this.newproducts = this.products.map((product) => product.condition)
       .filter((sos) => sos === 'new')
       .length;
