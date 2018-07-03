@@ -32,10 +32,5 @@ export class ShopService {
     return this.http.delete(this.MyApiUrl + `/${id}`)
       .map((res) => res.json());
   }
-  getImage(imageUrl: string): Observable<File> {
-    return this.http
-      .get(imageUrl, { responseType: ResponseContentType.Blob })
-      .map((res: Response) => res.blob());
-  }
 
 }

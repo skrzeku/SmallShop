@@ -28,8 +28,6 @@ import {FootserviceService} from './shop/footservice.service';
     CoreModule,
     LoginModule,
     AppRoutingModule,
-    AboutModule,
-    ContactModule,
 
 
     SharedModule

@@ -58,6 +58,7 @@ export class NavigationComponent implements OnInit , OnChanges {
 
     if (this.CheckboxNew) {
       this.myArray[0].value2 = 'new';
+      console.log(this.myArray);
     }
     if (this.CheckboxUsed) {
       this.myArray[0].value = 'used';

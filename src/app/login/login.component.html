@@ -1,13 +1,72 @@
-<div class="container">
-    <div class="card card-container">
-      <h3 class="text-center">Pawel's Shop</h3>
+<div class="container-fluid">
+  <div class="row">
+    <div class="offset-2 col-sm-10">
+      <div class="col-sm-12">
+        <div class="logo1">Sing In</div>
+      </div></div>
+    <div class=" offset-4 col-sm-4">
+    <div class="logo">
+      <div class="text-center">Pawel's Shop</div>
       <form id ='myform' class="form-signin">
         <input  [(ngModel)]="login" name="login" type="text" id="inputEmail" class="form-control" placeholder="Login">
         <input [(ngModel)]="password" name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" >
 
-        <button (click)="SendValues()" class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
+        <button (click)="SendValues()" class="btn-primary btn" type="submit" >Sign in</button>
+        <i class="fa fa-info-circle"  data-toggle="modal" data-target="#modal1"></i>
         <span class="redone" *ngIf="Failurelogin">Wrong login or Password, let's try again!</span>
       </form>
       <a class="btn" type="submit" (click)="LogAsGuest()">Sing In as Guest</a>
+      <i class="fa fa-info-circle" data-toggle="modal" data-target="#modalguest"></i>
+
+
+
+
     </div>
   </div>
+
+      <!-- Modal Sing In-->
+      <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered logo" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <span class="modal-title" id="exampleModalLongTitle1">Sing In</span>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              Logged users have permission to add, delete, edit current products and browse every tabs. Currently everybody can fill login and password as "admin" to test it.
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!-- Modal Guest-->
+    <div class="modal fade" id="modalguest" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered logo" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <span class="modal-title" id="exampleModalLongTitle2">Sing in as a Guest</span>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Guests have no permission to operate on products like add, delete and edit. They can just browse the pages.
+            <br />
+            Guard CanLoad give no access to browse Shop, About and Contact tabs for unauthenticated users.
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class=" offset-2 col-sm-9"><div class="logo" id="logolast">
+      Welcome to my project! Everything you would like to know about my project can be found in the tab <span class="redone">"About Shop"</span>. Everything contained in this project was just my idea.
+    </div> </div>
+  </div>
+</div>
+
+
+

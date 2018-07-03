@@ -9,11 +9,17 @@
     <div class="col-sm-2 leftnavigation"><app-navigation #showgrosschild [mapcost]="mapcost" [amounttv]="amounttv" [amountlaptops]="amountlaptops" [amountsoundbars]="amountsoundbars" [amountphones]="amountphones" [newproducts]="newproducts" [usedProduct]="usedProduct" [damagedproduct]="damagedproduct" (summarys)="showvalue($event)" (checked)="showoutput($event)"></app-navigation></div>
 
     <div class="col-sm-10">
+      <i class="fa-globe-asia"></i>
+      <div class="col-sm-12"><div class="logo1">Shop Products</div></div>
       <div class="row topmr">
+        <div class="col-sm-12"><p class="text-left d-inline">Available products: {{(products | myfilter: filters).length}}</p>
+          <button type="button" class="btn btn-group float-right btnmargin btn-primary" (click)="BuildMyForm()"  #MySpan>Add new Product</button>
+        </div>
+
 
 
         <!-- directive [routerLink]="['/shop', product.id]" can be replaced by router.navigate to run routing from level of class component-->
-        <div class="col-sm-1 lessmargins" *ngFor="let product of products | myfilter: filters" (click)="DetailsNavigate(product)"
+        <div class="col-sm-2 lessmargins" *ngFor="let product of products | myfilter: filters" (click)="DetailsNavigate(product)"
              [ngClass]="product.condition=='new' ? 'condition' : 'usecondition'" #PipeFillter>
 
           <div>
@@ -23,8 +29,14 @@
 
     </div> <!-- End Lessmargins ngFor-->
 
-        <!-- Output!-->
-        <div class="col-sm-12"><p class="text-right">All of every available products: {{sumproducts}}</p></div>
+        <!-- Caption!-->
+        <div class="col-sm-12">
+          <div class="text-right">
+            <span class="usecondition"> - </span> <span> &nbsp; Used Product</span>
+            <span class="condition"> - </span> <span> &nbsp; New Product</span>
+          </div>
+        </div>
+
 
 
       </div> <!-- End col-sm-10 -->
@@ -36,9 +48,8 @@
 
 
 
-      <button type="button" class="btn btn-group float-right btnmargin btn-primary" (click)="BuildMyForm()"  #MySpan>Add new Product</button>
 
-      <button type="submit" class="btn btn-danger float-left" (click)="changeMyPipe()">ChangePipe</button>
+
 
 
       <div class="col-sm-9 offset-sm-1"> <div class="form_addnewproduct" *ngIf="formsIsShown">
@@ -85,7 +96,7 @@
 
           <div *ngIf="myformgroup.get('condition').value == 'used'">
           <label>Is damaged?:</label>
-          <input formControlName="damaged" type="checkbox" (change)="ChangeValidators()">
+          <input formControlName="damaged" type="checkbox">
           </div>
 
           <p *ngIf="!myformgroup.get('damaged').valid && myformgroup.get('damaged').dirty" class="error_p">This field is requaired.</p>
@@ -119,7 +130,9 @@
 
           <!--
           <input type="text" formControlName="description" placeholder="description" class="form-control" style="height: 100px">
+
           -->
+
           </div>
           </div>
 
@@ -129,6 +142,8 @@
 
 
       </div></div>
+
+
 
 
 

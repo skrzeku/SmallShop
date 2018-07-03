@@ -12,8 +12,8 @@ const APP_ROUTES : Routes = [
       {path: '', pathMatch: 'full', redirectTo: 'shop'},
               //The Most important!! Delete ShopModule from app.module!!!
   {path: 'shop', canLoad: [CanloadGuard], loadChildren: 'app/shop/shop.module#ShopModule'},
-  {path: 'about' , component: <any>MainAboutComponent},
-  {path: 'contact', component: <any>InfoContactComponent},
+  {path: 'about' , canLoad: [CanloadGuard], loadChildren: 'app/about/about.module#AboutModule'},
+  {path: 'contact', canLoad: [CanloadGuard], loadChildren: 'app/contact/contact.module#ContactModule'},
   {path: '**', component: PageNotFoundComponent}
 
 ];

@@ -26,7 +26,7 @@ export class DetailsComponent implements OnInit {
   mydynamicoutput: number;
   visible: boolean = false;
   path_image: string;
-  Left_time: number;
+  Left_time: string;
   path_name: string = 'iphone7.jpeg';
   @ViewChild('myproductchild') myproductchild: ProductsComponent;
   @ViewChild('MyRefEdit') MyRefEdit: ElementRef;
@@ -46,7 +46,6 @@ export class DetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-   // this.voidService.myvoid$.subscribe(myvoid => this.Loadmyproducts);
     this.LoadOneProduct();
     this.make_string_footer();
     this.layserv.VisibleSubject$.subscribe(value => this.visible = value);
@@ -79,8 +78,16 @@ checkMyPath ()  {
 
   DateVoid () {
 
-    const timeleft = +this.product.finish_date - +new Date();
-    this.Left_time = Math.round(timeleft / (1000 * 60 * 60 * 24));
+
+    setInterval(() => {
+      const timeleft = +this.product.finish_date - +new Date();
+      const days = Math.floor(timeleft / (1000 * 60 * 60 * 24));
+      const hours = Math.floor(timeleft / (1000 * 60 * 60) % 24);
+      const minutes = Math.floor(timeleft / (1000 * 60) % 60);
+      const secounds = Math.floor(timeleft / (1000) % 60);
+      this.Left_time = days + ' ' + ' days'  + ': ' + hours + ' H ' + ': ' + minutes  + ':' + secounds;
+    }, 1000);
+
 
   }
 

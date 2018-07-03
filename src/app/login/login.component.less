@@ -1,10 +1,17 @@
+@import "../../assets/styles/variable";
+
+
 .card-container.card {
   max-width: 400px;
   padding: 40px 40px;
   border-radius: 15px;
 }
 .text-center {
-  margin-bottom: 90px;
+  color: @navbar;
+  font-size: 40px;
+  font-weight: 800;
+  padding: 30px 10px 100px 10px;
+  font-style: italic;
 }
 #inputPassword {
 margin-bottom: 40px;
@@ -44,13 +51,34 @@ margin-bottom: 40px;
 .form-signin input[type=password],
 .form-signin input[type=text],
 .form-signin button {
-  width: 100%;
-  display: block;
+  width: 90%;
   margin-bottom: 10px;
   z-index: 1;
   position: relative;
   box-sizing: border-box;
 }
+.fa-info-circle {
+  font-size: large;
+  opacity: 1;
+  color: @navbar;
+  &:hover {
+    opacity: 0.6;
+    font-size: 150%;
+  }
+}
+.modal-dialog {
+  position: absolute;
+  top: 40%;
+  right: 5%;
+  overflow: auto;
+  overflow-y: auto;
+}
+
+.modal-header {
+  margin-bottom: 15px;
+}
+
+
 
 
 .btn.btn-signin {
@@ -83,3 +111,18 @@ margin-bottom: 40px;
   font-weight: 700;
   font-size: medium;
 }
+.logo {
+  width: 75%;
+}
+.btn {
+  width: 90%;
+}
+.logo1 {
+  margin-bottom: 40px;
+}
+#logolast {
+  width: 75%;
+  margin: 30px 0 30px 0;
+  text-align: center;
+}
+

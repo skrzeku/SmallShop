@@ -1,4 +1,4 @@
-<div><div class="smalldivs">{{product?.name | uppercase }}</div>
-<div class="smalldivs">Color: {{product?.color}}</div>
-<div class="smalldivs">Price: {{product?.price | currency:'EUR':true}}</div>
+<div class="mycontainer"><div class="smalldivs header"><b>{{product?.name | uppercase }}</b></div>
+<div class="smalldivs image"><img style="max-width: 100%" src="{{product.path_image}}"></div>
+<div class="smalldivs price">{{product?.price | currency:'EUR':true}}</div>
 </div>

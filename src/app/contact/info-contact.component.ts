@@ -6,14 +6,7 @@ import {LayoutService} from '../shared-module/services/layout.service';
   templateUrl: './info-contact.component.html',
   styleUrls: ['./info-contact.component.less']
 })
-export class InfoContactComponent implements OnInit {
+export class InfoContactComponent {
 
-//vis: boolean = false;
-
-  constructor() { }
-
-  ngOnInit() {
-
-  }
 
 }

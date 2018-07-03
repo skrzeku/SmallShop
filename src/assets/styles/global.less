@@ -1,4 +1,29 @@
 @import "variable";
+//@fa-font-path: "../node_modules/font-awesome/fonts";
+//@import '~font-awesome/css/font-awesome.css';
 body {
   background-color: #CCCCCC;
+}
+.logo1 {
+  width: 50%;
+  font-size: 50px;
+  font-style: italic;
+  color: @navbar;
+  font-weight: 800;
+  text-shadow: 0 10px 10px rgba(300, 300, 300, 0.9);
+}
+.logo {
+  padding: 15px;
+  background-color: white;
+  border: @navbar solid 3px;
+  border-radius: 15px;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.3);
+}
+.modal-header, .modal-body, .modal-footer, .modal-content {
+  border: none;
+}
+.modal-title {
+  font-size: large;
+  font-weight: bold;
+  color: @navbar;
 }

@@ -1,11 +1,10 @@
-import {Class, NgModule} from '@angular/core';
-import {CanActivate, CanLoad, Resolve, Route, RouterModule, Routes} from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {ProductsComponent} from './products/products.component';
 import {ShopComponent} from './shop.component';
 import {DetailsComponent} from './details/details.component';
 import {ShopResolve} from './shop-resolve.service';
-import {AuthorizationService} from '../authorization/authorization.service';
-import {LayoutService} from '../shared-module/services/layout.service';
+
 
 
 

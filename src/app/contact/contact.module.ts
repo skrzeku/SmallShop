@@ -1,19 +1,15 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { InfoContactComponent } from './info-contact.component';
-import {SharedModule} from '../shared-module/shared-module.module';
-import {AuthorizationService} from '../authorization/authorization.service';
-import {LayoutService} from '../shared-module/services/layout.service';
-import {LoginModule} from '../login/login.module';
 import {BrowserModule} from '@angular/platform-browser';
-import {ShopModule} from '../shop/shop.module';
+import {ContactRoutingModule} from './contact-routing.module';
+import {CommonModule} from '@angular/common';
 
 @NgModule({
   imports: [
-    BrowserModule,
+    CommonModule,
+    ContactRoutingModule
   ],
   exports: [InfoContactComponent],
-  declarations: [InfoContactComponent],
-  providers: []
+  declarations: [InfoContactComponent]
 })
 export class ContactModule { }

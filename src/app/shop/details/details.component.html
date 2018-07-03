@@ -4,9 +4,10 @@
 
 
 <app-share-details>
-  <div logo class="logo"><img style="max-width: 100%" src="{{product.path_image}}"></div>
-
+  <div header><div class="logo1">Shop Products</div></div>
+  <div logo class="logo" id="mymargin"><img style="max-width: 100%" src="{{product.path_image}}"></div>
   <div detail>
+
 
     <h3>{{product.name | uppercase}}</h3>
     <div class="text-right">
@@ -16,10 +17,10 @@
       <p>Category: {{product.category}}</p>
       <p>Color: {{product.color}}</p>
       <p *ngIf="product.damaged">Damaged: {{product.damaged}}</p>
-      <p>Left Time: {{Left_time}}</p>
+      <p>Left Time: {{Left_time }}</p>
       <p>Start Date: {{product.start_date | date: 'fullDate'}}</p>
       <p>Finish Date: {{product.finish_date | date: 'fullDate' }}</p>
-      
+
       <div class="description logo"></div>
 
       <button class="btn btn-primary btnmargin" (click)="BuildMyForm()" #MyRefEdit>Edit</button>
@@ -64,7 +65,9 @@
 
     </div></div>
 
+
   </div>
+
   <div buttons>
     <!-- ngbTooltip: need to import NgbModule.forRoot() -->
     <button type="submit" (click)="ShowPrevProduct(product);">Previous Product</button>
