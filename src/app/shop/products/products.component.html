@@ -12,7 +12,7 @@
       <i class="fa-globe-asia"></i>
       <div class="col-sm-12"><div class="logo1">Shop Products</div></div>
       <div class="row topmr">
-        <div class="col-sm-12"><p class="text-left d-inline">Available products: {{(products | myfilter: filters).length}}</p>
+        <div class="col-sm-12"><p class="text-left d-inline"> <b>Available products: {{(products | myfilter: filters).length}}</b></p>
           <button type="button" class="btn btn-group float-right btnmargin btn-primary" (click)="BuildMyForm()"  #MySpan>Add new Product</button>
         </div>
 
