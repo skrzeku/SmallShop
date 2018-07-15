@@ -6,7 +6,7 @@ import { AmountItemsComponent } from './amount-items/amount-items.component';
 import {RouterModule} from '@angular/router';
 import {DetailsComponent} from './details/details.component';
 import {ShopResolve} from './shop-resolve.service';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FormBuilder, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SearchComponent} from './search/search.component';
 import { FootComponent } from './navigation/foot/foot.component';
 import { ProductsSectionComponent } from './products-section/products-section.component';

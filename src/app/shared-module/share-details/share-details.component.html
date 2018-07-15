@@ -1,19 +1,22 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-sm-12"><ng-content select="[header]"></ng-content></div>
+    <div class="col-sm-8">
+      <ng-content select="[header]"></ng-content>
+    </div>
+    <div class="col-sm-4"><ng-content select="[buttons]"></ng-content></div>
     <div class="col-sm-5">
       <ng-content select="[logo]"></ng-content>
     </div>
     <div class="col-sm-7">
-      <div class="buttons">
-        <ng-content select="[buttons]"></ng-content>
-      </div>
       <div class="item-detail text-center">
         <ng-content select="[detail]"></ng-content>
       </div>
     </div>
-    <div class="col-sm-12"><div class="card-footer">
+    <div class="col-sm-12 myforms">
+      <ng-content select="[form]"></ng-content>
+    </div>
+    <div class="col-sm-12 mymarg"><div class="card-footer">
       <ng-content select="[footer]"></ng-content>
     </div></div>
   </div>

@@ -28,7 +28,8 @@ export class DetailsComponent implements OnInit {
   path_image: string;
   Left_time: string;
   path_name: string = 'iphone7.jpeg';
-  @ViewChild('myproductchild') myproductchild: ProductsComponent;
+  characters: string = '';
+  formsIsShown: boolean;
   @ViewChild('MyRefEdit') MyRefEdit: ElementRef;
   @ViewChild('MyRefDel') MyRefDel: ElementRef;
   //@ViewChild ('templateTime' , {read: ViewContainerRef}) templateTime: ViewContainerRef;
@@ -58,6 +59,9 @@ export class DetailsComponent implements OnInit {
 checkMyPath ()  {
     this.path_image = '../../../assets/images/' + this.path_name;
 }
+  CheckLength(event: string): void {
+    this.characters = event;
+  }
 
                     //Dynamic Component by Component Factory Resolver dont need Right Now!
   /*
@@ -80,12 +84,18 @@ checkMyPath ()  {
 
 
     setInterval(() => {
-      const timeleft = +this.product.finish_date - +new Date();
-      const days = Math.floor(timeleft / (1000 * 60 * 60 * 24));
-      const hours = Math.floor(timeleft / (1000 * 60 * 60) % 24);
-      const minutes = Math.floor(timeleft / (1000 * 60) % 60);
-      const secounds = Math.floor(timeleft / (1000) % 60);
-      this.Left_time = days + ' ' + ' days'  + ': ' + hours + ' H ' + ': ' + minutes  + ':' + secounds;
+      const currentdate = +new Date();
+      const leftdate = new Date(this.product.finish_date);
+      const leftmytime = new Date(+leftdate - currentdate);
+
+      console.log(Math.round((+leftmytime) / (1000 * 60 * 60 * 24)));
+
+      const days = Math.floor(+leftmytime / (1000 * 60 * 60 * 24));
+      const hours = Math.floor(+leftmytime / (1000 * 60 * 60) % 24);
+      const minutes = Math.floor(+leftmytime / (1000 * 60) % 60);
+      const secounds = Math.floor(+leftmytime / (1000) % 60);
+
+      this.Left_time = days + 'days' + ',' + hours + ':' + minutes + ':' + secounds;
     }, 1000);
 
 
@@ -110,15 +120,8 @@ MakeDisabled (): void {
   }
                       // coppied from products.component
   BuildMyForm (): void {
-    this.myformgroup = this.formbuilder.group({
-      name: [this.product.name, [Validators.required, Validators.minLength(4), Validators.maxLength(12)]],
-      category: [this.product.category, Validators.required],
-      color: [this.product.color, Validators.required],
-      condition: [this.product.condition, Validators.required],
-      damaged: [this.product.damaged, Validators.required],
-      price: [this.product.price, [Validators.required, Validators.min(0), Validators.max(99999)]],
-      delivery_cost: [this.product.delivery_cost, [Validators.required, Validators.min(0)]]
-    });
+    this.formsIsShown = true;
+    this.myformgroup = this.formbuilder.group(this.shopservice.MyVoid(this.product));
   }
 
   LoadOneProduct(): void {
@@ -154,6 +157,9 @@ MakeDisabled (): void {
                         // After click update go to '/shop' by using service: Router.navigate
 
   EditProduct (): void {
+    this.formsIsShown = false;
+    this.shopservice.addformdetails(this.myformgroup);
+
     this.shopservice.Editproduct(this.product.id, this.myformgroup.value).subscribe(() => {
       this.routeService.navigate(['/shop']);
     });

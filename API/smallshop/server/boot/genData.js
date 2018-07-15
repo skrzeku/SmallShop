@@ -127,7 +127,7 @@ module.exports = function (app) {
       price: 567,
       delivery_cost: 35,
       start_date: '2018-06-01T17:16:39.259Z',
-      finish_date: '2018-07-01T17:16:39.260Z',
+      finish_date: '2018-08-01T17:16:39.260Z',
       path_image: '../../../assets/images/iphoneX.jpeg',
       description: 'iphone6ssdsdssgss'
     },
@@ -140,7 +140,7 @@ module.exports = function (app) {
       price: 567,
       delivery_cost: 35,
       start_date: '2018-06-01T17:16:39.259Z',
-      finish_date: '2018-07-01T17:16:39.260Z',
+      finish_date: '2018-11-10T17:16:39.260Z',
       path_image: '../../../assets/images/iphoneX.jpeg',
       description: 'iphone6ssssdsdsgss'
     },
@@ -153,7 +153,7 @@ module.exports = function (app) {
       price: 567,
       delivery_cost: 35,
       start_date: '2018-06-01T17:16:39.259Z',
-      finish_date: '2018-07-01T17:16:39.260Z',
+      finish_date: '2018-12-01T17:16:39.260Z',
       path_image: '../../../assets/images/iphoneX.jpeg',
       description: 'iphone6sssgsdsdsdss'
     },
@@ -166,7 +166,7 @@ module.exports = function (app) {
       price: 567,
       delivery_cost: 35,
       start_date: '2018-06-01T17:16:39.259Z',
-      finish_date: '2018-07-01T17:16:39.260Z',
+      finish_date: '2018-09-21T17:16:39.260Z',
       path_image: '../../../assets/images/iphoneX.jpeg',
       description: 'iphone6sdsdsssgss'
     },
@@ -179,7 +179,7 @@ module.exports = function (app) {
       price: 567,
       delivery_cost: 35,
       start_date: '2018-06-01T17:16:39.259Z',
-      finish_date: '2018-07-01T17:16:39.260Z',
+      finish_date: '2018-10-06T17:16:39.260Z',
       path_image: '../../../assets/images/iphoneX.jpeg',
       description: 'iphodssdsne6sssgss'
     },
@@ -192,10 +192,23 @@ module.exports = function (app) {
       price: 567,
       delivery_cost: 35,
       start_date: '2018-06-01T17:16:39.259Z',
-      finish_date: '2018-07-01T17:16:39.260Z',
+      finish_date: '2018-08-01T17:16:39.260Z',
       path_image: '../../../assets/images/iphoneX.jpeg',
       description: 'iphone6sssgsssdsds'
-    }
+    },
+    {
+      name: 'Samsung QLed Tv',
+      category: 'Tv',
+      color: 'gold',
+      condition: 'true',
+      damaged: false,
+      price: 2800,
+      delivery_cost: 78,
+      start_date: '2018-06-01T17:16:39.259Z',
+      finish_date: '2018-09-01T17:16:39.260Z',
+      path_image: '../../../assets/images/Samsung_Qled.jpeg',
+      description: 'Samsung QLed'
+    },
 
 
   ];

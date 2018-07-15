@@ -113,21 +113,7 @@ setTimeout(() => {
   BuildMyForm (): void {
 
     this.formsIsShown = true;
-    this.myformgroup = this.formbuilder.group({
-      name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(12)]],
-      category: ['', Validators.required],
-      color: ['', Validators.required],
-      condition: ['', Validators.required],
-      damaged: '',
-      price: ['', [Validators.required, Validators.min(0), Validators.max(99999)]],
-      delivery_cost: ['', [Validators.required, Validators.min(0)]],
-      start_date: new Date(),
-      days: [''],
-      finish_date: [''],
-      image: [''],
-      path_image: [''],
-      description: ['', Validators.maxLength(550)]
-    });
+    this.myformgroup = this.formbuilder.group(this.shopservice.MyVoid(''));
   }
 
   //No needed right now!
@@ -240,7 +226,7 @@ this.routerService.navigate(['/shop', product.id]);
     const mapsos = this.products.map((product) => product.category);
     this.amountlaptops = mapsos.filter((loko) => loko === 'laptops').length;
     this.amountphones = mapsos.filter((losa) => losa === 'smartphones').length;
-    this.amounttv = mapsos.filter((tv) => tv === 'tv').length;
+    this.amounttv = mapsos.filter((tv) => tv === 'Tv').length;
     this.amountsoundbars = mapsos.filter((bars) => bars === 'soundbars').length;
     }
 
@@ -273,20 +259,10 @@ this.routerService.navigate(['/shop', product.id]);
   }
 }
 
+
 addnewproduct (): void {
+  this.shopservice.addformdetails(this.myformgroup);
 
-  const daysvalue = this.myformgroup.controls['days'].value;
-  const mydatevalue = this.myformgroup.controls['start_date'].value;
-  this.days = daysvalue * 1000 * 60 * 60 * 24;
-  this.startdays = +mydatevalue;
-  const image = this.myformgroup.controls['image'].value;
-  this.Full_Path_image = '../../../assets/images/' + image + '.jpeg';
-
-        //Void to Return false of Damaged when condition === new was Selected!
-   this.ClearDamaged();
-
-  this.myformgroup.controls['finish_date'].setValue(this.startdays + this.days);
-  this.myformgroup.controls['path_image'].setValue(this.Full_Path_image);
 
   this.shopservice.AddShopProduct(this.myformgroup.value).subscribe(() => {
 this.formsIsShown = false;

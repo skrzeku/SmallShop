@@ -1,15 +1,15 @@
 
 
 <div class="container">
-      <div class="filters text-white">
+      <div class="filters text-white reletive">
         <div class="bgcondition">Categories: &nbsp;<i class="fa fa-info-circle" data-toggle="modal" data-target="#modal1"></i></div>
-      <div>Smartphones: <span class="r">{{amountphones}}</span></div>
-      <span class="redone" *ngIf="lastPhoneBoolean">Last Smartphone Use promocode: 'LastPhone' to get 10% discount</span>
-      <div>Laptops: <span class="r">{{amountlaptops}}</span></div>
+      <div>Smartphones: <span class="float-right">{{amountphones}}</span></div>
+      <span class="redone" *ngIf="latPhoneBoolean">Last Smartphone Use promocode: 'LastPhone' to get 10% discount</span>
+        <div>Laptops: <span class="float-right">{{amountlaptops}}</span></div>
       <span *ngIf="lastLapBoolean" class="redone">Last Laptop Use promocode: 'LastLap' to get 10% discount</span>
-      <div>TV: <span class="r">{{amounttv}}</span> </div>
-      <div>Soundbars: <span class="r">{{amountsoundbars}}</span></div>
-      <div class="sum">Summary: <span class="r">{{summaryproducts}}</span></div>
+      <div>TV: <span class="float-right">{{amounttv}}</span> </div>
+      <div>Soundbars: <span class="float-right">{{amountsoundbars}}</span></div>
+      <div class="sum">Summary: <span class="float-right">{{summaryproducts}}</span></div>
       </div>
 
 
