@@ -8,11 +8,11 @@
   <div class="row" *ngIf="products && products.length > 0; else noProducts">
     <div class="col-sm-2 leftnavigation"><app-navigation #showgrosschild [mapcost]="mapcost" [amounttv]="amounttv" [amountlaptops]="amountlaptops" [amountsoundbars]="amountsoundbars" [amountphones]="amountphones" [newproducts]="newproducts" [usedProduct]="usedProduct" [damagedproduct]="damagedproduct" (summarys)="showvalue($event)" (checked)="showoutput($event)"></app-navigation></div>
 
-    <div class="col-sm-10">
+    <div class="col-sm-10 pb-3">
       <i class="fa-globe-asia"></i>
-      <div class="col-sm-12"><div class="logo1">Shop Products</div></div>
+      <div class="col-sm-11"><div class="logo1">Shop Products</div><div class="text-right myclient" *ngIf="auth.client">Hallo {{auth.client.name}}!</div> </div>
       <div class="row topmr">
-        <div class="col-sm-12"><p class="text-left d-inline"> <b>Available products: {{(products | myfilter: filters).length}}</b></p>
+        <div class="col-sm-12"><p class="text-left d-inline" *ngIf="(products | myfilter: filters).length > 0; else nofiltredProducts"> <b>Available products: {{(products | myfilter: filters).length}}</b></p>
           <button type="button" class="btn btn-group float-right btnmargin btn-primary" (click)="BuildMyForm()"  #MySpan>Add new Product</button>
         </div>
 
@@ -29,11 +29,15 @@
 
     </div> <!-- End Lessmargins ngFor-->
 
+
         <!-- Caption!-->
         <div class="col-sm-12">
           <div class="text-right">
             <span class="usecondition"> - </span> <span> &nbsp; Used Product</span>
             <span class="condition"> - </span> <span> &nbsp; New Product</span>
+          </div>
+          <div class="logo" *ngFor="let client of clients">
+            <div>{{client.city}}</div>
           </div>
         </div>
 
@@ -52,10 +56,12 @@
 
 
 
-      <div class="col-sm-9 offset-sm-1"> <div class="form_addnewproduct" *ngIf="formsIsShown">
+      <div class="col-sm-9 offset-sm-1 pt-2 pb-5"> <div class="form_addnewproduct" *ngIf="formsIsShown">
+
 
         <form [formGroup]="myformgroup" class="logo">
           <div class="row">
+            <div class="offset-2 col-sm-7 font-weight-bold text-center"><h3>Product Info</h3></div>
           <div class="col-sm-4">
           <label>Product name:</label>
           <input formControlName="name" type="text" placeholder="name" class="form-control" [ngClass]="{'error_l' : !myformgroup.get('name').valid && myformgroup.get('name').dirty}">
@@ -127,20 +133,43 @@
           <textarea formControlName="description" class="form-control" placeholder="description" rows="12" cols="50" (input)="CheckLength($event.target.value)"></textarea>
             <p class="text-sm-left">Current characters: {{characters.length}}/550</p>
             <p *ngIf="!myformgroup.get('description').valid" class="error_p">Your Description is too long! (max 550 characters)</p>
+          </div>
+
+            <div class="col-sm-12">
+              <div class="offset-2 col-sm-6 text-center font-weight-bold"><h4>Client Info</h4></div>
+              <div class="offset-2 col-sm-6">
+            <label>Name:</label>
+            <input formControlName="clientname" type="text" placeholder="name" class="form-control">
+            <label>Surname:</label>
+            <input formControlName="clientsurname" type="text" placeholder="surname" class="form-control">
+            <label>Location:</label>
+            <input formControlName="clientcity" type="text" placeholder="city" class="form-control">
+            <label>Phone:</label>
+            <input formControlName="clientphone" type="number" placeholder="0000" class="form-control">
+            <label>Mail:</label>
+            <input formControlName="clientmail" type="text" placeholder="ex@wp.pl" class="form-control">
+              </div>
 
           <!--
           <input type="text" formControlName="description" placeholder="description" class="form-control" style="height: 100px">
 
           -->
-
           </div>
           </div>
 
         </form>
-        <button [disabled]="myformgroup.invalid" type="submit" (click)="addnewproduct()" class="btn btn-primary float-right btnmargin">Submit</button>
-        <button type="button" (click)="myformgroup.reset()" class="btn btn-danger float-right btnmargin">Clean</button>
+
+        <button [disabled]="myformgroup.invalid" type="submit" (click)="addnewproduct()" class="btn btn-primary float-right mb-3 mt-2 ml-1">Submit</button>
+        <button type="button" (click)="myformgroup.reset()" class="btn btn-danger float-right mb-3 mt-2">Clean</button>
 
 
+      </div></div>
+      <div class="col-sm-9 offset-sm-1"><div class="form_client" *ngIf="ClintformsIsShown">
+        <form [formGroup]="clientformgroup" class="logo">
+
+          <label>Name:</label>
+          <input type="text" formControlName="name">
+        </form>
       </div></div>
 
 
@@ -151,5 +180,7 @@
       <!-- <app-amount-items [amountProduct]="amountProduct"></app-amount-items> -->
 
   <ng-template #noProducts> <p>I can't find any shop products :(</p></ng-template>
+      <ng-template #nofiltredProducts> <p><b>Oops! ... Currently we have no available filtred products. Let's try to edit you filters!</b></p></ng-template>
 </div>
-
+  </div>
+</div>

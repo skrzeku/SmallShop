@@ -18,6 +18,7 @@ import {VoidService} from './shop/void.service';
 import {LayoutService} from './shared-module/services/layout.service';
 import {FootserviceService} from './shop/footservice.service';
 import {FormBuilder} from '@angular/forms';
+import {RegisterModule} from './register/register.module';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import {FormBuilder} from '@angular/forms';
     CoreModule,
     LoginModule,
     AppRoutingModule,
+    RegisterModule,
 
 
     SharedModule

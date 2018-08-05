@@ -11,6 +11,15 @@ import {ProductsComponent} from '../products/products.component';
 import {VoidService} from '../void.service';
 import {LayoutService} from '../../shared-module/services/layout.service';
 import {DeadlineComponent} from './deadline/deadline.component';
+import {getResponseURL} from '@angular/http/src/http_utils';
+import {errorHandler} from '@angular/platform-browser/src/browser';
+import {_throw} from 'rxjs/observable/throw';
+import {errorComparator} from 'tslint/lib/verify/lintError';
+import {catchError} from 'rxjs/operators';
+import {errorObject} from 'rxjs/util/errorObject';
+import {routerNgProbeToken} from '@angular/router/src/router_module';
+import {Client} from '../models/client';
+import {AuthorizationService} from '../../authorization/authorization.service';
 
 @Component({
   selector: 'app-details',
@@ -20,6 +29,7 @@ import {DeadlineComponent} from './deadline/deadline.component';
 
 export class DetailsComponent implements OnInit {
   product: Product;
+  client: Client;
   footerString: string;
   myformgroup: FormGroup;
   Loadmyproducts: any;
@@ -30,8 +40,14 @@ export class DetailsComponent implements OnInit {
   path_name: string = 'iphone7.jpeg';
   characters: string = '';
   formsIsShown: boolean;
+  mynumb: number = 0;
+  myfil: any;
   @ViewChild('MyRefEdit') MyRefEdit: ElementRef;
   @ViewChild('MyRefDel') MyRefDel: ElementRef;
+  products = [];
+  myid: number;
+  NextVisible: boolean = true;
+  PrevVisible: boolean = true;
   //@ViewChild ('templateTime' , {read: ViewContainerRef}) templateTime: ViewContainerRef;
 
   constructor(private ShopServices: ShopService,
@@ -43,7 +59,8 @@ export class DetailsComponent implements OnInit {
               private voidService: VoidService,
               private layserv: LayoutService,
               private rendered: Renderer2,
-              private componentfactoryresolve: ComponentFactoryResolver) {
+              private voidservice: VoidService,
+              private auth: AuthorizationService) {
   }
 
   ngOnInit() {
@@ -54,6 +71,10 @@ export class DetailsComponent implements OnInit {
     //this.CreateDynamicDataComponent();
     this.checkMyPath();
     this.DateVoid();
+    this.voidService.myproducts$.subscribe(value => this.products = value);
+    this.CheckLast();
+    this.CheckFirst();
+
   }
 
 checkMyPath ()  {
@@ -62,6 +83,27 @@ checkMyPath ()  {
   CheckLength(event: string): void {
     this.characters = event;
   }
+  CheckLast () {
+    const mymap = this.products.map((products) => products.id);
+    const maxmap = Math.max(...mymap);
+
+    if (this.product.id === maxmap) {
+      this.NextVisible = false;
+    }
+    else {
+      this.NextVisible = true;
+    }
+  }
+  CheckFirst (): void {
+    const mymap = this.products.map((products) => products.id);
+    const minmap = Math.min(...mymap);
+    if (this.product.id === minmap) {
+      this.PrevVisible = false;
+    }
+    else {
+      this.PrevVisible = true;
+    }
+}
 
                     //Dynamic Component by Component Factory Resolver dont need Right Now!
   /*
@@ -87,8 +129,6 @@ checkMyPath ()  {
       const currentdate = +new Date();
       const leftdate = new Date(this.product.finish_date);
       const leftmytime = new Date(+leftdate - currentdate);
-
-      console.log(Math.round((+leftmytime) / (1000 * 60 * 60 * 24)));
 
       const days = Math.floor(+leftmytime / (1000 * 60 * 60 * 24));
       const hours = Math.floor(+leftmytime / (1000 * 60 * 60) % 24);
@@ -121,7 +161,7 @@ MakeDisabled (): void {
                       // coppied from products.component
   BuildMyForm (): void {
     this.formsIsShown = true;
-    this.myformgroup = this.formbuilder.group(this.shopservice.MyVoid(this.product));
+    this.myformgroup = this.formbuilder.group(this.shopservice.MyVoid(this.auth, this.product));
   }
 
   LoadOneProduct(): void {
@@ -137,23 +177,64 @@ MakeDisabled (): void {
 
     this.product = this.rt.snapshot.data['product'];
   }
+
+
+  StartNavigte (param: number) {
+    this.routeService.navigate(['/shop', (this.product.id + param)]);
+    this.LoadOLdProduct(param);
+  }
+
+    CheckforLoop (par1: number, par2: any): void {
+    const mymap = this.products.map((products) => products.id);
+    let myid = par1;
+
+      this.myfil = mymap.filter(value => value === (this.product.id + myid))
+        .length;
+
+      if (this.myfil !== 0) {
+        this.StartNavigte(myid);
+      }
+      else if (this.myfil === 0) {
+        myid = par1;
+        do {
+          if (par2 === '++') {
+            myid ++;
+          }
+          else if (par2 === '--') {
+            myid --;
+          }
+
+          this.myfil = mymap.filter(value => value === (myid + this.product.id)).length;
+        }
+        while (this.myfil === 0) {
+            this.StartNavigte(myid);
+        }
+      }
+
+   }
+
+
+
   ShowNextProduct(product: Product) {
-    this.routeService.navigate(['/shop', this.product.id + 1]);
-    this.LoadOLdProduct();
+    this.CheckforLoop(1, '++' );
+
   }
 
   ShowPrevProduct(product: Product) {
-    this.routeService.navigate(['/shop', this.product.id - 1]);
-    this.LoadOLdProduct();
+    this.CheckforLoop(-1, '--' );
   }
 
-  LoadOLdProduct(): void {
+  LoadOLdProduct(number: any): void {
     const id = +this.rt.snapshot.params['id'];
 
-    this.ShopServices.getoneproduct(id).subscribe((product) => {
+    this.ShopServices.getoneproduct(id + number).subscribe((product) => {
       this.product = product;
-    });
+        this.CheckLast();
+        this.CheckFirst();
+    }
+     );
   }
+
                         // After click update go to '/shop' by using service: Router.navigate
 
   EditProduct (): void {

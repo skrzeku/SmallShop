@@ -12,7 +12,13 @@ module.exports = function (app) {
       start_date: '2018-06-01T17:16:39.259Z',
       finish_date: '2018-07-01T17:16:39.260Z',
       path_image: '../../../assets/images/iphone6.jpeg',
-      description: 'iphone6sssgss'
+      description: 'iphone6sssgss',
+      clientname: "Jan",
+      clientsurname: "Kowalski",
+      clientcity: "Trokajny",
+      clientphone: 6000000,
+      clientmail: "example@gmail.com",
+
     },
     {
       name: 'Macbook Air',
@@ -25,7 +31,12 @@ module.exports = function (app) {
       start_date: '2018-06-01T17:16:39.259Z',
       finish_date: '2018-07-01T17:16:39.260Z',
       path_image: '../../../assets/images/MacbookAir.jpeg',
-      description: 'iphone6sssgsscsdss'
+      description: 'iphone6sssgsscsdss',
+      clientname: "Jan",
+      clientsurname: "Kowalski",
+      clientcity: "Trokajny",
+      clientphone: 6000000,
+      clientmail: "example@gmail.com",
     },
     {
       name: 'Iphone 7',
@@ -38,7 +49,12 @@ module.exports = function (app) {
       start_date: '2018-06-01T17:16:39.259Z',
       finish_date: '2018-07-01T17:16:39.260Z',
       path_image: '../../../assets/images/iphone7.jpeg',
-      description: 'iphone6sssdsdsdsdgss'
+      description: 'iphone6sssdsdsdsdgss',
+      clientname: "Jan",
+      clientsurname: "Kowalski",
+      clientcity: "Trokajny",
+      clientphone: 6000000,
+      clientmail: "example@gmail.com",
     },
     {
       name: 'Iphone 8',
@@ -51,7 +67,12 @@ module.exports = function (app) {
       start_date: '2018-06-01T17:16:39.259Z',
       finish_date: '2018-07-01T17:16:39.260Z',
       path_image: '../../../assets/images/iphone8.jpeg',
-      description: 'iphone6sssgssdsdsdsdwwewe'
+      description: 'iphone6sssgssdsdsdsdwwewe',
+      clientname: "Jan",
+      clientsurname: "Nowak",
+      clientcity: "Trokajny",
+      clientphone: 6000000,
+      clientmail: "example@gmail.com",
     },
     {
       name: 'Iphone 6',
@@ -64,7 +85,12 @@ module.exports = function (app) {
       start_date: '2018-06-01T17:16:39.259Z',
       finish_date: '2018-07-01T17:16:39.260Z',
       path_image: '../../../assets/images/iphone6.jpeg',
-      description: 'iphonsdse6sssgss'
+      description: 'iphonsdse6sssgss',
+      clientname: "Jan",
+      clientsurname: "Kowalski",
+      clientcity: "Trokajny",
+      clientphone: 6000000,
+      clientmail: "example@gmail.com",
     },
     {
       name: 'Iphone X Plus',
@@ -77,7 +103,12 @@ module.exports = function (app) {
       start_date: '2018-06-01T17:16:39.259Z',
       finish_date: '2018-07-01T17:16:39.260Z',
       path_image: '../../../assets/images/iphoneX.jpeg',
-      description: 'iphone6sssgssdsds'
+      description: 'iphone6sssgssdsds',
+      clientname: "Marian",
+      clientsurname: "Kowalski",
+      clientcity: "Trokajny",
+      clientphone: 6000000,
+      clientmail: "example@gmail.com",
     },
     {
       name: 'Iphone X',
@@ -90,7 +121,12 @@ module.exports = function (app) {
       start_date: '2018-06-01T17:16:39.259Z',
       finish_date: '2018-07-01T17:16:39.260Z',
       path_image: '../../../assets/images/iphoneX.jpeg',
-      description: 'iphone6sssgssdsdsds'
+      description: 'iphone6sssgssdsdsds',
+      clientname: "Jan",
+      clientsurname: "Kowalski",
+      clientcity: "Trokajny",
+      clientphone: 6000000,
+      clientmail: "example@gmail.com",
     },
     {
       name: 'Samsung S8',
@@ -103,7 +139,12 @@ module.exports = function (app) {
       start_date: '2018-06-01T17:16:39.259Z',
       finish_date: '2018-07-01T17:16:39.260Z',
       path_image: '../../../assets/images/iphoneX.jpeg',
-      description: 'iphone6ssssddssamsunggss'
+      description: 'iphone6ssssddssamsunggss',
+      clientname: "Jan",
+      clientsurname: "Kowalski",
+      clientcity: "Trokajny",
+      clientphone: 6000000,
+      clientmail: "example@gmail.com",
     },
     {
       name: 'Samsung S8',
@@ -116,7 +157,12 @@ module.exports = function (app) {
       start_date: '2018-06-01T17:16:39.259Z',
       finish_date: '2018-07-01T17:16:39.260Z',
       path_image: '../../../assets/images/iphoneX.jpeg',
-      description: 'iphone6ssdssdsgfgfsgss'
+      description: 'iphone6ssdssdsgfgfsgss',
+      clientname: "Jan",
+      clientsurname: "Kowalski",
+      clientcity: "Trokajny",
+      clientphone: 6000000,
+      clientmail: "example@gmail.com",
     },
     {
       name: 'Samsung S8',
@@ -129,7 +175,12 @@ module.exports = function (app) {
       start_date: '2018-06-01T17:16:39.259Z',
       finish_date: '2018-08-01T17:16:39.260Z',
       path_image: '../../../assets/images/iphoneX.jpeg',
-      description: 'iphone6ssdsdssgss'
+      description: 'iphone6ssdsdssgss',
+      clientname: "Jan",
+      clientsurname: "Kowalski",
+      clientcity: "Trokajny",
+      clientphone: 6000000,
+      clientmail: "example@gmail.com",
     },
     {
       name: 'Samsung S8',
@@ -142,7 +193,12 @@ module.exports = function (app) {
       start_date: '2018-06-01T17:16:39.259Z',
       finish_date: '2018-11-10T17:16:39.260Z',
       path_image: '../../../assets/images/iphoneX.jpeg',
-      description: 'iphone6ssssdsdsgss'
+      description: 'iphone6ssssdsdsgss',
+      clientname: "Jan",
+      clientsurname: "Kowalski",
+      clientcity: "Trokajny",
+      clientphone: 6000000,
+      clientmail: "example@gmail.com",
     },
     {
       name: 'Samsung S8',
@@ -155,7 +211,12 @@ module.exports = function (app) {
       start_date: '2018-06-01T17:16:39.259Z',
       finish_date: '2018-12-01T17:16:39.260Z',
       path_image: '../../../assets/images/iphoneX.jpeg',
-      description: 'iphone6sssgsdsdsdss'
+      description: 'iphone6sssgsdsdsdss',
+      clientname: "Jan",
+      clientsurname: "Kowalski",
+      clientcity: "Trokajny",
+      clientphone: 6000000,
+      clientmail: "example@gmail.com",
     },
     {
       name: 'Samsung S8',
@@ -168,7 +229,12 @@ module.exports = function (app) {
       start_date: '2018-06-01T17:16:39.259Z',
       finish_date: '2018-09-21T17:16:39.260Z',
       path_image: '../../../assets/images/iphoneX.jpeg',
-      description: 'iphone6sdsdsssgss'
+      description: 'iphone6sdsdsssgss',
+      clientname: "Jan",
+      clientsurname: "Kowalski",
+      clientcity: "Trokajny",
+      clientphone: 6000000,
+      clientmail: "example@gmail.com",
     },
     {
       name: 'Samsung S8',
@@ -181,7 +247,12 @@ module.exports = function (app) {
       start_date: '2018-06-01T17:16:39.259Z',
       finish_date: '2018-10-06T17:16:39.260Z',
       path_image: '../../../assets/images/iphoneX.jpeg',
-      description: 'iphodssdsne6sssgss'
+      description: 'iphodssdsne6sssgss',
+      clientname: "Jan",
+      clientsurname: "Kowalski",
+      clientcity: "Trokajny",
+      clientphone: 6000000,
+      clientmail: "example@gmail.com",
     },
     {
       name: 'Samsung S8',
@@ -194,7 +265,12 @@ module.exports = function (app) {
       start_date: '2018-06-01T17:16:39.259Z',
       finish_date: '2018-08-01T17:16:39.260Z',
       path_image: '../../../assets/images/iphoneX.jpeg',
-      description: 'iphone6sssgsssdsds'
+      description: 'iphone6sssgsssdsds',
+      clientname: "Jan",
+      clientsurname: "Kowalski",
+      clientcity: "Trokajny",
+      clientphone: 6000000,
+      clientmail: "example@gmail.com",
     },
     {
       name: 'Samsung QLed Tv',
@@ -207,7 +283,12 @@ module.exports = function (app) {
       start_date: '2018-06-01T17:16:39.259Z',
       finish_date: '2018-09-01T17:16:39.260Z',
       path_image: '../../../assets/images/Samsung_Qled.jpeg',
-      description: 'Samsung QLed'
+      description: 'Samsung QLed',
+      clientname: "Jan",
+      clientsurname: "Kowalski",
+      clientcity: "Trokajny",
+      clientphone: 6000000,
+      clientmail: "example@gmail.com",
     },
 
 

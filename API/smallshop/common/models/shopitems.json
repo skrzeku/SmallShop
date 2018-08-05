@@ -54,6 +54,26 @@
     "description": {
       "type": "string",
       "required": false
+    },
+    "clientname": {
+      "type": "string",
+      "required": true
+    },
+    "clientsurname": {
+      "type": "string",
+      "required": true
+    },
+    "clientcity": {
+      "type": "string",
+      "required": true
+    },
+    "clientphone": {
+      "type": "number",
+      "required": true
+    },
+    "clientmail": {
+      "type": "string",
+      "required": true
     }
   },
   "validations": [],

@@ -11,6 +11,11 @@ export interface Product {
   finish_date: string;
   path_image: string;
   description: string;
+  clientname: string;
+  clientsurname: string;
+  clientcity: string;
+  clientphone: number;
+  clientmail: string;
 
 
 }

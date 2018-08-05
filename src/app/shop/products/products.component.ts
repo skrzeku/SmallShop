@@ -14,6 +14,8 @@ import {VoidService} from '../void.service';
 import {LayoutService} from '../../shared-module/services/layout.service';
 import {Subscription} from 'rxjs/Subscription';
 import {Filter} from '../../shared-module/models/Filter';
+import {Client} from '../models/client';
+import {AuthorizationService} from '../../authorization/authorization.service';
 
 
 
@@ -41,6 +43,7 @@ export class ProductsComponent implements OnInit, AfterViewInit, OnDestroy {
   visible: boolean = false;
   MostCondition: string;
   formsIsShown: boolean;
+  ClintformsIsShown: boolean;
   private mysubscription: Subscription;
   @ViewChild('showgrosschild') showgrosschild: NavigationComponent;
   @ViewChild('MySpan') MySpan: ElementRef;
@@ -54,8 +57,11 @@ export class ProductsComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
   myformgroup: FormGroup;
+  clientformgroup: FormGroup;
 
   products: Product[] = [];
+  clients: Client[] = [];
+  client: any;
 
                          // 3 Services in Constructor
   constructor(private shopservice: ShopService,
@@ -64,11 +70,14 @@ export class ProductsComponent implements OnInit, AfterViewInit, OnDestroy {
               private formbuilder: FormBuilder,
               private footserviceService: FootserviceService,
               private voidService: VoidService,
-              private render: Renderer2) { }
+              private render: Renderer2,
+              private auth: AuthorizationService) { }
 
   ngOnInit() {
 
     this.LoadProducts();
+
+
 
 
     this.mysubscription = this.lay.VisibleSubject$.subscribe((val) => {
@@ -113,8 +122,9 @@ setTimeout(() => {
   BuildMyForm (): void {
 
     this.formsIsShown = true;
-    this.myformgroup = this.formbuilder.group(this.shopservice.MyVoid(''));
+    this.myformgroup = this.formbuilder.group(this.shopservice.MyVoid(this.auth, ''));
   }
+
 
   //No needed right now!
   /*
@@ -184,6 +194,8 @@ setTimeout(() => {
       this.showcondition();
       this.footserviceService.sharevalue(this.MostCondition);
       this.mapcostproducts();
+      this.voidService.ShareProducts(this.products);
+
 
       setTimeout(() => {
         if (this.showgrosschild) {
@@ -262,8 +274,6 @@ this.routerService.navigate(['/shop', product.id]);
 
 addnewproduct (): void {
   this.shopservice.addformdetails(this.myformgroup);
-
-
   this.shopservice.AddShopProduct(this.myformgroup.value).subscribe(() => {
 this.formsIsShown = false;
 this.myformgroup.reset();

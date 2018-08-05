@@ -7,10 +7,10 @@
   <div header><div class="logo1">Shop Products</div></div>
   <div buttons class="btnmargin">
     <!-- ngbTooltip: need to import NgbModule.forRoot() -->
-    <button type="submit" (click)="ShowPrevProduct(product);">Previous Product</button>
-    <button placement="bottom" (click)="ShowNextProduct(product); ">Next Product</button>
+    <button type="submit" [disabled]="!PrevVisible" (click)="ShowPrevProduct(product);">Previous Product</button>
+    <button placement="bottom" [disabled]="!NextVisible" (click)="ShowNextProduct(product);">Next Product</button>
   </div>
-  <div logo class="logo" id="mymargin"><img style="max-width: 100%" src="{{product.path_image}}"></div>
+  <div logo class="logo mt-4"><img style="max-width: 100%" src="{{product.path_image}}"></div>
   <div detail>
 
 
@@ -25,19 +25,37 @@
       <p>Left Time: {{Left_time }}</p>
       <p>Start Date: {{product.start_date | date: 'fullDate'}}</p>
       <p>Finish Date: {{product.finish_date | date: 'fullDate' }}</p>
+      <p>Client name: {{product.clientname}} {{product.clientsurname}}</p>
+      <p>Location: {{product.clientcity}}</p>
+      <p>Contact: <br />
+        Name: {{product.clientname}} {{product.clientsurname}} <br />
+        Location: {{product.clientcity}}<br />
+       Phone: {{product.clientphone}}<br />
+        Mail: {{product.clientmail}}<br />
+      </p>
+
+
+
+     <!-- <p><b>Contact:</b> <br />
+        {{client.name}} <br />
+        <icon phone> {{client.phone}} <br />
+          <a href="mailto: {{client.mail}}" class="myfont">
+            <img src="http://icons.iconarchive.com/icons/dtafalonso/android-l/128/Gmail-icon.png" class="embed-responsive-item"> {{client.mail}}</a>
+      </p> -->
 
       <div class="description logo"> {{product.description}}</div>
 
-      <button class="btn btn-primary btnmargin" (click)="BuildMyForm()" #MyRefEdit>Edit</button>
-      <button type="button" (click)="DeleteProduct()" class="btn btn-danger btnmargin" #MyRefDel>Delete</button>
+      <button class="btn btn-primary mt-3 ml-1" (click)="BuildMyForm()" #MyRefEdit>Edit</button>
+      <button type="button" (click)="DeleteProduct()" class="btn btn-danger mt-3" #MyRefDel>Delete</button>
     </div>
 
 
   </div>
-  <div form>
+  <div form class="pb-5 pt-3">
     <div class="col-sm-10 offset-sm-1"> <div class="logo" *ngIf="formsIsShown">
       <form [formGroup]="myformgroup">
         <div class="row">
+          <div class="offset-2 col-sm-7 font-weight-bold text-center"><h3>Product Info</h3></div>
           <div class="col-sm-4">
             <label>Product name:</label>
             <input formControlName="name" type="text" placeholder="name" class="form-control" [ngClass]="{'error_l' : !myformgroup.get('name').valid && myformgroup.get('name').dirty}">
@@ -116,10 +134,25 @@
             -->
 
           </div>
+          <div class="col-sm-12">
+            <div class="offset-2 col-sm-6 text-center font-weight-bold"><h4>Client Info</h4></div>
+            <div class="offset-2 col-sm-6">
+              <label>Name:</label>
+              <input formControlName="clientname" type="text" placeholder="name" class="form-control">
+              <label>Surname:</label>
+              <input formControlName="clientsurname" type="text" placeholder="surname" class="form-control">
+              <label>Location:</label>
+              <input formControlName="clientcity" type="text" placeholder="city" class="form-control">
+              <label>Phone:</label>
+              <input formControlName="clientphone" type="number" placeholder="0000" class="form-control">
+              <label>Mail:</label>
+              <input formControlName="clientmail" type="text" placeholder="ex@wp.pl" class="form-control">
+            </div>
+        </div>
         </div>
       </form>
-      <button [disabled]="myformgroup.invalid" type="submit" class="btn btn-primary float-right btnmargin" (click)="EditProduct()">Update data</button>
-      <button [disabled]="!visible"  type="button" (click)="myformgroup.reset()" class="btn btn-group float-right">Clean</button>
+      <button [disabled]="myformgroup.invalid" type="submit" class="btn btn-primary float-right mt-4 ml-1" (click)="EditProduct()">Update data</button>
+      <button [disabled]="!visible" type="button" (click)="myformgroup.reset()" class="btn btn-danger float-right mt-4">Clean</button>
 
 
 

@@ -1,6 +1,4 @@
-
-
-<div class="container">
+<div class="container" xmlns="http://www.w3.org/1999/html">
       <div class="filters text-white reletive">
         <div class="bgcondition">Categories: &nbsp;<i class="fa fa-info-circle" data-toggle="modal" data-target="#modal1"></i></div>
       <div>Smartphones: <span class="float-right">{{amountphones}}</span></div>
@@ -16,9 +14,9 @@
       <div class="text-white filters">
         <div class="bgcondition">Filters: &nbsp;<i class="fa fa-info-circle" data-toggle="modal" data-target="#modal2"></i></div>
         <h5 class="insidefilters">Condition</h5>
-        <div class="form-check"><input [(ngModel)]="CheckboxNew" type="checkbox" class="form-check-input" id="checkboxWarnin" value="new">New Products: {{newproducts}}</div>
-        <div class="form-check"><input [(ngModel)]="CheckboxUsed" type="checkbox" class="form-check-input" id="checkboxWarni" value="used">Used Products: {{usedProduct}}</div>
-        <div class="form-check"><input [(ngModel)]="CheckboxDamaged" type="checkbox" class="form-check-input" id="checkboxWarn" value="damaged">Damaged Products: {{damagedproduct}}</div>
+        <div class="form-check"><input [(ngModel)]="CheckboxNew" type="checkbox" class="form-check-input mr-auto" id="checkboxWarnin" value="new"><span class="marginleft"> New Products: </span><span class="float-right">{{newproducts}}</span></div>
+        <div class="form-check"><input [(ngModel)]="CheckboxUsed" type="checkbox" class="form-check-input" id="checkboxWarni" value="used"><span class="marginleft"> Used Products: </span><span class="float-right">{{usedProduct}}</span></div>
+        <div class="form-check"><input [(ngModel)]="CheckboxDamaged" type="checkbox" class="form-check-input" id="checkboxWarn" value="damaged"><span class="marginleft"> Damaged Products: </span><span class="float-right">{{damagedproduct}}</span></div>
        <!--   Just for Tests
        <div>Max Price: {{maxprice}}</div>
         <div>Min Price: {{minprice}}</div> -->

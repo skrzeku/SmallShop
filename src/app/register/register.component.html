@@ -1,0 +1,41 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="offset-sm-4 col-sm-4 logo mt-5">
+
+      <form [formGroup]="myform">
+        <label>First name:</label>
+      <input formControlName="name" type="string" placeholder="name" class="form-control">
+        <p *ngIf="!myform.get('name').valid && myform.get('name').dirty" class="error_p">This field is requaired.</p>
+
+        <label>Last name:</label>
+        <input formControlName="surname" type="string" placeholder="last name" class="form-control">
+        <p *ngIf="!myform.get('surname').valid && myform.get('surname').dirty" class="error_p">This field is requaired.</p>
+
+        <label>Location:</label>
+        <input formControlName="city" type="string" placeholder="city" class="form-control">
+        <p *ngIf="!myform.get('city').valid && myform.get('city').dirty" class="error_p">This field is requaired.</p>
+
+        <label>Phone number:</label>
+        <input formControlName="phone" type="number" placeholder="0600..." class="form-control">
+        <p *ngIf="!myform.get('phone').valid && myform.get('phone').dirty" class="error_p">This field is requaired.</p>
+
+        <label>Mail adress:</label>
+        <input formControlName="mail" type="string" placeholder="mail@gmail.com" class="form-control">
+        <p *ngIf="!myform.get('mail').valid && myform.get('mail').dirty" class="error_p">This field is requaired.</p>
+
+        <label>Login:</label>
+        <input formControlName="login" type="string" placeholder="login" class="form-control">
+        <p *ngIf="!myform.get('login').valid && myform.get('login').dirty" class="error_p">This field is requaired.</p>
+
+        <label>Password:</label>
+        <input formControlName="password" type="string" placeholder="password" class="form-control">
+        <p *ngIf="!myform.get('password').valid && myform.get('password').dirty" class="error_p">This field is requaired.</p>
+      </form>
+
+      <button type="submit" class="btn btn-primary float-right mt-4 ml-1" (click)="AddUser()" [disabled]="myform.invalid">Register</button>
+      <button type="submit" class="btn btn-danger float-right mt-4" (click)="Reset()">Clean</button>
+      <span class="redone" *ngIf="Failurelogin">Wrong Login, let's try to use another one!</span>
+
+    </div>
+  </div>
+</div>

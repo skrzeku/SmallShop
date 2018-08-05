@@ -38,5 +38,9 @@
   "shopitems": {
     "dataSource": "db",
     "public": true
+  },
+  "client": {
+    "dataSource": "db",
+    "public": true
   }
 }
